@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('retrospectApp')
-    .controller('BoardCtrl', ['$scope', 'tickets', function ($scope, tickets) {
+    .controller('BoardCtrl', ['$scope', '$routeParams', 'tickets', function ($scope, $routeParams, tickets) {
+        var retroId = $routeParams.retroId;
+
         $scope.retrospectives = [];
 
         // this throws an error with cross domain
-        tickets.query(function (retrospectives) {
+        tickets.query({retroId: retroId }, function (retrospectives) {
             $scope.retrospectives = retrospectives;
         });
+
+        //$scope.retroId = $routeParams.retroId;
     }
 ]);
