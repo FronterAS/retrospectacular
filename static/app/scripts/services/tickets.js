@@ -5,6 +5,6 @@ angular.module('retrospectApp')
     .factory('tickets', [
         '$resource',
         function ($resource) {
-            return $resource('http://localhost\\:3000/retrospectives/' + ticketId + '/tickets');
+            return $resource('http://localhost\\:3000/retrospectives/:retroId/tickets',{retroId:'@retroId'});
         }
     ]);
