@@ -7,6 +7,10 @@ angular.module('retrospectApp', ['ngResource'])
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
             })
+            .when('/retrospectives/:retroId', {
+                templateUrl: 'views/board.html',
+                controller: 'BoardCtrl'
+            })
             .when('/choosetype', {
                 templateUrl: 'views/choosetype.html',
                 controller: 'ChoosetypeCtrl'
