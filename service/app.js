@@ -1,10 +1,12 @@
-var express = require('express'),
-    app = express();
+var routes = require('./routes'),
+    express = require('express'),
+    api = express();
 
-app.use(express.json());
+api.use(express.methodOverride());
+api.use(express.json());
 
-app.get('/', function (req, res) {
-    res.json('boom');
-});
+routes.setup(api);
 
-app.listen(3000);
+api.use(express.logger('dev'));
+
+api.listen(3000);
