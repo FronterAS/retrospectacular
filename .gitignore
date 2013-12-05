@@ -19,3 +19,4 @@ static/.sass-cache
 static/.tmp
 static/app/bower_components
 static/dist
+static/app/styles/*.css
