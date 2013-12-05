@@ -1,6 +1,17 @@
 var sage = require('sage'),
     q = require('q'),
-    es = sage('http://localhost:9200');
+    es = sage('http://localhost:9200'),
+
+    adaptResults = function (results) {
+        results = results.map(function (result) {
+            var _result = result._source;
+            _result.id = result.id;
+
+            return _result;
+        });
+
+        return results;
+    };
 
 exports.postData = function (data) {
     var typeName;
@@ -70,6 +81,12 @@ exports.getIndexStatus = function (indexName) {
     return defer.promise;
 };
 
+/**
+ * Use to retrive all results of [type] from [index].
+ *
+ * @param  {string|array} types e.g. 'type1' 'type1, type2' ['type1', 'type2']
+ * @return {promise}
+ */
 exports.getAll = function (types) {
     return {
         from: function (indexName) {
@@ -84,13 +101,15 @@ exports.getAll = function (types) {
 
             est = esi.type(types);
 
-            est.find(function (err, result) {
+            est.find(function (err, results) {
                 if (err) {
                     defer.reject(err);
                     return;
                 }
 
-                defer.resolve(result);
+                results = adaptResults(results);
+
+                defer.resolve(results);
             });
 
             return defer.promise;
