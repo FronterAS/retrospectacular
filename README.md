@@ -28,4 +28,4 @@ cd static
 npm install
 bower install
 grunt server
-```Shell
+```
