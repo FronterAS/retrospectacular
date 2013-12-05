@@ -1,54 +1,17 @@
 var ejs = require('elastic.js'),
     nc = require('elastic.js/elastic-node-client'),
+    routes = require('./routes'),
     express = require('express'),
-    app = express();
+    api = express();
 
+// default elasticsearch port is 9200
 ejs.client = nc.NodeClient('localhost', '9200');
 
-app.use(express.json());
+api.use(express.methodOverride());
+api.use(express.json());
 
-app.get('/', function (req, res) {
-    var termQuery = ejs.TermQuery('message', 'hello'),
+routes.setup(api, ejs);
 
-        /* a function to display results */
-        resultsCallBack = function (results) {
-            if (results.hits) {
-                var hits = results.hits.hits;
+api.use(express.logger('dev'));
 
-                hits.forEach(function (hit) {
-                    console.log(hit._source.message);
-                });
-            }
-        },
-
-        /* execute the request */
-        r = ejs.Request()
-                .collections('twitter')
-                .types('tweet')
-                .query(termQuery);
-
-    r.doSearch(resultsCallBack);
-
-    res.json('boom');
-});
-
-app.use(express.logger('dev'));
-
-var allowCrossDomain = function (req, res, next) {
-    if (!req.get('Origin')) {
-        return next();
-    }
-
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
-    // res.set('Access-Control-Allow-Max-Age', 3600);
-
-    if ('OPTIONS' == req.method) {
-        return res.send(200);
-    }
-
-    next();
-};
-
-app.listen(3000);
+api.listen(3000);
