@@ -20,7 +20,7 @@ db.postData(teamData).ofType('team').into('retrospectives')
         console.log(err);
     });
 
-/*var retroData = {
+var retroData = {
     'teamId': 102,
     'type': 'pro',
     'message': 'Learning new things'
@@ -32,7 +32,7 @@ db.postData(retroData).ofType('ticket').into('retrospectives')
     })
     .fail(function (err) {
         console.log(err);
-    });*/
+    });
 
 exports.getResults = function (req, res) {
     res.json('boom');
