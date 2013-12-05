@@ -11,6 +11,10 @@ angular.module('retrospectApp', [])
         templateUrl: 'views/choosetype.html',
         controller: 'ChoosetypeCtrl'
       })
+      .when('/editpage', {
+        templateUrl: 'views/editpage.html',
+        controller: 'EditpageCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
