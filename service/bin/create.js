@@ -4,6 +4,9 @@ var db = require('../wrapper'),
     tickets = [{
         'role': 'pro',
         'message': 'We learned loads'
+    },{
+        'role': 'con',
+        'message': 'Then we forgot most of it'
     }],
 
     handleError = function (err) {
