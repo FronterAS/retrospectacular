@@ -54,7 +54,7 @@ exports.checkIndexExists = function (indexName) {
     return defer.promise;
 };
 
-exports.checkIndexStatus = function (indexName) {
+exports.getIndexStatus = function (indexName) {
     var esi = es.index(indexName),
         defer = q.defer();
 
@@ -114,13 +114,30 @@ exports.destroyIndex = function (indexName) {
     return defer.promise;
 };
 
+exports.createIndex = function (indexName) {
+    var esi = es.index(indexName),
+        defer = q.defer();
+
+    esi.create(function (err, result) {
+        if (err) {
+            defer.reject(err);
+            return;
+        }
+
+        defer.resolve(result);
+    });
+
+    return defer.promise;
+};
+
+
 
 // USAGE NOTES
 /*
 
 db.destroyIndex('retrospectives');
 
-db.checkIndexExists('retrospectives')
+db.indexExists('retrospectives')
     .then(function (exists) {
         console.log('check index exists', exists);
     })
@@ -128,7 +145,7 @@ db.checkIndexExists('retrospectives')
         console.log(err);
     });
 
-db.checkIndexStatus('retrospectives')
+db.indexStatus('retrospectives')
     .then(function (status) {
         console.log('check index status ', status);
     })
