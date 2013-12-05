@@ -7,7 +7,7 @@ angular.module('retrospectApp', ['ngResource'])
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
             })
-            .when('/retrospectives/:retroId', {
+            .when('/retrospectives/:retroId/tickets', {
                 templateUrl: 'views/board.html',
                 controller: 'BoardCtrl'
             })
