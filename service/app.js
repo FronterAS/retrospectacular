@@ -8,24 +8,24 @@ ejs.client = nc.NodeClient('localhost', '9200');
 app.use(express.json());
 
 app.get('/', function (req, res) {
-    var termQuery = ejs.TermQuery("message", "hello");
+    var termQuery = ejs.TermQuery('message', 'hello'),
 
-    /* a function to display results */
-    var resultsCallBack = function(results) {
-        if (results.hits) {
-            var hits = results.hits.hits;
-            for (var i = 0; i > hits.length; i++) {
-                var hit = hits[i];
-                console.log(hit._source.message);
+        /* a function to display results */
+        resultsCallBack = function (results) {
+            if (results.hits) {
+                var hits = results.hits.hits;
+
+                hits.forEach(function (hit) {
+                    console.log(hit._source.message);
+                });
             }
-        }
-    };
+        },
 
-    /* execute the request */
-    var r = ejs.Request()
-        .collections("twitter")
-        .types("tweet")
-        .query(termQuery);
+        /* execute the request */
+        r = ejs.Request()
+                .collections('twitter')
+                .types('tweet')
+                .query(termQuery);
 
     r.doSearch(resultsCallBack);
 
