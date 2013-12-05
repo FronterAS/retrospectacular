@@ -1,30 +1,41 @@
-var ejs = require('elastic.js'),
-    nc = require('elastic.js/elastic-node-client');
+var sage = require('sage');
+var q = require('q');
+var es = sage("http://localhost:9200");
+var esi = es.index('retrospectives');
 
-// default elasticsearch port is 9200
-ejs.client = nc.NodeClient('localhost', '9200');
+var db = require('./wrapper');
+
+esi.exists(function (err, exists) {
+    var defer = q.defer();
+
+    if (err) {
+        console.log(err);
+        defer.reject(err);
+        return;
+    }
+
+    console.log(exists);
+    defer.resolve(exists);
+});
+
+esi.all({
+    'docs': [
+        {_type: 'ticket', _id: 0}
+    ]
+}, function (err, exists) {
+    var defer = q.defer();
+
+    if (err) {
+        console.log(err);
+        defer.reject(err);
+        return;
+    }
+
+    console.log(exists);
+    defer.resolve(exists);
+});
+
 
 exports.getResults = function (req, res) {
-    var termQuery = ejs.TermQuery('message', 'hello'),
-
-        /* a function to display results */
-        resultsCallBack = function (results) {
-            if (results.hits) {
-                var hits = results.hits.hits;
-
-                hits.forEach(function (hit) {
-                    console.log(hit._source.message);
-                });
-            }
-        },
-
-        /* execute the request */
-        r = ejs.Request()
-                .collections('twitter')
-                .types('tweet')
-                .query(termQuery);
-
-    r.doSearch(resultsCallBack);
-
     res.json('boom');
 };

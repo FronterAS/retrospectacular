@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "express": "~3.4.6",
-    "elastic.js": "~1.1.1"
+    "elastic.js": "~1.1.1",
+    "q": "~0.9.7"
   }
 }
