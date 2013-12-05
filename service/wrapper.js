@@ -2,12 +2,16 @@ var sage = require('sage'),
     q = require('q'),
     es = sage('http://localhost:9200'),
 
+    adaptResult = function (result) {
+        var _result = result._source;
+        _result.id = result.id;
+
+        return _result;
+    },
+
     adaptResults = function (results) {
         results = results.map(function (result) {
-            var _result = result._source;
-            _result.id = result.id;
-
-            return _result;
+            return adaptResult(result);
         });
 
         return results;
@@ -117,6 +121,43 @@ exports.getAll = function (types) {
     };
 };
 
+exports.get = function (types) {
+    var getId;
+
+    return {
+        withId: function (_id) {
+            getId = _id;
+            return this;
+        },
+
+        from: function (indexName) {
+            var defer = q.defer(),
+                esi = es.index(indexName),
+                defer = q.defer(),
+                est;
+
+            if (!types) {
+                defer.reject(new Error('Type(s) must be supplied'));
+            }
+
+            est = esi.type(types);
+
+            est.get(getId, function (err, results) {
+                if (err) {
+                    defer.reject(err);
+                    return;
+                }
+
+                results = adaptResult(results);
+
+                defer.resolve(results);
+            });
+
+            return defer.promise;
+        }
+    };
+};
+
 exports.destroyIndex = function (indexName) {
     var esi = es.index(indexName),
         defer = q.defer();
@@ -149,6 +190,45 @@ exports.createIndex = function (indexName) {
     return defer.promise;
 };
 
+exports.query = function (queryString) {
+    var typeName;
+
+    return {
+        of: function (_typeName) {
+            typeName = _typeName;
+            return this;
+        },
+
+        from: function (indexName) {
+            var defer = q.defer(),
+                esi = es.index(indexName),
+                defer = q.defer(),
+                qStr,
+                est;
+
+            if (!typeName) {
+                defer.reject(new Error('Type name must be supplied'));
+            }
+
+            est = esi.type(typeName);
+
+            qStr = {'query': { 'query_string': { 'query': queryString }}};
+
+            est.find(qStr, function (err, results) {
+                if (err) {
+                    defer.reject(err);
+                    return;
+                }
+
+                results = adaptResults(results);
+
+                defer.resolve(results);
+            });
+
+            return defer.promise;
+        }
+    };
+}
 
 
 // USAGE NOTES

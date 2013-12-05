@@ -1,8 +1,7 @@
 var db = require('./wrapper');
 
 exports.getTickets = function (req, res) {
-
-    db.getAll('ticket').from('retrospectives')
+    db.query('retroId:' + req.params.retroId).of('ticket').from('retrospectives')
         .then(function (result) {
             console.log(result);
             res.json(result);
@@ -14,7 +13,6 @@ exports.getTickets = function (req, res) {
 };
 
 exports.getRetrospectives = function (req, res) {
-
     db.getAll('retrospective').from('retrospectives')
         .then(function (result) {
             console.log(result);
