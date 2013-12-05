@@ -7,6 +7,10 @@ angular.module('retrospectApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/choosetype', {
+        templateUrl: 'views/choosetype.html',
+        controller: 'ChoosetypeCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
