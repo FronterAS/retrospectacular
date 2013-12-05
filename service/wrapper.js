@@ -16,14 +16,15 @@ exports.postToType = function (type, data) {
         defer.resolve(result);
         console.log(result);
     });
+
+    return defer.promise;
 };
 
 exports.checkIndexExists = function (indexName) {
-    var esi = es.index(indexName);
+    var esi = es.index(indexName),
+        defer = q.defer();
 
     esi.exists(function (err, exists) {
-        var defer = q.defer();
-
         if (err) {
             console.log(err);
             defer.reject(err);
@@ -33,4 +34,6 @@ exports.checkIndexExists = function (indexName) {
         console.log(exists);
         defer.resolve(exists);
     });
+
+    return defer.promise;
 };
