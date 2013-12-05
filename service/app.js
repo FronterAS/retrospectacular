@@ -1,4 +1,6 @@
-var express = require('express'),
+var elastic = require('elastic.js'),
+    nc = require('elastic.js/elastic-node-client'),
+    express = require('express'),
     app = express();
 
 app.use(express.json());
@@ -24,6 +26,6 @@ var allowCrossDomain = function (req, res, next) {
     }
 
     next();
-}
+};
 
 app.listen(3000);
