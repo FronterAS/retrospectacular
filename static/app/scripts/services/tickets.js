@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('retrospectApp')
+/*angular.module('retrospectApp')
     .factory('tickets', ['$http', function ($http) {
 
     var tickets = {};
@@ -19,4 +19,12 @@ angular.module('retrospectApp')
 
     // Public API here
     return tickets;
-}]);
+}]);*/
+
+angular.module('retrospectApp')
+    .factory('tickets', [
+        '$resource',
+        function ($resource) {
+            return $resource('http://petter.fronter.net:3000/retrospectives');
+        }
+    ]);

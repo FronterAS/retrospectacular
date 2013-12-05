@@ -1,10 +1,16 @@
 'use strict';
 
 angular.module('retrospectApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+    .controller('MainCtrl', ['$scope', 'tickets', function ($scope, tickets) {
+        $scope.awesomeThings = [
+            'HTML5 Boilerplate',
+            'AngularJS',
+            'Karma'
+        ];
+
+        // this throws an error with cross domain
+        tickets.get(function () {
+            console.log('got');
+        });
+    }
+]);
