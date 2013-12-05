@@ -3,9 +3,32 @@ var elastic = require('elastic.js'),
     express = require('express'),
     app = express();
 
+ejs.client = nc.NodeClient('localhost', '9200');
+
 app.use(express.json());
 
 app.get('/', function (req, res) {
+    var termQuery = ejs.TermQuery("message", "hello");
+
+    /* a function to display results */
+    var resultsCallBack = function(results) {
+        if (results.hits) {
+            var hits = results.hits.hits;
+            for (var i = 0; i &lt; hits.length; i++) {
+                var hit = hits[i];
+                console.log(hit._source.message);
+            }
+        }
+    };
+
+    /* execute the request */
+    var r = ejs.Request()
+        .collections("twitter")
+        .types("tweet")
+        .query(termQuery);
+
+    r.doSearch(resultsCallBack);
+
     res.json('boom');
 });
 
