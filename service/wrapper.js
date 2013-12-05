@@ -70,7 +70,7 @@ exports.checkIndexStatus = function (indexName) {
     return defer.promise;
 };
 
-exports.getAll = function (typeName) {
+exports.getAll = function (types) {
     return {
         from: function (indexName) {
             var defer = q.defer(),
@@ -78,11 +78,11 @@ exports.getAll = function (typeName) {
                 defer = q.defer(),
                 est;
 
-            if (!typeName) {
-                defer.reject(new Error('Type must be supplied'));
+            if (!types) {
+                defer.reject(new Error('Type(s) must be supplied'));
             }
 
-            est = esi.type(typeName);
+            est = esi.type(types);
 
             est.find(function (err, result) {
                 if (err) {
@@ -96,4 +96,20 @@ exports.getAll = function (typeName) {
             return defer.promise;
         }
     };
+};
+
+exports.destroyIndex = function (indexName) {
+    var esi = es.index(indexName),
+        defer = q.defer();
+
+    esi.destroy(function (err, result) {
+        if (err) {
+            defer.reject(err);
+            return;
+        }
+
+        defer.resolve(result);
+    });
+
+    return defer.promise;
 };

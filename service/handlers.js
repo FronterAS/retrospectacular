@@ -1,16 +1,17 @@
 var db = require('./wrapper');
 
+/*db.destroyIndex('retrospectives');*/
 db.checkIndexExists('retrospectives')
-    .then(function (result) {
-        console.log('check index exists', result);
+    .then(function (exists) {
+        console.log('check index exists', exists);
     })
     .fail(function (err) {
         console.log(err);
     });
 
 db.checkIndexStatus('retrospectives')
-    .then(function (result) {
-        console.log('check index status ', result);
+    .then(function (status) {
+        console.log('check index status ', status);
     })
     .fail(function (err) {
         console.log(err);
@@ -42,7 +43,7 @@ db.postData(retroData).ofType('ticket').into('retrospectives')
         console.log(err);
     });
 
-db.getAll('tickets').from('retrospectives')
+db.getAll('ticket').from('retrospectives')
     .then(function (result) {
         console.log(result);
     })
