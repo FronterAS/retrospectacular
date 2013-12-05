@@ -2,22 +2,40 @@ var sage = require('sage');
 var q = require('q');
 var es = sage('http://localhost:9200');
 
-exports.postToType = function (type, data) {
-    var est = esi.type('ticket'),
-        defer = q.defer();
+exports.postData = function (data) {
+    var typeName;
 
-    est.post(data, function (err, result) {
-        if (err) {
-            console.log(err);
-            defer.reject(err);
-            return;
+    return {
+        ofType: function (_typeName) {
+            typeName = _typeName;
+            return this;
+        },
+
+        into: function (indexName) {
+            var defer = q.defer(),
+                esi = es.index(indexName),
+                defer = q.defer(),
+                est;
+
+            if (!typeName) {
+                defer.reject(new Error('You must specify a type'));
+                return;
+            }
+
+            est = esi.type(typeName);
+
+            est.post(data, function (err, result) {
+                if (err) {
+                    defer.reject(err);
+                    return;
+                }
+
+                defer.resolve(result);
+            });
+
+            return defer.promise;
         }
-
-        defer.resolve(result);
-        console.log(result);
-    });
-
-    return defer.promise;
+    };
 };
 
 exports.checkIndexExists = function (indexName) {
@@ -26,12 +44,10 @@ exports.checkIndexExists = function (indexName) {
 
     esi.exists(function (err, exists) {
         if (err) {
-            console.log(err);
             defer.reject(err);
             return;
         }
 
-        console.log(exists);
         defer.resolve(exists);
     });
 
