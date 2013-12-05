@@ -20,7 +20,7 @@ exports.getResults = function (req, res) {
 
         /* execute the request */
         r = ejs.Request()
-                .collections('twitter')
+                .indices('twitter')
                 .types('tweet')
                 .query(termQuery);
 
