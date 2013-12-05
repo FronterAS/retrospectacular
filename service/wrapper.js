@@ -1,6 +1,6 @@
-var sage = require('sage');
-var q = require('q');
-var es = sage('http://localhost:9200');
+var sage = require('sage'),
+    q = require('q'),
+    es = sage('http://localhost:9200');
 
 exports.postData = function (data) {
     var typeName;
