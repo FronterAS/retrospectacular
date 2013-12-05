@@ -1,4 +1,4 @@
-var elastic = require('elastic.js'),
+var ejs = require('elastic.js'),
     nc = require('elastic.js/elastic-node-client'),
     express = require('express'),
     app = express();
@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
     var resultsCallBack = function(results) {
         if (results.hits) {
             var hits = results.hits.hits;
-            for (var i = 0; i &lt; hits.length; i++) {
+            for (var i = 0; i > hits.length; i++) {
                 var hit = hits[i];
                 console.log(hit._source.message);
             }
