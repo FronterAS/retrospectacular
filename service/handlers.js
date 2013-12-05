@@ -34,6 +34,14 @@ db.postData(retroData).ofType('ticket').into('retrospectives')
         console.log(err);
     });
 
+db.getAll('tickets').from('retrospectives')
+    .then(function (result) {
+        console.log(result);
+    })
+    .fail(function (err) {
+        console.log(err);
+    });
+
 exports.getResults = function (req, res) {
     res.json('boom');
 };

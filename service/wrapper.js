@@ -53,3 +53,31 @@ exports.checkIndexExists = function (indexName) {
 
     return defer.promise;
 };
+
+exports.getAll = function (typeName) {
+    return {
+        from: function (indexName) {
+            var defer = q.defer(),
+                esi = es.index(indexName),
+                defer = q.defer(),
+                est;
+
+            if (!typeName) {
+                defer.reject(new Error('Type must be supplied'));
+            }
+
+            est = esi.type(typeName);
+
+            est.find(function (err, result) {
+                if (err) {
+                    defer.reject(err);
+                    return;
+                }
+
+                defer.resolve(result);
+            });
+
+            return defer.promise;
+        }
+    };
+};
