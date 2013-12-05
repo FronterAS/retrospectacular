@@ -1,0 +1,23 @@
+{
+  "name": "retrospective",
+  "version": "0.0.0",
+  "description": "A tool to aid remote retrospective and facilitate continuous improvement.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/plumpNation/retrospective.git"
+  },
+  "keywords": [
+    "retrospective",
+    "prime",
+    "directive"
+  ],
+  "author": "The Retrospective Team: Fronter AS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plumpNation/retrospective/issues"
+  }
+}
