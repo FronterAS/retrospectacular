@@ -1,49 +1,29 @@
-
-curl -XPUT localhost:9200/retrospective/team/101 -d '{
-    "teamName" : "The retro team",
-    "id" : "101",
-    "date" : "2013-12-15T14:12:12",
-    "message" : "Even more detailed information in stories - for QA"
-}'
-curl -XPUT localhost:9200/retrospective/ticket/2001 -d '{
-    "teamId":101,
+curl -XPOST localhost:9200/retrospective/ticket -d '{
     "type" : "pro",
     "message" : "Even more detailed information in stories - for QA"
 }'
-curl -XPUT localhost:9200/retrospective/ticket/2002 -d '{
-    "teamId":101,
+curl -XPOST localhost:9200/retrospective/ticket -d '{
     "type" : "pro",
     "message" : "Showing up on time"
 }'
-curl -XPUT localhost:9200/retrospective/ticket/2003 -d '{
-    "teamId":101,
+curl -XPOST localhost:9200/retrospective/ticket -d '{
     "type" : "con",
     "message" : "Get \"old\" or well know issues flagged as crisis and demand immediate fix"
 }'
-curl -XPUT localhost:9200/retrospective/ticket/2004 -d '{
-    "teamId":101,
+curl -XPOST localhost:9200/retrospective/ticket -d '{
     "type" : "con",
     "message" : "Stop distractions, bugs coming in during the sprint"
 }'
-curl -XPUT localhost:9200/retrospective/ticket/2005 -d '{
-    "teamId":101,
+curl -XPOST localhost:9200/retrospective/ticket -d '{
     "type" : "con",
     "message" : "Stop distractions, bugs coming in during the sprint"
 }'
-curl -XPUT localhost:9200/retrospective/ticket/2006 -d '{
-    "teamId":101,
+curl -XPOST localhost:9200/retrospective/ticket -d '{
     "type" : "puzzle",
     "message" : "Discussion on review"
 }'
-curl -XPUT localhost:9200/retrospective/retro/102 -d '{
-    "teamName" : "The avo team",
-    "id" : "102",
-    "date" : "2013-12-10T14:12:12",
-    "message" : "Even more detailed information in stories - for QA"
-}'
 
-curl -XPUT localhost:9200/retrospective/ticket/2007 -d '{
-    "teamId":102,
+curl -XPOST localhost:9200/retrospective/ticket -d '{
     "type" : "puzzle",
     "message" : "Small releases (we can be so much better)"
 }'
