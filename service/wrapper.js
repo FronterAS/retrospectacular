@@ -54,6 +54,22 @@ exports.checkIndexExists = function (indexName) {
     return defer.promise;
 };
 
+exports.checkIndexStatus = function (indexName) {
+    var esi = es.index(indexName),
+        defer = q.defer();
+
+    esi.status(function(err, result) {
+        if (err) {
+            defer.reject(err);
+            return;
+        }
+
+        defer.resolve(result);
+    });
+
+    return defer.promise;
+};
+
 exports.getAll = function (typeName) {
     return {
         from: function (indexName) {

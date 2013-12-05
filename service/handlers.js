@@ -2,7 +2,15 @@ var db = require('./wrapper');
 
 db.checkIndexExists('retrospectives')
     .then(function (result) {
-        console.log(result);
+        console.log('check index exists', result);
+    })
+    .fail(function (err) {
+        console.log(err);
+    });
+
+db.checkIndexStatus('retrospectives')
+    .then(function (result) {
+        console.log('check index status ', result);
     })
     .fail(function (err) {
         console.log(err);
