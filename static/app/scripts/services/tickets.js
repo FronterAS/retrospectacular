@@ -1,16 +1,20 @@
 'use strict';
 
 angular.module('retrospectApp')
-  .factory('tickets', function () {
-    // Service logic
-    // ...
+  .factory('tickets', ['$http', function ($http) {
+    var tickets = {};
 
-    var meaningOfLife = 42;
+    tickets.getTickets = function (callback) {
+        var url = 'http://petter.fronter.net:3000/retrospectives';
+
+        return $http.get(url).success(function(data, status) {
+                callback(data);
+            }).error(function (data, status) {
+                // Stuff gone bad!
+                callback(data);
+            });
+    };
 
     // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
-  });
+    return tickets;
+}]);
