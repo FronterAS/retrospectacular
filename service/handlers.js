@@ -12,6 +12,18 @@ exports.getTickets = function (req, res) {
         });
 };
 
+exports.getTicket = function (req, res) {
+    db.query('_id:' + req.params.ticketId).of('ticket').from('retrospectives')
+        .then(function (result) {
+            console.log(result);
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
+
 exports.getRetrospectives = function (req, res) {
     db.getAll('retrospective').from('retrospectives')
         .then(function (result) {
