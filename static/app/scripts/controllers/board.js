@@ -12,12 +12,12 @@ angular.module('retrospectApp')
             query.ticketId = ticketId;
         }
 */
-        $scope.retrospectives = [];
+        $scope.tickets = [];
 
-        tickets.query(query, function (retrospectives) {
-            $scope.retrospectives = retrospectives;
+        tickets.query(query, function (tickets) {
+            $scope.tickets = tickets;
         });
 
-        //$scope.retroId = $routeParams.retroId;
+        $scope.retroId = retroId;
     }
 ]);
