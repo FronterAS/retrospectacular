@@ -1,30 +1,39 @@
-var ejs = require('elastic.js'),
-    nc = require('elastic.js/elastic-node-client');
+var db = require('./wrapper');
 
-// default elasticsearch port is 9200
-ejs.client = nc.NodeClient('localhost', '9200');
+db.checkIndexExists('retrospectives')
+    .then(function (result) {
+        console.log(result);
+    })
+    .fail(function (err) {
+        console.log(err);
+    });
+
+var teamData = {
+    name: 'Bogus team'
+};
+
+db.postData(teamData).ofType('team').into('retrospectives')
+    .then(function (result) {
+        console.log(result);
+    })
+    .fail(function (err) {
+        console.log(err);
+    });
+
+var retroData = {
+    'teamId': 102,
+    'type': 'pro',
+    'message': 'Learning new things'
+};
+
+db.postData(retroData).ofType('ticket').into('retrospectives')
+    .then(function (result) {
+        console.log(result);
+    })
+    .fail(function (err) {
+        console.log(err);
+    });
 
 exports.getResults = function (req, res) {
-    var termQuery = ejs.TermQuery('message', 'hello'),
-
-        /* a function to display results */
-        resultsCallBack = function (results) {
-            if (results.hits) {
-                var hits = results.hits.hits;
-
-                hits.forEach(function (hit) {
-                    console.log(hit._source.message);
-                });
-            }
-        },
-
-        /* execute the request */
-        r = ejs.Request()
-                .indices('twitter')
-                .types('tweet')
-                .query(termQuery);
-
-    r.doSearch(resultsCallBack);
-
     res.json('boom');
 };
