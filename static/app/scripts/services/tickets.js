@@ -5,9 +5,9 @@ angular.module('retrospectApp')
     var tickets = {};
 
     tickets.getTickets = function (callback) {
-        var url = 'http://petter.fronter.net:3000/retrospectives';
+        var url = 'http://petter.fronter.net:3000/retrospectives?callback=JSON_CALLBACK';
 
-        return $http.get(url).success(function(data, status) {
+        return $http.jsonp(url).success(function(data, status) {
                 callback(data);
             }).error(function (data, status) {
                 // Stuff gone bad!
