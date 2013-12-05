@@ -11,5 +11,5 @@ var handlers = require('./handlers'),
 exports.setup = function (api) {
     api.get('/', allowCrossDomain);
 
-    api.get('/results', handlers.getResults);
+    api.get('/retrospectives', handlers.getResults);
 };
