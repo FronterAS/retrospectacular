@@ -5,22 +5,27 @@ A retrospective tool
 ##Service
 
 ###Setup
-cd service/bin
 
+```Shell
+cd service/bin
 node create.js
+```
 
 ###Run
-cd service
 
+
+```Shell
+cd service
 node app.js
+```
 
 ##Static
 
 ###Setup
+
+```Shell
 cd static
-
 npm install
-
 bower install
-
 grunt server
+```Shell
