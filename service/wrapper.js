@@ -17,7 +17,7 @@ var sage = require('sage'),
         return results;
     };
 
-exports.postData = function (data) {
+exports.post = function (data) {
     var typeName;
 
     return {

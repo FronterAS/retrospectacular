@@ -33,7 +33,7 @@ var db = require('../wrapper'),
 
         console.log('posting retrospective');
 
-        db.postData({'name': 'Sprint 1'}).ofType('retrospective').into('retrospectives')
+        db.post({'name': 'Sprint 1'}).ofType('retrospective').into('retrospectives')
             .then(function (result) {
                 console.log(result);
                 defer.resolve(result);
@@ -55,7 +55,7 @@ var db = require('../wrapper'),
 
             ticket.retroId = retrospective._id;
 
-            db.postData(ticket).ofType('ticket').into('retrospectives')
+            db.post(ticket).ofType('ticket').into('retrospectives')
                 .then(function (result) {
                     defer.resolve(result);
                 })

@@ -23,3 +23,15 @@ exports.getRetrospectives = function (req, res) {
             res.json(err);
         });
 };
+
+exports.postRetrospective = function (req, res) {
+    db.post(req.body).ofType('retrospective').into('retrospectives')
+        .then(function (result) {
+            console.log(result);
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
