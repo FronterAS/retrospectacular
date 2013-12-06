@@ -11,11 +11,7 @@ angular.module('retrospectApp', ['ngResource'])
                 templateUrl: 'views/board.html',
                 controller: 'BoardCtrl'
             })
-            .when('/choosetype', {
-                templateUrl: 'views/choosetype.html',
-                controller: 'ChoosetypeCtrl'
-            })
-            .when('/editpage/:noteType', {
+            .when('/editpage/:retroId', {
                 templateUrl: 'views/editpage.html',
                 controller: 'EditpageCtrl'
             })

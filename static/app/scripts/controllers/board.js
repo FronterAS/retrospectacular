@@ -7,17 +7,11 @@ angular.module('retrospectApp')
         'tickets',
 
         function ($scope, $routeParams, tickets) {
-            var retroId = $routeParams.retroId,
-                query = {
-                    'retroId': retroId
-                };
-
+            $scope.retroId = $routeParams.retroId;
             $scope.tickets = [];
 
-            tickets.query(query, function (tickets) {
+            tickets.query({'retroId': $scope.retroId}, function (tickets) {
                 $scope.tickets = tickets;
             });
-
-            $scope.retroId = retroId;
         }
     ]);
