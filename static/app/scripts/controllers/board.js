@@ -8,16 +8,21 @@ angular.module('retrospectApp')
         'tickets',
 
         function ($scope, $routeParams, $timeout, tickets, BoardService) {
-            var updateTickets;
+            var updateTickets,
+                promise;
 
             $scope.retroId = $routeParams.retroId;
             $scope.tickets = [];
+
+            $scope.$on('$locationChangeStart', function(){
+                $timeout.cancel(promise);
+            });
 
             updateTickets = function () {
                 console.log('Getting tickets');
                 tickets.query({'retroId': $scope.retroId}, function (tickets) {
                     $scope.tickets = tickets;
-                    $timeout(updateTickets, 2000);
+                    promise = $timeout(updateTickets, 2000);
                 });
             };
 
