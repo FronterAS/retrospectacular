@@ -46,13 +46,18 @@ exports.post = function (data) {
                 var defer = q.defer();
                 promises.push(defer.promise);
 
+                debugger;
+
                 est.post(item, function (err, result) {
                     if (err) {
                         defer.reject(err);
                         return;
                     }
 
+                    debugger;
+
                     est.get(result.id, function (err, result) {
+                        debugger;
                         if (err) {
                             defer.reject(err);
                             return;
