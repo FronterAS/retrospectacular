@@ -33,7 +33,5 @@ angular.module('retrospectApp')
         retrospectives.get(function (response) {
             $scope.retrospectives = response.results;
         });
-
-        buildCloud();
     }
 ]);
