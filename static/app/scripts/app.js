@@ -11,9 +11,9 @@ angular.module('retrospectApp', ['ngResource', 'retrospectApp.config'])
                 templateUrl: 'views/board.html',
                 controller: 'BoardCtrl'
             })
-            .when('/editpage/:retroId', {
-                templateUrl: 'views/editpage.html',
-                controller: 'EditpageCtrl'
+            .when('/tickets/:retroId', {
+                templateUrl: 'views/tickets.html',
+                controller: 'TicketCtrl'
             })
             .otherwise({
                 redirectTo: '/'

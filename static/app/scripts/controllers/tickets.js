@@ -2,7 +2,7 @@
 
 angular.module('retrospectApp')
 
-    .controller('EditpageCtrl', function ($scope, $location, $routeParams, tickets) {
+    .controller('TicketCtrl', function ($scope, $location, $routeParams, tickets) {
         $scope.tickets = [];
         $scope.role;
 
