@@ -8,10 +8,15 @@ html, body {
     margin: 20px;
 }
 
+h2 {
+    font-size: 25px;
+}
+
 body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    font-size: 18px;
 }
 
 .hero-unit {
@@ -41,9 +46,12 @@ body {
     display: inline-block;
 }
 
-header h1,
-#tickets-publish {
+header h1 {
     display: inline-block;
+}
+
+#tickets-publish {
+    float: right;
 }
 
 .role-switcher,
