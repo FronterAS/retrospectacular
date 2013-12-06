@@ -11,9 +11,9 @@ angular.module('retrospectApp', ['ngResource', 'retrospectApp.config'])
                 templateUrl: 'views/board.html',
                 controller: 'BoardCtrl'
             })
-            .when('/cloud', {
-                templateUrl: 'views/cloud.html',
-                controller: 'CloudCtrl'
+            .when('/wordcloud', {
+                templateUrl: 'views/wordcloud.html',
+                controller: 'WordCloudCtrl'
             })
             .when('/tickets/:retroId', {
                 templateUrl: 'views/tickets.html',

@@ -1,20 +1,19 @@
 'use strict';
 
 angular.module('retrospectApp')
-    .controller('CloudCtrl', [
+    .controller('WordCloudCtrl', [
         '$scope',
         '$routeParams',
+        'wordcloud',
 
-        function ($scope, $routeParams) {
-            var buildCloud = function () {
+        function ($scope, $routeParams, wordcloud) {
+            var buildCloud = function (cloudwords) {
                 console.log('building cloud');
 
                 var fill = d3.scale.category20();
 
                 d3.layout.cloud().size([300, 300])
-                        .words([
-                            'Hello', 'world', 'normally', 'you', 'want', 'more', 'words',
-                            'than', 'this'].map(function (d) {
+                        .words(cloudwords.map(function (d) {
                             return {text: d, size: 10 + Math.random() * 90};
                         }))
                         .padding(5)
@@ -44,7 +43,9 @@ angular.module('retrospectApp')
                 }
             };
 
-            buildCloud();
+            wordcloud.get(function (cloudwords) {
+                buildCloud(cloudwords.results);
+            })
         }
     ]
 );

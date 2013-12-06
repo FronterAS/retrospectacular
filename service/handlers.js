@@ -1,4 +1,27 @@
-var db = require('./wrapper');
+var db = require('./wrapper'),
+
+    explodeMessages = function (results) {
+        var words = [];
+
+        results.forEach(function (result) {
+            words = words.concat(result.message.split(' '));
+        });
+
+        return words;
+    };
+
+exports.getTicketWords = function (req, res) {
+    db.getAll('ticket').from('retrospectives')
+        .then(function (result) {
+            var words = explodeMessages(result);
+            console.log(words);
+            res.json({'results': words});
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
 
 exports.getTickets = function (req, res) {
     db.query('retroId:' + req.params.retroId).of('ticket').from('retrospectives')
