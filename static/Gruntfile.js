@@ -133,10 +133,10 @@ module.exports = function (grunt) {
                 javascriptsDir: '<%= yeoman.app %>/scripts',
                 fontsDir: '<%= yeoman.app %>/styles/fonts',
                 importPath: '<%= yeoman.app %>/bower_components',
-                httpImagesPath: '/images',
-                httpGeneratedImagesPath: '/images/generated',
-                httpFontsPath: '/styles/fonts',
-                relativeAssets: false
+                httpImagesPath: '<%= yeoman.app %>/images',
+                httpGeneratedImagesPath: '<%= yeoman.app %>/images/generated',
+                httpFontsPath: '<%= yeoman.app %>/styles/fonts',
+                relativeAssets: true
             },
             dist: {},
             server: {
@@ -242,7 +242,7 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'bower_components/**/*',
                         'images/{,*/}*.{gif,webp}',
-                        'styles/fonts/*'
+                        'fonts/*'
                     ]
                 }, {
                     expand: true,
