@@ -1,0 +1,19 @@
+<div class="hero-unit">
+    <h1>Retrospectives</h1>
+
+    <form name="retroAddForm"  novalidate>
+        <div class="input-group">
+            <input type="text" class="form-control" id="new-retrospective" ng-model="newRetrospective.name" placeholder="Retrospective name">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+            </span>
+        </div>
+    </form>
+
+    <ul>
+        <li ng-repeat="retrospective in retrospectives">
+            <a href="#/retrospectives/{{retrospective.id}}">{{retrospective.name}}</a>
+        </li>
+    </ul>
+    <h3>Enjoy retrospecting!</h3>
+</div>

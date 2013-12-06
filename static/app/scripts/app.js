@@ -4,8 +4,8 @@ angular.module('retrospectApp', ['ngResource'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
+                templateUrl: 'views/retrospectives.html',
+                controller: 'RetroCtrl'
             })
             .when('/retrospectives/:retroId', {
                 templateUrl: 'views/board.html',

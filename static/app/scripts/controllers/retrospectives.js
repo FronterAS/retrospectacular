@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('retrospectApp')
-    .controller('MainCtrl', [
+    .controller('RetroCtrl', [
         '$scope',
         '$location',
         'retrospectives',

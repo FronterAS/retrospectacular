@@ -1,11 +1,11 @@
 $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
-@import "bootstrap-sass/lib/bootstrap";
+@import "sass-bootstrap/lib/bootstrap";
 
 /* Put your CSS here */
 html, body {
-  margin: 20px;
+    margin: 20px;
 }
 
 body {
@@ -29,4 +29,14 @@ body {
     font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    display: inline-block;
 }
