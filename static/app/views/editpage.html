@@ -1,10 +1,16 @@
+<ul class="nav nav-tabs">
+    <li class="active"><button class="btn btn-success" type="button" ng-click="setRole('pro')">+</button></li>
+    <li><button class="btn btn-danger" type="button" ng-click="setRole('con')">-</button></li>
+    <li><button class="btn btn-warning" type="button" ng-click="setRole('puzzle')">?</button></li>
+</ul>
+
 <div class="controls controls-row container">
     <div class="span6">
         <div class="span1">
             <a class="btn btn-success" ng-click="retroPublish()">Publish</a>
         </div>
         <div class="span3">
-            <h1 class="editpage">{{noteType}}</h1>
+            <h1 class="editpage">{{role}}</h1>
         </div>
     </div>
 </div>
@@ -24,3 +30,5 @@
         </ul>
     </div>
 </div>
+
+
