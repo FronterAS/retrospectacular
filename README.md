@@ -29,3 +29,11 @@ npm install
 bower install
 grunt server
 ```
+
+###Frontend
+```Shell
+cd static/app/scripts
+cp config.js.example config.js
+```
+
+Edit the config to suit

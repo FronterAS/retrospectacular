@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('retrospectApp', ['ngResource'])
+angular.module('retrospectApp', ['ngResource', 'retrospectApp.config'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {

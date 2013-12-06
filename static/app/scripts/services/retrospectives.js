@@ -3,7 +3,8 @@
 angular.module('retrospectApp')
     .factory('retrospectives', [
         '$resource',
-        function ($resource) {
-            return $resource('http://localhost\\:3000/retrospectives');
+        'SERVICE_URL',
+        function ($resource, SERVICE_URL) {
+            return $resource(SERVICE_URL + '/retrospectives');
         }
     ]);

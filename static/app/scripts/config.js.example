@@ -1,0 +1,3 @@
+angular.module('retrospectApp.config', [])
+    .constant('APP_NAME','Retrospective Tool')
+    .constant('SERVICE_URL','http://localhost\\:3000');

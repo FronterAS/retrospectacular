@@ -4,8 +4,10 @@
 angular.module('retrospectApp')
     .factory('tickets', [
         '$resource',
-        function ($resource) {
-            return $resource('http://localhost\\:3000/retrospectives/:retroId/tickets',
+        'SERVICE_URL',
+
+        function ($resource, SERVICE_URL) {
+            return $resource(SERVICE_URL + '/retrospectives/:retroId/tickets',
                 { 'retroId': '@retroId' }
             );
         }
