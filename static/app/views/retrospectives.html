@@ -1,11 +1,11 @@
 <div class="hero-unit">
     <h1>Retrospectives</h1>
 
-    <form name="retroAddForm"  novalidate>
+    <form name="retroAddForm" ng-submit="saveRetrospective()" novalidate>
         <div class="input-group">
             <input type="text" class="form-control" id="new-retrospective" ng-model="newRetrospective.name" placeholder="Retrospective name">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
+                <button class="btn btn-default" type="submit">Go!</button>
             </span>
         </div>
     </form>

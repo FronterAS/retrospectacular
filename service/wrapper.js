@@ -20,6 +20,10 @@ var sage = require('sage'),
 exports.post = function (data) {
     var typeName;
 
+    if (!Array.isArray(data)) {
+        data = [data];
+    }
+
     return {
         ofType: function (_typeName) {
             typeName = _typeName;
@@ -27,9 +31,8 @@ exports.post = function (data) {
         },
 
         into: function (indexName) {
-            var defer = q.defer(),
-                esi = es.index(indexName),
-                defer = q.defer(),
+            var esi = es.index(indexName),
+                promises = [],
                 est;
 
             if (!typeName) {
@@ -39,26 +42,34 @@ exports.post = function (data) {
 
             est = esi.type(typeName);
 
-            est.post(data, function (err, result) {
-                if (err) {
-                    defer.reject(err);
-                    return;
-                }
+            data.forEach(function (item) {
+                var defer = q.defer();
+                promises.push(defer.promise);
 
-                est.get(result.id, function (err, result) {
+                est.post(item, function (err, result) {
                     if (err) {
                         defer.reject(err);
                         return;
                     }
 
-                    console.log(result);
+                    est.get(result.id, function (err, result) {
+                        if (err) {
+                            defer.reject(err);
+                            return;
+                        }
 
-                    result = adaptResult(result);
-                    defer.resolve(result);
+                        result = adaptResult(result);
+                        defer.resolve(result);
+                    });
                 });
+
             });
 
-            return defer.promise;
+            if (data.length === 1) {
+                return promises[0];
+            }
+
+            return q.all(promises);
         }
     };
 };
@@ -116,14 +127,16 @@ exports.getAll = function (types) {
             est = esi.type(types);
 
             est.find(function (err, results) {
+                var response;
+
                 if (err) {
                     defer.reject(err);
                     return;
                 }
 
-                results = adaptResults(results);
+                response = adaptResults(results);
 
-                defer.resolve(results);
+                defer.resolve(response);
             });
 
             return defer.promise;

@@ -28,7 +28,7 @@ exports.getRetrospectives = function (req, res) {
     db.getAll('retrospective').from('retrospectives')
         .then(function (result) {
             console.log(result);
-            res.json(result);
+            res.json({'results': result});
         })
         .fail(function (err) {
             console.log(err);

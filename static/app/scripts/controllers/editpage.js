@@ -31,7 +31,7 @@ angular.module('retrospectApp')
         $scope.retroPublish = function () {
             tickets.save($scope.tickets, function (response) {
                 console.log('did something');
-                console.log(response);
+                console.log(response.results);
             });
         };
     });

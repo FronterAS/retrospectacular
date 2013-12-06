@@ -31,8 +31,8 @@ angular.module('retrospectApp')
         };
 
         // this throws an error with cross domain
-        retrospectives.query(function (retrospectives) {
-            $scope.retrospectives = retrospectives;
+        retrospectives.get(function (response) {
+            $scope.retrospectives = response.results;
         });
     }
 ]);
