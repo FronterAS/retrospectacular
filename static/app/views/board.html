@@ -8,7 +8,7 @@
 
     <h2>Positive</h2>
     <ul id="positive-tickets">
-        <li ng-repeat="ticket in tickets | role:'pro'">
+        <li ng-repeat="ticket in tickets | filter: {role:'pro'}">
             <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
                 {{ticket.message}}
             </a>
@@ -17,7 +17,7 @@
 
     <h2>Negative</h2>
     <ul id="negative-tickets">
-        <li ng-repeat="ticket in tickets | role:'con'">
+        <li ng-repeat="ticket in tickets | filter: {role:'con'}">
             <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
                 {{ticket.message}}
             </a>
@@ -26,7 +26,7 @@
 
     <h2>Puzzle</h2>
     <ul id="puzzle-tickets">
-        <li ng-repeat="ticket in tickets | role:'puzzle'">
+        <li ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
             <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
                 {{ticket.message}}
             </a>
