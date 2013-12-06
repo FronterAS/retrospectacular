@@ -6,12 +6,12 @@
         <div class="input-group">
             <input type="text" class="form-control" id="new-retrospective" ng-model="newRetrospective.name" placeholder="Retrospective name">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">Go!</button>
+                <button class="btn btn-success" type="submit">Start</button>
             </span>
         </div>
     </form>
 
-    <ul>
+    <ul id="sprint-names">
         <li ng-repeat="retrospective in retrospectives">
             <a href="#/retrospectives/{{retrospective.id}}">{{retrospective.name}}</a>
         </li>

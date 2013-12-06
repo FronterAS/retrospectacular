@@ -9,13 +9,15 @@
     <li><a class="role-switcher puzzle" href="" ng-click="setRole('puzzle')">?</a></li>
 </ul>
 
-<div class="input-group">
-    <span class="input-group-addon role-marker {{role}}"></span>
-    <input type="text" class="form-control" ng-model="retroMessage" placeholder="{{placeholder}}">
-    <span class="input-group-btn">
-        <button id="add" name="add" class="btn btn-default" ng-click="addTicket()">Add</button>
-    </span>
-</div>
+<form ng-submit="addTicket()">
+    <div class="input-group">
+        <span class="input-group-addon role-marker {{role}}"></span>
+            <input type="text" class="form-control" ng-model="retroMessage" placeholder="{{placeholder}}">
+            <span class="input-group-btn">
+                <button id="add" name="add" class="btn btn-default">Add</button>
+            </span>
+    </div>
+</form>
 
 <div class="controls controls-row">
     <div class="span6">

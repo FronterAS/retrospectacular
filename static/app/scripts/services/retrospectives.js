@@ -5,6 +5,6 @@ angular.module('retrospectApp')
         '$resource',
         'SERVICE_URL',
         function ($resource, SERVICE_URL) {
-            return $resource(SERVICE_URL + '/retrospectives');
+            return $resource(SERVICE_URL + '/retrospectives/:retroId');
         }
     ]);

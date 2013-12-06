@@ -47,6 +47,18 @@ exports.getTicket = function (req, res) {
         });
 };
 
+exports.getRetrospective = function (req, res) {
+    db.get('retrospective').withId(req.params.retroId).from('retrospectives')
+        .then(function (result) {
+            console.log(result);
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
+
 exports.getRetrospectives = function (req, res) {
     db.getAll('retrospective').from('retrospectives')
         .then(function (result) {

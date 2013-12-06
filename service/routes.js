@@ -10,6 +10,7 @@ exports.setup = function (api) {
     api.use(allowCrossDomain);
 
     api.get('/retrospectives', handlers.getRetrospectives);
+    api.get('/retrospectives/:retroId', handlers.getRetrospective);
     api.post('/retrospectives', handlers.postRetrospective);
 
     api.get('/retrospectives/:retroId/tickets', handlers.getTickets);

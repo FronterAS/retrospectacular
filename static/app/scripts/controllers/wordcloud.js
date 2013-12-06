@@ -25,8 +25,8 @@ angular.module('retrospectApp')
 
                 function draw(words) {
                     d3.select('#cloud-container').append('svg')
-                            .attr('width', 300)
-                            .attr('height', 300)
+                            .attr('width', window.innerWidth)
+                            .attr('height', window.innerHeight)
                         .append('g')
                             .attr('transform', 'translate(150,150)')
                         .selectAll('text')
