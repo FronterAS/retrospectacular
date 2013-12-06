@@ -47,3 +47,18 @@ exports.postRetrospective = function (req, res) {
             res.json(err);
         });
 };
+
+exports.postTicketToRetrospective = function (req, res) {
+    // @TODO: perhaps move retroId into req.body
+    //  from the frontend?
+    req.body.retroId = req.params.retroId;
+    db.post(req.body).ofType('ticket').into('retrospectives')
+        .then(function (result) {
+            console.log(result);
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
