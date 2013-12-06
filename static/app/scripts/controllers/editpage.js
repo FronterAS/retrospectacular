@@ -12,11 +12,14 @@ angular.module('retrospectApp')
             $scope.role = role;
         };
 
+        $scope.createdAt = JSON.stringify(new Date());
+
         $scope.addTicket = function() {
             $scope.tickets.push({
                 'role'   : $scope.role,
                 'message': $scope.retroMessage,
-                'retroId': $scope.retroId
+                'retroId': $scope.retroId,
+                'createdAt': JSON.parse($scope.createdAt)
             });
 
             // clear the message input box
@@ -31,4 +34,4 @@ angular.module('retrospectApp')
                 console.log(response);
             });
         };
-});
+    });

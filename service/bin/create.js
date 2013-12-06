@@ -1,15 +1,15 @@
 var db = require('../wrapper'),
     q = require('q'),
-    created_at = JSON.stringify(new Date()),
+    createdAt = JSON.stringify(new Date()),
 
     tickets = [{
         'role': 'pro',
         'message': 'We learned loads',
-        'created_at' : JSON.parse(created_at)
+        'createdAt' : JSON.parse(createdAt)
     },{
         'role': 'con',
         'message': 'Then we forgot most of it',
-        'created_at': JSON.parse(created_at)
+        'createdAt': JSON.parse(createdAt)
     }],
 
     handleError = function (err) {
