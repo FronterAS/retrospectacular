@@ -16,7 +16,7 @@ node create.js
 
 ```Shell
 cd service
-node app.js >logs/output.log 2>logs/error.log
+node app.js >logs/output.log 2>logs/error.log &
 ```
 
 ###Post a ticket
