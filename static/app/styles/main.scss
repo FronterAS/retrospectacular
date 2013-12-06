@@ -40,3 +40,23 @@ body {
 .nav-item {
     display: inline-block;
 }
+
+header h1,
+#tickets-publish {
+    display: inline-block;
+}
+
+
+.role-marker {
+    &.pro {
+        background-color: $btn-success-bg;
+    }
+
+    &.con {
+        background-color: $btn-danger-bg;
+    }
+
+    &.puzzle {
+        background-color: $btn-warning-bg;
+    }
+}

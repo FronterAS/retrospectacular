@@ -1,29 +1,22 @@
-<div class="hero-unit">
-<ul class="nav nav-tabs">
-    <li class="active"><button class="btn btn-success" type="button" ng-click="setRole('pro')">+</button></li>
-    <li><button class="btn btn-danger" type="button" ng-click="setRole('con')">-</button></li>
-    <li><button class="btn btn-warning" type="button" ng-click="setRole('puzzle')">?</button></li>
-</ul>
+<header>
+    <h1>My tickets</h1>
+    <a id="tickets-publish" class="btn btn-success" ng-click="retroPublish()">Publish</a>
+</header>
 
-<div class="controls controls-row container">
-    <div class="span6">
-        <div class="span1">
-            <a class="btn btn-success" ng-click="retroPublish()">Publish</a>
-        </div>
-        <div class="span3">
-            <h1 class="editpage">{{role}}</h1>
-        </div>
-    </div>
+<div class="btn-group">
+    <button type="button" class="btn btn-success" ng-click="setRole('pro')">+</button>
+    <button type="button" class="btn btn-danger" ng-click="setRole('con')">-</button>
+    <button type="button" class="btn btn-warning" ng-click="setRole('puzzle')">?</button>
 </div>
-<div class="controls controls-row">
-    <div class="span6">
-        <div class="span3">
-            <input type="text" id="message" name="message" ng-model="retroMessage" />
-        </div>
-        <div class="span1">
-            <button id="add" name="add" ng-click="addTicket()">Add</button>
-        </div>
+
+<div class="input-group">
+    <span class="input-group-addon role-marker {{role}}"></span>
+    <input type="text" class="form-control" ng-model="retroMessage" placeholder="{{placeholder}}">
+    <span class="input-group-btn">
+        <button id="add" name="add" class="btn btn-default" ng-click="addTicket()">Add</button>
+    </span>
 </div>
+
 <div class="controls controls-row">
     <div class="span6">
         <ul>
@@ -35,27 +28,21 @@
 <h2>Positive</h2>
     <ul id="positive-tickets">
         <li ng-repeat="ticket in tickets | role:'pro'">
-            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
-                {{ticket.message}}
-            </a>
+            {{ticket.message}}
         </li>
     </ul>
 
     <h2>Negative</h2>
     <ul id="negative-tickets">
         <li ng-repeat="ticket in tickets | role:'con'">
-            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
-                {{ticket.message}}
-            </a>
+            {{ticket.message}}
         </li>
     </ul>
 
     <h2>Puzzle</h2>
     <ul id="puzzle-tickets">
         <li ng-repeat="ticket in tickets | role:'puzzle'">
-            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
-                {{ticket.message}}
-            </a>
+            {{ticket.message}}
         </li>
     </ul>
 </div>
