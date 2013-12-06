@@ -4,20 +4,29 @@ angular.module('retrospectApp')
     .controller('BoardCtrl', [
         '$scope',
         '$routeParams',
+        '$timeout',
         'tickets',
 
-        function ($scope, $routeParams, tickets) {
-            var retroId = $routeParams.retroId,
-                query = {
-                    'retroId': retroId
-                };
+        function ($scope, $routeParams, $timeout, tickets, BoardService) {
+            var updateTickets,
+                promise;
 
+            $scope.retroId = $routeParams.retroId;
             $scope.tickets = [];
 
-            tickets.query(query, function (tickets) {
-                $scope.tickets = tickets;
+            $scope.$on('$locationChangeStart', function(){
+                $timeout.cancel(promise);
             });
 
-            $scope.retroId = retroId;
+            updateTickets = function () {
+                console.log('Getting tickets');
+                tickets.query({'retroId': $scope.retroId}, function (tickets) {
+                    $scope.tickets = tickets;
+                    promise = $timeout(updateTickets, 2000);
+                });
+            };
+
+            updateTickets();
         }
-    ]);
+    ]
+);

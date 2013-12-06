@@ -18,3 +18,12 @@ node create.js
 cd service
 node app.js
 ```
+
+###Post a ticket
+```Shell
+curl -XPOST --header 'Content-Type: application/json' -d '{
+  "role" : "con",
+  "message" : "We didn't drink enough coffee!!",
+  "created_at": "2013-12-06T09:44:49.258Z",
+}' http://localhost:3000/retrospectives/LUu3vCumSw6RXkcoG8PP9g
+```
