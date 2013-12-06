@@ -3,11 +3,11 @@
     <a id="tickets-publish" class="btn btn-success" ng-click="retroPublish()">Publish</a>
 </header>
 
-<div class="btn-group">
-    <button type="button" class="btn btn-success" ng-click="setRole('pro')">+</button>
-    <button type="button" class="btn btn-danger" ng-click="setRole('con')">-</button>
-    <button type="button" class="btn btn-warning" ng-click="setRole('puzzle')">?</button>
-</div>
+<ul class="nav nav-pills nav-justified">
+    <li><a class="role-switcher pro" href="" ng-click="setRole('pro')">+</a></li>
+    <li><a class="role-switcher con" href="" ng-click="setRole('con')">-</a></li>
+    <li><a class="role-switcher puzzle" href="" ng-click="setRole('puzzle')">?</a></li>
+</ul>
 
 <div class="input-group">
     <span class="input-group-addon role-marker {{role}}"></span>
