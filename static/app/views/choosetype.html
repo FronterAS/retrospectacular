@@ -1,19 +1,20 @@
+<h1>{{lastRetrospective.name}}</h1>
 <div class="span3">
-    <a class="btn btn-success btn-large btn-block" ng-click="goToEdit('Start')">
+    <a class="btn btn-success btn-large btn-block" ng-click="goToEdit({{lastRetrospective}},'Start')">
         {{types.start}}
         <span class="badge pull-right">
             {{1}}
         </span>
     </a>
     <br>
-    <a class="btn btn-danger btn-large btn-block" ng-click="goToEdit('Stop')">
+    <a class="btn btn-danger btn-large btn-block" ng-click="goToEdit({{lastRetrospective}},'Stop')">
         {{types.stop}}
         <span class="badge pull-right">
             1
         </span>
     </a>
     <br>
-    <a class="btn btn-warning btn-large btn-block" ng-click="goToEdit('Continue')">
+    <a class="btn btn-warning btn-large btn-block" ng-click="goToEdit({{lastRetrospective}},'Continue')">
         {{types.cont}}
         <span class="badge pull-right">
             1

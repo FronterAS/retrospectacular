@@ -7,6 +7,8 @@ angular.module('retrospectApp')
 
     $scope.noteType = $routeParams.noteType;
 
+    $scope.retroId = $routeParams.retroId;
+
     $scope.addTicket = function() {
         $scope.retroListElements.push ({
             'role': $scope.noteType,
@@ -15,8 +17,11 @@ angular.module('retrospectApp')
         $scope.retroMessage = '';
     };
 
-    $scope.retroPublish = function () {
-        // here call the tickets.save()
-    };
 
-  });
+
+    $scope.retroPublish = function () {
+        var params = {'retroId': $scope.retroId};
+        tickets.data = $scope.retroListElements;
+        tickets.save(params);
+    };
+});
