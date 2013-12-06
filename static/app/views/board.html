@@ -1,12 +1,33 @@
 <div class="hero-unit">
-    <a href="#/retrospectives">Back to retrospectives</a>
-    <a href="#/editpage/{{retroId}}">Add tickets</a>
-    <h1>Board</h1>
     <ul>
-        <li ng-repeat="ticket in tickets">
+        <li><a href="#/retrospectives">Back to retrospectives</a></li>
+        <li><a href="#/editpage/{{retroId}}">Add tickets</a></li>
+    </ul>
+
+    <h1>Board</h1>
+
+    <ul id="positive-tickets">
+        <li ng-repeat="ticket in tickets | role:'pro'">
             <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
                 {{ticket.message}}
             </a>
         </li>
     </ul>
+
+    <ul id="negative-tickets">
+        <li ng-repeat="ticket in tickets | role:'con'">
+            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                {{ticket.message}}
+            </a>
+        </li>
+    </ul>
+
+    <ul id="puzzle-tickets">
+        <li ng-repeat="ticket in tickets | role:'puzzle'">
+            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                {{ticket.message}}
+            </a>
+        </li>
+    </ul>
+
 </div>
