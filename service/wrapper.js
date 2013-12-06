@@ -219,12 +219,18 @@ exports.createIndex = function (indexName) {
 };
 
 exports.query = function (queryString) {
-    var typeName;
+    var typeName,
+        // results to return
+        size = 1000000;
 
     return {
         of: function (_typeName) {
             typeName = _typeName;
             return this;
+        },
+
+        withSize: function (_size) {
+            size = _size;
         },
 
         from: function (indexName) {
@@ -240,7 +246,7 @@ exports.query = function (queryString) {
 
             est = esi.type(typeName);
 
-            qStr = {'query': { 'query_string': { 'query': queryString }}};
+            qStr = {'size': size, 'query': { 'query_string': { 'query': queryString }}};
 
             est.find(qStr, function (err, results) {
                 if (err) {
@@ -248,7 +254,11 @@ exports.query = function (queryString) {
                     return;
                 }
 
+                console.log('results');
+                console.log(results.length);
+
                 results = adaptResults(results);
+                console.log(results.length);
 
                 defer.resolve(results);
             });
@@ -257,60 +267,3 @@ exports.query = function (queryString) {
         }
     };
 }
-
-
-// USAGE NOTES
-/*
-
-db.destroyIndex('retrospectives');
-
-db.indexExists('retrospectives')
-    .then(function (exists) {
-        console.log('check index exists', exists);
-    })
-    .fail(function (err) {
-        console.log(err);
-    });
-
-db.indexStatus('retrospectives')
-    .then(function (status) {
-        console.log('check index status ', status);
-    })
-    .fail(function (err) {
-        console.log(err);
-    });
-
-var teamData = {
-    name: 'Bogus team'
-};
-
-db.postData(teamData).ofType('team').into('retrospectives')
-    .then(function (result) {
-        console.log(result);
-    })
-    .fail(function (err) {
-        console.log(err);
-    });
-
-var retroData = {
-    'teamId': 102,
-    'type': 'pro',
-    'message': 'Learning new things'
-};
-
-db.postData(retroData).ofType('ticket').into('retrospectives')
-    .then(function (result) {
-        console.log(result);
-    })
-    .fail(function (err) {
-        console.log(err);
-    });
-
-db.getAll('ticket').from('retrospectives')
-    .then(function (result) {
-        console.log(result);
-    })
-    .fail(function (err) {
-        console.log(err);
-    });
-*/

@@ -14,7 +14,6 @@ exports.getTicketWords = function (req, res) {
     db.getAll('ticket').from('retrospectives')
         .then(function (result) {
             var words = explodeMessages(result);
-            console.log(words);
             res.json({'results': words});
         })
         .fail(function (err) {
@@ -26,7 +25,6 @@ exports.getTicketWords = function (req, res) {
 exports.getTickets = function (req, res) {
     db.query('retroId:' + req.params.retroId).of('ticket').from('retrospectives')
         .then(function (result) {
-            console.log(result);
             res.json(result);
         })
         .fail(function (err) {
@@ -38,7 +36,6 @@ exports.getTickets = function (req, res) {
 exports.getTicket = function (req, res) {
     db.query('_id:' + req.params.ticketId).of('ticket').from('retrospectives')
         .then(function (result) {
-            console.log(result);
             res.json(result);
         })
         .fail(function (err) {
@@ -50,7 +47,6 @@ exports.getTicket = function (req, res) {
 exports.getRetrospective = function (req, res) {
     db.get('retrospective').withId(req.params.retroId).from('retrospectives')
         .then(function (result) {
-            console.log(result);
             res.json(result);
         })
         .fail(function (err) {
@@ -62,7 +58,6 @@ exports.getRetrospective = function (req, res) {
 exports.getRetrospectives = function (req, res) {
     db.getAll('retrospective').from('retrospectives')
         .then(function (result) {
-            console.log(result);
             res.json({'results': result});
         })
         .fail(function (err) {
@@ -74,7 +69,6 @@ exports.getRetrospectives = function (req, res) {
 exports.postRetrospective = function (req, res) {
     db.post(req.body).ofType('retrospective').into('retrospectives')
         .then(function (result) {
-            console.log(result);
             res.json(result);
         })
         .fail(function (err) {
@@ -89,7 +83,6 @@ exports.postTicketToRetrospective = function (req, res) {
     req.body.retroId = req.params.retroId;
     db.post(req.body).ofType('ticket').into('retrospectives')
         .then(function (result) {
-            console.log(result);
             res.json(result);
         })
         .fail(function (err) {

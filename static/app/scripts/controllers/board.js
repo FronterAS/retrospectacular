@@ -21,7 +21,6 @@ angular.module('retrospectApp')
             });
 
             updateTickets = function () {
-                console.log('Getting tickets');
                 tickets.query({'retroId': $scope.retroId}, function (tickets) {
                     $scope.tickets = tickets;
                     promise = $timeout(updateTickets, 2000);
@@ -31,11 +30,6 @@ angular.module('retrospectApp')
             retrospectives.get({'retroId': $scope.retroId}, function (retrospective) {
                 $scope.retroName = retrospective.name;
             });
-
-/*            $scope.$on('currentScope', function () {
-                console.log('current scope');
-                updateTickets();
-            });*/
 
             updateTickets();
         }

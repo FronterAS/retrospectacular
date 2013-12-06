@@ -29,21 +29,26 @@ angular.module('retrospectApp')
         $scope.createdAt = JSON.stringify(new Date());
 
         $scope.addTicket = function () {
-            $scope.tickets.push({
+            var params = {
                 'role'   : $scope.role,
                 'message': $scope.retroMessage,
                 'retroId': $scope.retroId,
                 'createdAt': JSON.parse($scope.createdAt)
-            });
+            };
+
+            console.log(params);
+
+            $scope.tickets.push(params);
 
             // clear the message input box
             $scope.retroMessage = '';
         };
 
 
-
         $scope.retroPublish = function () {
             $scope.tickets.forEach(function (ticket) {
+                console.log('saving a ticket');
+
                 tickets.save(ticket, function (response) {
                     console.log('did something');
                     console.log(response);
