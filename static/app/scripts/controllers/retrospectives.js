@@ -9,7 +9,6 @@ angular.module('retrospectApp')
         $scope.retrospectives = [];
         $scope.newRetrospective = {};
 
-
         $scope.saveRetrospective = function () {
             var retrospective;
 
@@ -34,5 +33,7 @@ angular.module('retrospectApp')
         retrospectives.get(function (response) {
             $scope.retrospectives = response.results;
         });
+
+        buildCloud();
     }
 ]);
