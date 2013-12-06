@@ -45,7 +45,17 @@ exports.post = function (data) {
                     return;
                 }
 
-                defer.resolve(result);
+                est.get(result.id, function (err, result) {
+                    if (err) {
+                        defer.reject(err);
+                        return;
+                    }
+
+                    console.log(result);
+
+                    result = adaptResult(result);
+                    defer.resolve(result);
+                });
             });
 
             return defer.promise;
