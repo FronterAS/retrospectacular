@@ -53,7 +53,7 @@ var db = require('../wrapper'),
         tickets.forEach(function (ticket) {
             var defer = q.defer();
 
-            ticket.retroId = retrospective._id;
+            ticket.retroId = retrospective.id;
 
             db.post(ticket).ofType('ticket').into('retrospectives')
                 .then(function (result) {

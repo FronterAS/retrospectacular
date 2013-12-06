@@ -10,7 +10,7 @@ angular.module('retrospectApp')
         $scope.newRetrospective = {};
 
 
-        $scope.saveRetro = function () {
+        $scope.saveRetrospective = function () {
             var retrospective;
 
             if ($scope.retroAddForm.$valid) {
@@ -18,8 +18,6 @@ angular.module('retrospectApp')
 
                 // Sending plan data to the service
                 retrospectives.save($scope.newRetrospective, function (savedRetrospective) {
-                    console.log(savedRetrospective);
-
                     $scope.retrospectives.push(savedRetrospective);
                     $location.path('/retrospectives/' + savedRetrospective.id);
 
