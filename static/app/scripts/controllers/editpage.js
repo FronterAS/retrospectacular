@@ -3,7 +3,7 @@
 angular.module('retrospectApp')
 
     .controller('EditpageCtrl', function ($scope, $routeParams, tickets) {
-        $scope.retroTickets = [];
+        $scope.tickets = [];
         $scope.role = 'pro';
 
         $scope.retroId = $routeParams.retroId;
@@ -13,7 +13,7 @@ angular.module('retrospectApp')
         };
 
         $scope.addTicket = function() {
-            $scope.retroTickets.push({
+            $scope.tickets.push({
                 'role'   : $scope.role,
                 'message': $scope.retroMessage,
                 'retroId': $scope.retroId
@@ -26,7 +26,7 @@ angular.module('retrospectApp')
 
 
         $scope.retroPublish = function () {
-            tickets.save($scope.retroTickets, function (response) {
+            tickets.save($scope.tickets, function (response) {
                 console.log('did something');
                 console.log(response);
             });

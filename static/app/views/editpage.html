@@ -31,4 +31,31 @@
     </div>
 </div>
 
+<h2>Positive</h2>
+    <ul id="positive-tickets">
+        <li ng-repeat="ticket in tickets | role:'pro'">
+            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                {{ticket.message}}
+            </a>
+        </li>
+    </ul>
+
+    <h2>Negative</h2>
+    <ul id="negative-tickets">
+        <li ng-repeat="ticket in tickets | role:'con'">
+            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                {{ticket.message}}
+            </a>
+        </li>
+    </ul>
+
+    <h2>Puzzle</h2>
+    <ul id="puzzle-tickets">
+        <li ng-repeat="ticket in tickets | role:'puzzle'">
+            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                {{ticket.message}}
+            </a>
+        </li>
+    </ul>
+
 
