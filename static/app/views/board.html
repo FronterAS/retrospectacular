@@ -1,36 +1,40 @@
-<div class="hero-unit">
+<div>
     <nav class="navigation-container btn-group">
-        <a class="btn btn-info" href="#/retrospectives">Back to retrospectives</a>
-        <a class="btn btn-success" href="#/editpage/{{retroId}}">Add tickets</a>
+        <a class="btn btn-info" href="#/retrospectives"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to retrospectives</a>
+        <a class="btn btn-success" href="#/editpage/{{retroId}}"><span class="glyphicon glyphicon-plus-sign"></span> Add tickets</a>
     </nav>
 
     <h1>Board</h1>
-
-    <h2>Positive</h2>
-    <ul id="positive-tickets">
-        <li ng-repeat="ticket in tickets | filter: {role:'pro'}">
-            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
-                {{ticket.message}}
-            </a>
-        </li>
-    </ul>
-
-    <h2>Negative</h2>
-    <ul id="negative-tickets">
-        <li ng-repeat="ticket in tickets | filter: {role:'con'}">
-            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
-                {{ticket.message}}
-            </a>
-        </li>
-    </ul>
-
-    <h2>Puzzle</h2>
-    <ul id="puzzle-tickets">
-        <li ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
-            <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
-                {{ticket.message}}
-            </a>
-        </li>
-    </ul>
-
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <h2>Positive</h2>
+            <ul id="positive-tickets">
+                <li ng-repeat="ticket in tickets | filter: {role:'pro'}">
+                    <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                        {{ticket.message}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+<div class="col-xs-12 col-md-3">
+        <h2>Negative</h2>
+        <ul id="negative-tickets">
+            <li ng-repeat="ticket in tickets | filter: {role:'con'}">
+                <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                    {{ticket.message}}
+                </a>
+            </li>
+        </ul>
+</div>
+<div class="col-xs-12 col-md-3">
+        <h2>Puzzle</h2>
+        <ul id="puzzle-tickets">
+            <li ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
+                <a href="#/retrospectives/{{retrospectiveId}}/tickets/{{ticket.id}}">
+                    {{ticket.message}}
+                </a>
+            </li>
+        </ul>
+    </div>
+    </div>
 </div>
