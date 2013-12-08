@@ -2,13 +2,36 @@
 
 A retrospective tool
 
+##Database
+###Setup
+http://www.elasticsearch.org/download/
+
+
+The easiest way is to download the tar.gz and run the binary.
+
+```Shell
+cd /opt
+wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.tar.gz
+tar -xvf elasticsearch-0.90.7.tar.gz
+```
+
+###Run
+```Shell
+cd elasticsearch-0.90.7/bin
+./elasticsearch
+```
+
+
 ##Service
 
 ###Setup
 
 ```Shell
-cd service/bin
-node create.js
+# create and update config file
+cp service/config.json.example service/config.json
+
+# Build the dbs
+node service/create.js
 ```
 
 ###Run
