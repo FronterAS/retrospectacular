@@ -47,16 +47,9 @@ grunt compass
 cd app/scripts
 cp config.js.example config.js
 ```
-Open config.js with your favourite editor and change it to your needs.
+Edit the config to suit
 ```Shell
 cd -
 grunt server
 ```
 
-###Frontend
-```Shell
-cd static/app/scripts
-cp config.js.example config.js
-```
-
-Edit the config to suit
