@@ -4,23 +4,12 @@ A retrospective tool
 
 ##Service
 
-###Setup
-
 ```Shell
 cd service
 npm install
-```
-
-```Shell
 cd service/bin
 node create.js
-```
-
-###Run
-
-
-```Shell
-cd service
+cd -
 node app.js
 ```
 
@@ -36,8 +25,6 @@ And Compass
 ```Shell
 gem install compass
 ```
-
-###Setup
 
 ```Shell
 cd static
