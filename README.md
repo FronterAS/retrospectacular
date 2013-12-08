@@ -25,7 +25,6 @@ cd elasticsearch-0.90.7/bin
 ##Service
 
 ```Shell
-<<<<<<< HEAD
 # create and update config file
 cp service/config.json.example service/config.json
 cd service
