@@ -24,39 +24,42 @@ cd elasticsearch-0.90.7/bin
 
 ##Service
 
-###Setup
-
 ```Shell
+<<<<<<< HEAD
 # create and update config file
 cp service/config.json.example service/config.json
-
-# Build the dbs
-node service/create.js
-```
-
-###Run
-
-
-```Shell
 cd service
-node app.js
+npm install
+cd service/bin
+node create.js
+cd -
+npm start
 ```
 
 ##Static
 
-###Setup
+Requires global install of bower and grunt-cli
+```Shell
+npm install -g bower
+npm install -g grunt-cli
+```
+
+And Compass
+```Shell
+gem install compass
+```
 
 ```Shell
 cd static
 npm install
 bower install
+grunt compass
+cd app/scripts
+cp config.js.example config.js
+```
+Edit the config to suit
+```Shell
+cd -
 grunt server
 ```
 
-###Frontend
-```Shell
-cd static/app/scripts
-cp config.js.example config.js
-```
-
-Edit the config to suit
