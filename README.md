@@ -32,7 +32,16 @@ npm install
 cd service/bin
 node create.js
 cd -
-npm start
+npm start >logs/output.log 2>logs/error.log &
+```
+
+###Post a ticket
+```Shell
+curl -XPOST --header 'Content-Type: application/json' -d '{
+  "role" : "con",
+  "message" : "We didn't drink enough coffee!!",
+  "createdAt": "2013-12-06T09:44:49.258Z",
+}' http://localhost:3000/retrospectives/LUu3vCumSw6RXkcoG8PP9g
 ```
 
 ##Static
