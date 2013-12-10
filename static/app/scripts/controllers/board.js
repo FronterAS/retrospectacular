@@ -4,26 +4,31 @@ angular.module('retrospectApp')
     .controller('BoardCtrl', [
         '$scope',
         '$routeParams',
-        '$timeout',
         'retrospectives',
         'tickets',
 
-        function ($scope, $routeParams, $timeout, retrospectives, tickets, BoardService) {
-            var updateTickets,
-                promise;
+        function ($scope, $routeParams, retrospectives, tickets, BoardService) {
+            var updateTickets;
 
             $scope.retroId = $routeParams.retroId;
             $scope.retroName = '';
             $scope.tickets = [];
 
-            $scope.$on('$locationChangeStart', function () {
-                $timeout.cancel(promise);
-            });
+            $scope.deleteTicket = function (ticket) {
+                var index = $scope.tickets.indexOf(ticket);
 
-            updateTickets = function () {
+                tickets.delete({'ticketId': ticket.id, 'retroId': $scope.retroId}, function () {
+                    console.log('got a response');
+                });
+
+                $scope.tickets.splice(index, 1);
+            };
+
+            $scope.updateTickets = function () {
+                console.log('Updating tickets.');
                 tickets.query({'retroId': $scope.retroId}, function (tickets) {
+                    console.log('Got tickets');
                     $scope.tickets = tickets;
-                    promise = $timeout(updateTickets, 2000);
                 });
             };
 
@@ -31,7 +36,7 @@ angular.module('retrospectApp')
                 $scope.retroName = retrospective.name;
             });
 
-            updateTickets();
+            $scope.updateTickets();
         }
     ]
 );

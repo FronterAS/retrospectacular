@@ -7,7 +7,7 @@ angular.module('retrospectApp')
         'SERVICE_URL',
 
         function ($resource, SERVICE_URL) {
-            return $resource(SERVICE_URL + '/retrospectives/:retroId/tickets',
+            return $resource(SERVICE_URL + '/retrospectives/:retroId/tickets/:ticketId',
                 { 'retroId': '@retroId' }
             );
         }

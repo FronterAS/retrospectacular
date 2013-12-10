@@ -44,6 +44,17 @@ exports.getTicket = function (req, res) {
         });
 };
 
+exports.deleteTicket = function (req, res) {
+    db.delete('ticket').withId(req.params.ticketId).from('retrospectives')
+        .then(function (result) {
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
+
 exports.getRetrospective = function (req, res) {
     db.get('retrospective').withId(req.params.retroId).from('retrospectives')
         .then(function (result) {

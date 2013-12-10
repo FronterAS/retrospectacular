@@ -4,8 +4,6 @@ angular.module('retrospectApp')
             var filtered = [];
 
             angular.forEach(items, function (item) {
-                console.log(items, role);
-
                 if (item.role === role) {
                     filtered.push(item);
                 }

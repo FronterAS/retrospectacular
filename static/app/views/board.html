@@ -1,16 +1,30 @@
 <div>
     <nav class="navigation-container btn-group">
-        <a class="btn btn-info" href="#/retrospectives"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to retrospectives</a>
-        <a class="btn btn-success" href="#/tickets/{{retroId}}"><span class="glyphicon glyphicon-plus-sign"></span> Add tickets</a>
+        <a class="btn btn-info" href="#/retrospectives">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span> Back to retrospectives
+        </a>
+        <a class="btn btn-success" href="#/tickets/{{retroId}}">
+            <span class="glyphicon glyphicon-plus-sign"></span> Add tickets
+        </a>
     </nav>
 
-    <h1>Board: {{retroName}}</h1>
+    <header>
+        <h1>Board: {{retroName}}</h1>
+        <a class="btn btn-default" ng-click="updateTickets()">
+            <span class="glyphicon glyphicon-refresh"></span> Refresh
+        </a>
+    </header>
+
     <div class="row">
         <div class="col-xs-12 col-md-3">
             <h2>Positive</h2>
             <ul id="positive-tickets">
                 <li ng-repeat="ticket in tickets | filter: {role:'pro'}">
                     {{ticket.message}}
+                    <button class="btn btn-danger" ng-click="deleteTicket(ticket)">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        Delete
+                    </button>
                 </li>
             </ul>
         </div>
@@ -19,6 +33,10 @@
         <ul id="negative-tickets">
             <li ng-repeat="ticket in tickets | filter: {role:'con'}">
                 {{ticket.message}}
+                <button class="btn btn-danger" ng-click="deleteTicket(ticket)">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                    Delete
+                </button>
             </li>
         </ul>
 </div>
@@ -27,6 +45,10 @@
         <ul id="puzzle-tickets">
             <li ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
                 {{ticket.message}}
+                <button class="btn btn-danger" ng-click="deleteTicket(ticket)">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                    Delete
+                </button>
             </li>
         </ul>
     </div>

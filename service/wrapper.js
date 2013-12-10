@@ -17,6 +17,44 @@ var sage = require('sage'),
         return results;
     };
 
+/**
+ * Delete type from index.
+ * @example
+ * db.delete('myType').withId(5).from('myIndex');
+ * // 'withId' param is the id to delete.
+ * // 'from' param is the string name of the index to delete from.
+ *
+ * @param  {string} typeName The name of the type to delete.
+ * @return {object}
+ */
+exports.delete = function (typeName) {
+    var id;
+
+    return {
+        withId: function (_id) {
+            id = _id;
+            return this;
+        },
+
+        from: function (indexName) {
+            var esi = es.index(indexName),
+                est = esi.type(typeName),
+                defer = q.defer();
+
+            est.del({'_id': id}, function (err, result) {
+                if (err) {
+                    defer.reject(err);
+                    return;
+                }
+
+                defer.resolve(result);
+            });
+
+            return defer.promise;
+        }
+    };
+};
+
 exports.post = function (data) {
     var typeName;
 
