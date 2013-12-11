@@ -44,6 +44,14 @@ curl -XPOST --header 'Content-Type: application/json' -d '{
 }' http://localhost:3000/retrospectives/LUu3vCumSw6RXkcoG8PP9g
 ```
 
+###Unit-test
+
+```Shell
+cd service
+npm install -g mocha
+mocha
+```
+
 ##Static
 
 Requires global install of bower and grunt-cli
