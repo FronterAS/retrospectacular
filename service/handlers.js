@@ -56,7 +56,7 @@ exports.deleteTicket = function (req, res) {
 };
 
 exports.getRetrospective = function (req, res) {
-    db.get('retrospective').withId(req.params.retroId).from('retrospectives')
+    db.query('_id:' + req.params.retroId).of('retrospective').from('retrospectives')
         .then(function (result) {
             res.json(result);
         })
