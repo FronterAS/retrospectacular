@@ -24,9 +24,6 @@ describe('Routing', function () {
         });
     });
 
-    /** Gives a
-     *      Cannot set property id of undefined at line 7 in wrapper.js
-     *
     describe('Retrospectives GET', function() {
         it('Should return correct headers', function(done) {
             request(url)
@@ -36,12 +33,32 @@ describe('Routing', function () {
                 });
         });
     });
-    */
+
 
     describe('Retrospectives POST', function() {
         it('Should return correct headers', function(done) {
             request(url)
                 .post('/retrospectives')
+                .end(function(err, res) {
+                    checkHeaders(err, res, done);
+                });
+        });
+    });
+
+    describe('Tickets GET all', function() {
+        it('Should return correct headers', function(done) {
+            request(url)
+                .get('/retrospectives/sfsdf234/tickets')
+                .end(function(err, res) {
+                    checkHeaders(err, res, done);
+                });
+        });
+    });
+
+    describe('Tickets GET', function() {
+        it('Should return correct headers', function(done) {
+            request(url)
+                .get('/retrospectives/sdfsdr2334/tickets/dgdfgg')
                 .end(function(err, res) {
                     checkHeaders(err, res, done);
                 });
