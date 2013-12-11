@@ -16,6 +16,7 @@ node_modules
 
 # service
 service/config.json
+service/test/config-debug.js
 
 # static
 static/.sass-cache
