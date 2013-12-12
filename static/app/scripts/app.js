@@ -11,6 +11,10 @@ angular.module('retrospectApp', ['ngResource', 'retrospectApp.config'])
                 templateUrl: 'views/board.html',
                 controller: 'BoardCtrl'
             })
+            .when('/retrospectives/:retroId/markup', {
+                templateUrl: 'views/wikiboard.html',
+                controller: 'BoardCtrl'
+            })
             .when('/wordcloud', {
                 templateUrl: 'views/wordcloud.html',
                 controller: 'WordCloudCtrl'

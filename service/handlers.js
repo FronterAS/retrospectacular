@@ -58,7 +58,7 @@ exports.deleteTicket = function (req, res) {
 exports.getRetrospective = function (req, res) {
     db.query('_id:' + req.params.retroId).of('retrospective').from('retrospectives')
         .then(function (result) {
-            res.json(result);
+            res.json(result[0]);
         })
         .fail(function (err) {
             console.log(err);

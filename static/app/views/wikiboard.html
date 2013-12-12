@@ -1,0 +1,25 @@
+<span>= {{retroName}} =</span>
+<br />
+<div ng-show="(tickets | filter: {role:'pro'}).length">
+    <span>== Positive ==</span>
+    <br />
+    <span ng-repeat="ticket in tickets | filter: {role:'pro'}">
+        * {{ticket.message}}
+    </span>
+</div>
+
+<div ng-show="(tickets | filter: {role:'con'}).length">
+    <span>== Negative ==</span>
+    <br />
+    <span ng-repeat="ticket in tickets | filter: {role:'con'}">
+        * {{ticket.message}}
+    </span>
+</div>
+
+<div ng-show="(tickets | filter: {role:'puzzle'}).length">
+    <span>== Puzzle ==</span>
+    <br />
+    <span ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
+        * {{ticket.message}}
+    </span>
+</div>
