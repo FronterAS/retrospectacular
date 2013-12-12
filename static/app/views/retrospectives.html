@@ -6,7 +6,7 @@
         <div class="input-group">
             <input type="text" class="form-control" id="new-retrospective" ng-model="newRetrospective.name" placeholder="Retrospective name">
             <span class="input-group-btn">
-                <button class="btn btn-success" type="submit">Start</button>
+                <button class="btn btn-success" ng-disabled="!newRetrospective.name" type="submit">Start</button>
             </span>
         </div>
     </form>
