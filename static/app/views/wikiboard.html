@@ -6,6 +6,7 @@
     <span ng-repeat="ticket in tickets | filter: {role:'pro'}">
         * {{ticket.message}}
     </span>
+    <br />
 </div>
 
 <div ng-show="(tickets | filter: {role:'con'}).length">
@@ -14,6 +15,7 @@
     <span ng-repeat="ticket in tickets | filter: {role:'con'}">
         * {{ticket.message}}
     </span>
+    <br />
 </div>
 
 <div ng-show="(tickets | filter: {role:'puzzle'}).length">
@@ -22,4 +24,5 @@
     <span ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
         * {{ticket.message}}
     </span>
+    <br />
 </div>
