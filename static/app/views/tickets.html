@@ -3,7 +3,7 @@
         <span class="glyphicon glyphicon-circle-arrow-left"></span> Back to board
     </a>
     <h1>My tickets</h1>
-    <a id="tickets-publish" class="btn btn-success" ng-click="retroPublish()">Publish</a>
+    <button id="tickets-publish" class="btn btn-success" ng-click="retroPublish()" ng-disabled="!tickets.length">Publish</button>
 </header>
 
 <ul class="nav nav-pills nav-justified">
