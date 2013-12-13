@@ -42,12 +42,30 @@ angular.module('retrospectApp')
                 });
             };
 
-            $scope.selectTag = function (selectTag) {
-                $scope.selectedTags.push(selectTag);
+            /**
+             * Won't select the tag if it already exists in the tags array.
+             *
+             * @return {void}
+             */
+            $scope.selectTag = function () {
+                if (!~$scope.selectedTags.indexOf($scope.tagSelect)) {
+                    $scope.selectedTags.push($scope.tagSelect);
+                    $scope.tagSelect = '';
+                }
             };
 
-            $scope.deselectTag = function (selectTag) {
-                $scope.selectedTags.push(selectTag);
+            /**
+             * Won't try to remove a tag.
+             *
+             * @param  {string} deselectThisTag The tag name.
+             * @return {void}
+             */
+            $scope.deselectTag = function (deselectThisTag) {
+                var index = $scope.selectedTags.indexOf(deselectThisTag);
+
+                if (~index) {
+                    $scope.selectedTags.splice(index, 1);
+                }
             };
 
             $scope.chooseTags = function (ticket) {

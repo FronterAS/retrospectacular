@@ -165,12 +165,30 @@ header h1 {
             transform: translate(-50%, -50%);
 }
 
-.tag-selection-list {
-    list-style: none;
-    padding: 0;
-}
-
 .tag-selector {
     border: none;
     background: transparent;
+}
+
+.tags {
+
+    margin: 10px 0;
+    list-style: none;
+    padding: 0;
+
+    .tag {
+        border-radius: 6px;
+        background-color: #EFEFEF;
+        border: 1px solid #DDD;
+        padding: 5px;
+        margin-right: 10px;
+        display: inline;
+
+        &:hover {
+            color: red;
+            text-decoration: none;
+        }
+    }
+
+
 }

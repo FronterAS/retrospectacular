@@ -74,8 +74,13 @@
         </div>
 
         <div class="tag-container">
-            <span class="tag-chosen" ng-repeat="ticketTag in ticketTags"></span>
-            <input autocomplete type="text" datasets="tagsData" ng-model="tag"></div>
+            <ul class="tags">
+                <li class="tag" ng-click="deselectTag(selectedTag)" ng-repeat="selectedTag in selectedTags">{{selectedTag}}</li>
+            </ul>
+            <form ng-submit="selectTag()">
+                <input placeholder="Add a tag..." autocomplete type="text" datasets="tagsData" ng-model="tagSelect">
+                <button class="btn btn-success" type="submit">Add</button>
+            </form>
         </div>
     </div>
 </div>
