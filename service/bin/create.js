@@ -5,12 +5,23 @@ var db = require('../wrapper'),
     tickets = [{
         'role': 'pro',
         'message': 'We learned loads',
-        'createdAt' : JSON.parse(createdAt)
+        'createdAt' : JSON.parse(createdAt),
+        'tags': [],
     },{
         'role': 'con',
         'message': 'Then we forgot most of it',
-        'createdAt': JSON.parse(createdAt)
+        'createdAt': JSON.parse(createdAt),
+        'tags': []
     }],
+
+    tags = [
+        {
+            'name': 'jira'
+        },
+        {
+            'name': 'team spirit'
+        },
+    ],
 
     handleError = function (err) {
         console.log(err);
@@ -45,6 +56,26 @@ var db = require('../wrapper'),
         return defer.promise;
     },
 
+    postTags = function () {
+        var promises = [];
+
+        console.log('posting tags');
+
+        tags.forEach(function (tag) {
+            var defer = q.defer();
+
+            db.post(tag).ofType('tag').into('retrospectives')
+                .then(function (result) {
+                    defer.resolve(result);
+                })
+                .fail(function (err) {
+                    defer.reject(err);
+                });
+        });
+
+        return q.all(promises);
+    },
+
     postTickets = function (retrospective) {
         var promises = [];
 
@@ -72,4 +103,5 @@ db.checkIndexExists('retrospectives')
     .then(createDb)
     .then(postRetrospective)
     .then(postTickets)
+    .then(postTags)
     .fail(handleError);

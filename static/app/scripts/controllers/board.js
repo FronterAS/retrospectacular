@@ -13,6 +13,7 @@ angular.module('retrospectApp')
             $scope.retroId = $routeParams.retroId;
             $scope.retroName = '';
             $scope.tickets = [];
+            $scope.choosingTag = false;
 
             $scope.deleteTicket = function (ticket) {
                 var index = $scope.tickets.indexOf(ticket);
@@ -30,6 +31,11 @@ angular.module('retrospectApp')
                     console.log('Got tickets');
                     $scope.tickets = tickets;
                 });
+            };
+
+            $scope.chooseTag = function (ticket) {
+                console.log(ticket.id);
+                $scope.choosingTag = true;
             };
 
             retrospectives.get({'retroId': $scope.retroId}, function (retrospective) {

@@ -9,6 +9,8 @@ var handlers = require('./handlers'),
 exports.setup = function (api) {
     api.use(allowCrossDomain);
 
+    api.get('/tags', handlers.getTags);
+
     api.get('/retrospectives', handlers.getRetrospectives);
     api.get('/retrospectives/:retroId', handlers.getRetrospective);
     api.post('/retrospectives', handlers.postRetrospective);

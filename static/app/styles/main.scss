@@ -92,6 +92,8 @@ header h1 {
     margin-bottom: 5px;
     outline: 1px solid #E2E2E2;
 
+    cursor: pointer;
+
     font-family: 'comic sans ms',fantasy;
 
     &.pro {
@@ -118,4 +120,38 @@ header h1 {
     .ticket-message {
         padding: 5px;
     }
+}
+
+#overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    @include border-box();
+
+    -webkit-filter: blur(40px);
+       -moz-filter: blur(40px);
+        -ms-filter: blur(40px);
+            filter: blur(40px);
+
+    background: white;
+    opacity: 0.6;
+}
+
+#tag-chooser {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #FFFFFF;
+
+    -webkit-box-shadow: 0 3px 16px #888888;
+       -moz-box-shadow: 0 3px 16px #888888;
+            box-shadow: 0 3px 16px #888888;
+
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 }

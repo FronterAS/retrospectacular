@@ -22,6 +22,17 @@ exports.getTicketWords = function (req, res) {
         });
 };
 
+exports.getTags = function (req, res) {
+    db.getAll('tag').from('retrospectives')
+        .then(function (result) {
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
+
 exports.getTickets = function (req, res) {
     db.query('retroId:' + req.params.retroId).of('ticket').from('retrospectives')
         .then(function (result) {
