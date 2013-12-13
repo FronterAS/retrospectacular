@@ -23,9 +23,13 @@
             <h2>Positive</h2>
             <ul id="positive-tickets" class="tickets">
                 <li class="ticket pro" ng-repeat="ticket in tickets | filter: {role:'pro'}">
-                    <div class="ticket-controls" ng-click="chooseTags(ticket)">
+                    <div class="ticket-controls">
+                        <button class="delete-ticket btn btn-warning" ng-click="chooseTags(ticket)">
+                            <span class="glyphicon glyphicon-tag"></span>
+                            <span class="sr-only">Tag</span>
+                        </button>
                         <button class="delete-ticket btn btn-danger" ng-click="deleteTicket(ticket)">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
                             <span class="sr-only">Delete</span>
                         </button>
                     </div>
@@ -39,8 +43,12 @@
             <ul id="negative-tickets" class="tickets">
                 <li class="ticket con" ng-repeat="ticket in tickets | filter: {role:'con'}">
                     <div class="ticket-controls">
+                        <button class="delete-ticket btn btn-warning" ng-click="chooseTags(ticket)">
+                            <span class="glyphicon glyphicon-tag"></span>
+                            <span class="sr-only">Tag</span>
+                        </button>
                         <button class="delete-ticket btn btn-danger" ng-click="deleteTicket(ticket)">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
                             <span class="sr-only">Delete</span>
                         </button>
                     </div>
@@ -53,8 +61,12 @@
             <ul id="puzzle-tickets" class="tickets">
                 <li class="ticket puzzle" ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
                     <div class="ticket-controls">
+                        <button class="delete-ticket btn btn-warning" ng-click="chooseTags(ticket)">
+                            <span class="glyphicon glyphicon-tag"></span>
+                            <span class="sr-only">Tag</span>
+                        </button>
                         <button class="delete-ticket btn btn-danger" ng-click="deleteTicket(ticket)">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
                             <span class="sr-only">Delete</span>
                         </button>
                     </div>
@@ -64,11 +76,12 @@
         </div>
     </div>
 
+    <!-- TAGGING COMPONENT - SPLIT THIS OUT! -->
     <div id="overlay" ng-show="choosingTag"></div>
     <div id="tag-chooser" ng-show="choosingTag">
         <div class="modal-controls">
             <button class="close-btn btn btn-danger" ng-click="closeTagChooser()">
-                <span class="glyphicon glyphicon-remove-circle"></span>
+                <span class="glyphicon glyphicon-remove"></span>
                 <span class="sr-only">Close</span>
             </button>
         </div>
@@ -77,6 +90,7 @@
             <ul class="tags">
                 <li class="tag" ng-click="deselectTag(selectedTag)" ng-repeat="selectedTag in selectedTags">{{selectedTag}}</li>
             </ul>
+
             <form ng-submit="selectTag()">
                 <input placeholder="Add a tag..." autocomplete type="text" datasets="tagsData" ng-model="tagSelect">
                 <button class="btn btn-success" type="submit">Add</button>

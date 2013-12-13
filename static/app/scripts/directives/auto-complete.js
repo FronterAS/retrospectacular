@@ -9,7 +9,7 @@ angular.module('retrospectApp')
       scope: {
         datasets: '=',
         ngModel: '=',
-        onSelect: '&',
+        onSelect: '&'
       },
       link: function (scope, element) {
         var localChange = false;
@@ -21,8 +21,10 @@ angular.module('retrospectApp')
             scope.ngModel = datum;
             scope.selectedDataset = dataset;
           });
-          if (scope.onSelect)
+
+          if (scope.onSelect) {
             scope.onSelect();
+          }
         });
 
         // Updates the ngModel binding when a query is autocompleted.

@@ -49,6 +49,11 @@ angular.module('retrospectApp')
              */
             $scope.selectTag = function () {
                 if (!~$scope.selectedTags.indexOf($scope.tagSelect)) {
+                    // @TODO: This is a quick fix. When you click the autocomplete selection
+                    // you get a object not a string.
+                    if ($scope.tagSelect.value) {
+                        $scope.tagSelect = $scope.tagSelect.value;
+                    }
                     $scope.selectedTags.push($scope.tagSelect);
                     $scope.tagSelect = '';
                 }
