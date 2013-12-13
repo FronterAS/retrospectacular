@@ -9,7 +9,19 @@ angular.module('retrospectApp')
         'tags',
 
         function ($scope, $routeParams, retrospectives, tickets, tags) {
-            var updateTickets;
+            var updateTickets,
+
+                updateTags = function () {
+                    tags.get(function (tags) {
+                        $scope.tags = tags.results.map(function (tag) {
+                            return tag.name;
+                        });
+
+                        $scope.tagsData = {
+                            local: $scope.tags
+                        };
+                    });
+                };
 
             $scope.retroId = $routeParams.retroId;
             $scope.retroName = '';
@@ -74,17 +86,11 @@ angular.module('retrospectApp')
             };
 
             $scope.chooseTags = function (ticket) {
-                tags.get(function (tags) {
-                    $scope.tags = tags.results.map(function (tag) {
-                        return tag.name;
-                    });
+                $scope.choosingTag = true;
 
-                    $scope.tagsData = {
-                        local: $scope.tags
-                    };
-
-                    $scope.choosingTag = true;
-                });
+                // We now reference the ticket tags, IT IS A REFERENCE!!!! that's why it updates
+                // as if by magic silly fucker!
+                $scope.selectedTags = ticket.tags;
             };
 
             $scope.closeTagChooser = function () {
