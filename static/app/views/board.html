@@ -23,7 +23,7 @@
             <h2>Positive</h2>
             <ul id="positive-tickets" class="tickets">
                 <li class="ticket pro" ng-repeat="ticket in tickets | filter: {role:'pro'}">
-                    <div class="ticket-controls" ng-click="chooseTag(ticket)">
+                    <div class="ticket-controls" ng-click="chooseTags(ticket)">
                         <button class="delete-ticket btn btn-danger" ng-click="deleteTicket(ticket)">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                             <span class="sr-only">Delete</span>
@@ -65,5 +65,17 @@
     </div>
 
     <div id="overlay" ng-show="choosingTag"></div>
-    <div id="tag-chooser" ng-show="choosingTag"></div>
+    <div id="tag-chooser" ng-show="choosingTag">
+        <div class="modal-controls">
+            <button class="close-btn btn btn-danger" ng-click="closeTagChooser()">
+                <span class="glyphicon glyphicon-remove-circle"></span>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
+
+        <div class="tag-container">
+            <span class="tag-chosen" ng-repeat="ticketTag in ticketTags"></span>
+            <input autocomplete type="text" datasets="tagsData" ng-model="tag"></div>
+        </div>
+    </div>
 </div>

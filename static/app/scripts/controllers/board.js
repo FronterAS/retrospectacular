@@ -6,13 +6,22 @@ angular.module('retrospectApp')
         '$routeParams',
         'retrospectives',
         'tickets',
+        'tags',
 
-        function ($scope, $routeParams, retrospectives, tickets, BoardService) {
+        function ($scope, $routeParams, retrospectives, tickets, tags) {
             var updateTickets;
 
             $scope.retroId = $routeParams.retroId;
             $scope.retroName = '';
             $scope.tickets = [];
+
+            $scope.tags = [];
+            $scope.selectedTags = [];
+
+            $scope.tagsData = {
+                local: []
+            };
+
             $scope.choosingTag = false;
 
             $scope.deleteTicket = function (ticket) {
@@ -33,9 +42,30 @@ angular.module('retrospectApp')
                 });
             };
 
-            $scope.chooseTag = function (ticket) {
-                console.log(ticket.id);
-                $scope.choosingTag = true;
+            $scope.selectTag = function (selectTag) {
+                $scope.selectedTags.push(selectTag);
+            };
+
+            $scope.deselectTag = function (selectTag) {
+                $scope.selectedTags.push(selectTag);
+            };
+
+            $scope.chooseTags = function (ticket) {
+                tags.get(function (tags) {
+                    $scope.tags = tags.results.map(function (tag) {
+                        return tag.name;
+                    });
+
+                    $scope.tagsData = {
+                        local: $scope.tags
+                    };
+
+                    $scope.choosingTag = true;
+                });
+            };
+
+            $scope.closeTagChooser = function () {
+                $scope.choosingTag = false;
             };
 
             retrospectives.get({'retroId': $scope.retroId}, function (retrospective) {

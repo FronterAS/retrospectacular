@@ -10,7 +10,8 @@
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
     "sass-bootstrap": "~3.0.2",
-    "d3-cloud": "~1.0.4"
+    "d3-cloud": "~1.0.4",
+    "typeahead.js": "~0.9.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",

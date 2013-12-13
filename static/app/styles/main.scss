@@ -3,6 +3,7 @@
 $pro_bg: #D4FFD7;
 $con_bg: #FFDADA;
 $puzzle_bg: #FFFDD4;
+$font_family: 'comic sans ms', fantasy;
 
 @mixin border-box() {
   -webkit-box-sizing: border-box;
@@ -87,6 +88,15 @@ header h1 {
     padding: 0;
 }
 
+.close-btn {
+    padding: 4px 5px;
+    height: 25px;
+}
+
+.modal-controls {
+    text-align: right;
+}
+
 .ticket {
     padding:5px;
     margin-bottom: 5px;
@@ -94,7 +104,7 @@ header h1 {
 
     cursor: pointer;
 
-    font-family: 'comic sans ms',fantasy;
+    font-family: $font_family;
 
     &.pro {
         background-color: $pro_bg;
@@ -109,12 +119,11 @@ header h1 {
     }
 
     .ticket-controls {
-        text-align: right;
+        @extend .modal-controls;
     }
 
     .delete-ticket {
-        padding: 4px 5px;
-        height: 25px;
+        @extend .close-btn;
     }
 
     .ticket-message {
@@ -140,8 +149,8 @@ header h1 {
 }
 
 #tag-chooser {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 200px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -154,4 +163,14 @@ header h1 {
     -webkit-transform: translate(-50%, -50%);
        -moz-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
+}
+
+.tag-selection-list {
+    list-style: none;
+    padding: 0;
+}
+
+.tag-selector {
+    border: none;
+    background: transparent;
 }

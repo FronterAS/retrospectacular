@@ -25,7 +25,7 @@ exports.getTicketWords = function (req, res) {
 exports.getTags = function (req, res) {
     db.getAll('tag').from('retrospectives')
         .then(function (result) {
-            res.json(result);
+            res.json({'results': result});
         })
         .fail(function (err) {
             console.log(err);
