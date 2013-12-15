@@ -88,6 +88,17 @@ exports.postRetrospective = function (req, res) {
         });
 };
 
+exports.putRetrospective = function (req, res) {
+    db.put(req.body).ofType('retrospective').withId(req.params.retroId).into('retrospectives')
+        .then(function (result) {
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
+
 exports.postTicketToRetrospective = function (req, res) {
     // @TODO: perhaps move retroId into req.body
     //  from the frontend?

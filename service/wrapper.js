@@ -117,6 +117,56 @@ exports.post = function (data) {
     };
 };
 
+exports.put = function (data) {
+    var typeName;
+
+    return {
+        ofType: function (_typeName) {
+            typeName = _typeName;
+            return this;
+        },
+        withId: function(_id) {
+            data.id = _id;
+            return this;
+        },
+        into: function (indexName) {
+            var esi = es.index(indexName),
+                promises = [],
+                defer = q.defer(),
+                est;
+
+            promises.push(defer.promise);
+
+            if (!typeName) {
+                defer.reject(new Error('You must specify a type'));
+                return;
+            }
+
+            est = esi.type(typeName);
+
+            est.put(data, function(err, result) {
+                if (err) {
+                    defer.reject(err);
+                    return;
+                }
+                est.get(result.id, function (err, result) {
+                    if (err) {
+                        defer.reject(err);
+                        return;
+                    }
+
+                    result = adaptResult(result);
+                    defer.resolve(result);
+                });
+            });
+            if (data.length === 1) {
+                return promises[0];
+            }
+            return q.all(promises);
+        }
+    };
+};
+
 exports.checkIndexExists = function (indexName) {
     var esi = es.index(indexName),
         defer = q.defer();
