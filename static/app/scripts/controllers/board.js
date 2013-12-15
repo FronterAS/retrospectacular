@@ -29,6 +29,7 @@ angular.module('retrospectApp')
 
             $scope.tags = [];
             $scope.selectedTags = [];
+            $scope.selectedTicket = null;
 
             $scope.tagsData = {
                 local: []
@@ -85,8 +86,19 @@ angular.module('retrospectApp')
                 }
             };
 
+            $scope.updateTicketTags = function (tags) {
+                var defer = $q.defer();
+
+                tickets.save($scope.selectedTags, function (response) {
+                    defer.resolve(response);
+                });
+
+                return defer.promise;
+            };
+
             $scope.chooseTags = function (ticket) {
                 $scope.choosingTag = true;
+                $scope.selectedTicket = ticket;
 
                 // We now reference the ticket tags, IT IS A REFERENCE!!!! that's why it updates
                 // as if by magic silly fucker!
@@ -94,7 +106,11 @@ angular.module('retrospectApp')
             };
 
             $scope.closeTagChooser = function () {
-                $scope.choosingTag = false;
+                updateTicketTags($scope.selectedTags)
+                    .then(function (response) {
+                        $scope.choosingTag = false;
+                        $scope.selectedTicket = null;
+                    });
             };
 
             retrospectives.get({'retroId': $scope.retroId}, function (retrospective) {
