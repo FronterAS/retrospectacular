@@ -19,7 +19,7 @@
     </header>
 
     <div>
-        <div class="col-xs-12 col-md-3">
+        <div class="col-xs-12 col-md-4">
             <h2>Positive</h2>
             <ul id="positive-tickets" class="tickets">
                 <li class="ticket pro" ng-repeat="ticket in tickets | filter: {role:'pro'}">
@@ -34,7 +34,7 @@
             </ul>
         </div>
 
-        <div class="col-xs-12 col-md-3">
+        <div class="col-xs-12 col-md-4">
             <h2>Negative</h2>
             <ul id="negative-tickets" class="tickets">
                 <li class="ticket con" ng-repeat="ticket in tickets | filter: {role:'con'}">
@@ -48,7 +48,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-xs-12 col-md-3">
+        <div class="col-xs-12 col-md-4">
             <h2>Puzzle</h2>
             <ul id="puzzle-tickets" class="tickets">
                 <li class="ticket puzzle" ng-repeat="ticket in tickets | filter: {role:'puzzle'}">
