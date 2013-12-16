@@ -84,6 +84,11 @@ exports.post = function (data) {
                 var defer = q.defer();
                 promises.push(defer.promise);
 
+                if (!item.createdAt) {
+                    item.createdAt = JSON.parse(
+                        JSON.stringify(new Date())
+                    );
+                }
                 debugger;
 
                 est.post(item, function (err, result) {
