@@ -1,5 +1,6 @@
 var sage = require('sage'),
     q = require('q'),
+    _ = require('lodash'),
     es = sage('http://localhost:9200'),
 
     adaptResult = function (result) {
@@ -149,19 +150,38 @@ exports.put = function (data) {
 
             est = esi.type(typeName);
 
-            est.put(data, function(err, result) {
+            est.get(data.id, function(err, result) {
                 if (err) {
+                    // if it didn't find it, do a est.post?
                     defer.reject(err);
                     return;
                 }
-                est.get(result.id, function (err, result) {
+
+                data.updatedAt = JSON.parse(
+                    JSON.stringify(new Date())
+                );
+
+                _.forEach(result._source, function(value, name) {
+                    if (!data[name] ) {
+                        data[name] = value;
+                    }
+                });
+
+                est.put(data, function(err, result) {
                     if (err) {
                         defer.reject(err);
                         return;
                     }
 
-                    result = adaptResult(result);
-                    defer.resolve(result);
+                    est.get(result.id, function (err, result) {
+                        if (err) {
+                            defer.reject(err);
+                            return;
+                        }
+
+                        result = adaptResult(result);
+                        defer.resolve(result);
+                    });
                 });
             });
             if (data.length === 1) {
