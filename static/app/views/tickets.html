@@ -29,39 +29,34 @@
         </ul>
     </div>
 </div>
+<div>
+    <div class="col-xs-12 col-md-4">
+        <h2>Positive</h2>
+            <ul id="positive-tickets" class="tickets">
+                <li class="ticket pro" ng-repeat="ticket in tickets | role:'pro'">
+                    <fui-editable item=ticket delete-it="deleteTicket(ticket)"></fui-editable>
+                </li>
+            </ul>
+        </div>
 
-<h2>Positive</h2>
-    <ul id="positive-tickets">
-        <li ng-repeat="ticket in tickets | role:'pro'">
-            {{ticket.message}}
-            <button class="btn btn-danger" ng-click="deleteTicket(ticket)">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-                Delete
-            </button>
-        </li>
-    </ul>
+        <div class="col-xs-12 col-md-4">
+            <h2>Negative</h2>
+            <ul id="negative-tickets" class="tickets">
+                <li class="ticket con" ng-repeat="ticket in tickets | role:'con'">
+                    <fui-editable item=ticket delete-it="deleteTicket(ticket)"></fui-editable>
+                </li>
+            </ul>
+        </div>
 
-    <h2>Negative</h2>
-    <ul id="negative-tickets">
-        <li ng-repeat="ticket in tickets | role:'con'">
-            {{ticket.message}}
-            <button class="btn btn-danger" ng-click="deleteTicket(ticket)">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-                Delete
-            </button>
-        </li>
-    </ul>
-
-    <h2>Puzzle</h2>
-    <ul id="puzzle-tickets">
-        <li ng-repeat="ticket in tickets | role:'puzzle'">
-            {{ticket.message}}
-            <button class="btn btn-danger" ng-click="deleteTicket(ticket)">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-                Delete
-            </button>
-        </li>
-    </ul>
+        <div class="col-xs-12 col-md-4">
+            <h2>Puzzle</h2>
+            <ul id="puzzle-tickets" class="tickets">
+                <li class="ticket puzzle" ng-repeat="ticket in tickets | role:'puzzle'">
+                    <fui-editable item=ticket delete-it="deleteTicket(ticket)"></fui-editable>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 
