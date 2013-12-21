@@ -8,7 +8,7 @@ angular.module('retrospectApp')
         replace: true,
         scope: {
             item: '=',
-            deleteIt: '&'
+            onDelete: '&'
             },
         transclude: true,
         link: function postLink(scope, element, attrs) {
