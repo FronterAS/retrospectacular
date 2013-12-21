@@ -1,0 +1,14 @@
+<span>
+    <div class="ticket-controls">
+        <button class="delete-ticket btn btn-warning" ng-click="toggleEditmode()">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="sr-only" ng-transclude>Edit</span>
+        </button>
+        <button class="delete-ticket btn btn-danger" ng-click="deleteIt()">
+            <span class="glyphicon glyphicon-remove-circle"></span>
+            <span class="sr-only">Delete</span>
+        </button>
+    </div>
+    <div class="ticket-message" ng-hide="showEdit">{{item.message}}</div>
+    <div class="ticket-message" ng-show="showEdit"><input type="text" ng-model="item.message"</div>
+</span>
