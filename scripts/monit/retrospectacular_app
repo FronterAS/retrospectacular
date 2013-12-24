@@ -1,0 +1,11 @@
+#!monit
+set logfile /var/log/monit.log
+
+check process retrospectacular_app with pidfile "/var/run/retrospectacular_app.pid"
+        start program = "/sbin/start retrospectacular_app"
+        stop program = "/sbin/stop retrospectacular_app"
+        if failed port 3000 protocol HTTP
+                request /retrospectives
+                with timeout 10 seconds
+                then restart
+
