@@ -35,6 +35,7 @@ cd ../../
 npm start >logs/output.log 2>logs/error.log &
 ```
 ###Prod setup
+```Shell
 sudo aptitude install monit
 cd scripts/
 sudo cp monit/retrospectacular_app /etc/monit/conf.d
@@ -44,6 +45,7 @@ sudo start monit
 sudo killall -9 node
 sudo monit start retrospectacular_app
 sudo monit status retrospectacular_app
+```
 
 ###Post a ticket
 ```Shell
