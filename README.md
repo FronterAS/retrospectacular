@@ -31,9 +31,19 @@ cd service
 npm install
 cd service/bin
 node create.js
-cd -
+cd ../../
 npm start >logs/output.log 2>logs/error.log &
 ```
+###Prod setup
+sudo aptitude install monit
+cd scripts/
+sudo cp monit/retrospectacular_app /etc/monit/conf.d
+sudo cp upstart/retrospectacular_app.conf /etc/init/
+sudo stop monit
+sudo start monit
+sudo killall -9 node
+sudo monit start retrospectacular_app
+sudo monit status retrospectacular_app
 
 ###Post a ticket
 ```Shell
