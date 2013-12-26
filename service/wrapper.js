@@ -16,15 +16,6 @@ var sage = require('sage'),
         });
 
         return results;
-    },
-    adaptMeta = function (meta) {
-        if (!_.isObject(meta)) {
-            return meta;
-        }
-        return {
-            total : meta.hits.total,
-//            took : meta.took
-        };
     };
 
 /**
@@ -254,8 +245,7 @@ exports.getAll = function (types) {
             est = esi.type(types);
 
             est.find(function (err, results, code, headers, message) {
-                var response,
-                    meta = adaptMeta(message.body);
+                var response;
 
                 if (err) {
                     defer.reject(err);
@@ -263,7 +253,9 @@ exports.getAll = function (types) {
                 }
 
                 response = adaptResults(results);
-                response.meta = meta;
+
+                // Add a total count for the query
+                response.total = message.body.hits.total;
 
                 defer.resolve(response);
             });
@@ -372,17 +364,20 @@ exports.query = function (queryString) {
 
             qStr = {'size': size, 'query': { 'query_string': { 'query': queryString }}};
 
-            est.find(qStr, function (err, results) {
+            est.find(qStr, function (err, results, code, headers, message) {
                 if (err) {
                     defer.reject(err);
                     return;
                 }
 
-                console.log('results');
-                console.log(results.length);
-
+                console.log('results', results.length);
                 results = adaptResults(results);
-                console.log(results.length);
+                console.log('adapted results', results.length);
+
+                // Add a total count for the query
+                results.total = message.body.hits.total;
+
+
 
                 defer.resolve(results);
             });

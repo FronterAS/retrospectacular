@@ -25,7 +25,7 @@ exports.getTicketWords = function (req, res) {
 exports.getTickets = function (req, res) {
     db.query('retroId:' + req.params.retroId).of('ticket').from('retrospectives')
         .then(function (result) {
-            res.json(result);
+            res.json({'results': result, 'total': result.total});
         })
         .fail(function (err) {
             console.log(err);
@@ -69,8 +69,7 @@ exports.getRetrospective = function (req, res) {
 exports.getRetrospectives = function (req, res) {
     db.getAll('retrospective').from('retrospectives')
         .then(function (result) {
-            var meta = result.meta;
-            res.json({'results': result, 'meta': meta});
+            res.json({'results': result, 'total': result.total});
         })
         .fail(function (err) {
             console.log(err);
