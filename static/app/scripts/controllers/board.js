@@ -26,9 +26,9 @@ angular.module('retrospectApp')
 
             $scope.updateTickets = function () {
                 console.log('Updating tickets.');
-                tickets.query({'retroId': $scope.retroId}, function (tickets) {
+                tickets.get({'retroId': $scope.retroId}, function (tickets) {
                     console.log('Got tickets');
-                    $scope.tickets = tickets;
+                    $scope.tickets = tickets.results;
                 });
             };
 
