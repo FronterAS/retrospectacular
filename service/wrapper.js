@@ -16,6 +16,15 @@ var sage = require('sage'),
         });
 
         return results;
+    },
+    adaptMeta = function (meta) {
+        if (!_.isObject(meta)) {
+            return meta;
+        }
+        return {
+            total : meta.hits.total,
+//            took : meta.took
+        };
     };
 
 /**
@@ -244,8 +253,9 @@ exports.getAll = function (types) {
 
             est = esi.type(types);
 
-            est.find(function (err, results) {
-                var response;
+            est.find(function (err, results, code, headers, message) {
+                var response,
+                    meta = adaptMeta(message.body);
 
                 if (err) {
                     defer.reject(err);
@@ -253,6 +263,7 @@ exports.getAll = function (types) {
                 }
 
                 response = adaptResults(results);
+                response.meta = meta;
 
                 defer.resolve(response);
             });
