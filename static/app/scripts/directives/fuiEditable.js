@@ -8,12 +8,18 @@ angular.module('retrospectApp')
         replace: true,
         scope: {
             item: '=',
-            onDelete: '&'
+            onDelete: '&',
+            onUpdate: '&'
             },
         transclude: true,
         link: function postLink(scope, element, attrs) {
             scope.toggleEditmode = function() {
                 scope.showEdit = !scope.showEdit;
+            }
+
+            scope.saveChange = function () {
+                scope.onUpdate();
+                scope.toggleEditmode();
             }
         }
     };

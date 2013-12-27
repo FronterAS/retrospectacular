@@ -34,7 +34,7 @@
         <h2>Positive</h2>
             <ul id="positive-tickets" class="tickets">
                 <li class="ticket pro" ng-repeat="ticket in tickets | role:'pro'">
-                    <fui-editable item=ticket on-delete="deleteTicket(ticket)"></fui-editable>
+                    <fui-editable item=ticket on-delete="deleteTicket(ticket)" on-update="saveChanges()"></fui-editable>
                 </li>
             </ul>
         </div>
@@ -43,7 +43,7 @@
             <h2>Negative</h2>
             <ul id="negative-tickets" class="tickets">
                 <li class="ticket con" ng-repeat="ticket in tickets | role:'con'">
-                    <fui-editable item=ticket on-delete="deleteTicket(ticket)"></fui-editable>
+                    <fui-editable item=ticket on-delete="deleteTicket(ticket)" on-update="saveChanges()"></fui-editable>
                 </li>
             </ul>
         </div>
@@ -52,7 +52,7 @@
             <h2>Puzzle</h2>
             <ul id="puzzle-tickets" class="tickets">
                 <li class="ticket puzzle" ng-repeat="ticket in tickets | role:'puzzle'">
-                    <fui-editable item=ticket on-delete="deleteTicket(ticket)"></fui-editable>
+                    <fui-editable item=ticket on-delete="deleteTicket(ticket)" on-update="saveChanges()"></fui-editable>
                 </li>
             </ul>
         </div>
