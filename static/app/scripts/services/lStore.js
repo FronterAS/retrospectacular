@@ -7,9 +7,6 @@ angular.module('retrospectApp')
       hasCheckedForLocalStorage = false,
       checkForLocalStorage = function () {
         var tst = "retrospectacular";
-        if (hasLocalStorage) {
-          return hasLocalStorage;
-        }
 
         if (hasCheckedForLocalStorage) {
           return hasLocalStorage;
