@@ -25,6 +25,7 @@ angular.module('retrospectApp')
             $scope.deleteTicket = function (ticket) {
                 var index = $scope.tickets.indexOf(ticket);
                 $scope.tickets.splice(index, 1);
+                Lstore.set($scope.retroId, $scope.tickets);
             };
 
             $scope.setRole = function (role) {
@@ -55,14 +56,10 @@ angular.module('retrospectApp')
                     'createdAt': JSON.parse($scope.createdAt)
                 };
 
-                console.log(params);
-
                 $scope.tickets.push(params);
 
                 // clear the message input box
                 $scope.retroMessage = '';
-
-                console.log($scope.tickets);
 
                 Lstore.set($scope.retroId, $scope.tickets);
             };
