@@ -81,7 +81,7 @@ gem install compass
 cd static
 npm install
 bower install
-grunt compass
+grunt
 cd app/scripts
 cp config.js.example config.js
 ```
