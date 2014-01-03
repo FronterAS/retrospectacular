@@ -370,9 +370,7 @@ exports.query = function (queryString) {
                     return;
                 }
 
-                console.log('results', results.length);
                 results = adaptResults(results);
-                console.log('adapted results', results.length);
 
                 // Add a total count for the query
                 results.total = message.body.hits.total;
