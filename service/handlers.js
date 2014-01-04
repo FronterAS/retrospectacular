@@ -1,4 +1,5 @@
-var db = require('./wrapper'),
+var _ = require('lodash'),
+    db = require('./wrapper'),
 
     explodeMessages = function (results) {
         var words = [];
@@ -67,7 +68,11 @@ exports.getRetrospective = function (req, res) {
 };
 
 exports.getRetrospectives = function (req, res) {
-    db.getAll('retrospective').from('retrospectives')
+    var start = 0;
+    if (!_.isUndefined(req.params.start)) {
+        start = req.params.start;
+    }
+    db.getAll('retrospective').start(start).from('retrospectives')
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })
