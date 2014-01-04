@@ -2,16 +2,20 @@ var sage = require('sage'),
     q = require('q'),
     _ = require('lodash'),
     es = sage('http://localhost:9200'),
+    elasticsearch = require('elasticsearch'),
+    client = new elasticsearch.Client({
+        host: 'localhost:9200'
+    }),
 
     adaptResult = function (result) {
         var _result = result._source;
-        _result.id = result.id;
+        _result.id = result._id;
 
         return _result;
     },
 
     adaptResults = function (results) {
-        results = results.map(function (result) {
+        results = _.map(results, function(result) {
             return adaptResult(result);
         });
 
@@ -224,38 +228,42 @@ exports.getIndexStatus = function (indexName) {
     return defer.promise;
 };
 
+
 /**
- * Use to retrive all results of [type] from [index].
+ * Use to retrieve all results of [type] from [index].
  *
- * @param  {string|array} types e.g. 'type1' 'type1, type2' ['type1', 'type2']
+ * @param  {string} type
  * @return {promise}
  */
-exports.getAll = function (types) {
+exports.getAll = function (type) {
+    var from = 0;
     return {
-        from: function (indexName) {
-            var defer = q.defer(),
-                esi = es.index(indexName),
-                est;
+        start: function (_start) {
+            start = _start;
+            return this;
+        },
 
-            if (!types) {
-                defer.reject(new Error('Type(s) must be supplied'));
+        from: function (indexName) {
+            var defer = q.defer();
+
+            if (!type) {
+                // @TODO: if we ever actually need 'types' as a array, check
+                // back in git history.
+                defer.reject(new Error('Type must be supplied'));
             }
 
-            est = esi.type(types);
-
-            est.find(function (err, results, code, headers, message) {
+            client.search({
+                index: indexName,
+                q: '_type:' + type,
+                from: start
+            }, function (error, results) {
                 var response;
-
-                if (err) {
-                    defer.reject(err);
+                if (error) {
+                    defer.reject(error);
                     return;
                 }
-
-                response = adaptResults(results);
-
-                // Add a total count for the query
-                response.total = message.body.hits.total;
-
+                response = adaptResults(results.hits.hits);
+                response.total = results.hits.total;
                 defer.resolve(response);
             });
 
@@ -263,6 +271,7 @@ exports.getAll = function (types) {
         }
     };
 };
+
 
 exports.get = function (types) {
     var getId;
