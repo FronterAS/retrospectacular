@@ -34,27 +34,24 @@ var sage = require('sage'),
  */
 exports.delete = function (typeName) {
     var id;
-
     return {
         withId: function (_id) {
             id = _id;
             return this;
         },
-
         from: function (indexName) {
-            var esi = es.index(indexName),
-                est = esi.type(typeName),
-                defer = q.defer();
-
-            est.del({'_id': id}, function (err, result) {
-                if (err) {
-                    defer.reject(err);
+            var defer = q.defer();
+            client.delete({
+                index: indexName,
+                type: typeName,
+                id: id
+            }, function (error, response) {
+                if (error) {
+                    defer.reject(error);
                     return;
                 }
-
-                defer.resolve(result);
+                defer.resolve(response);
             });
-
             return defer.promise;
         }
     };
