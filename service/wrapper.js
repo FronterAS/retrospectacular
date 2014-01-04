@@ -235,7 +235,6 @@ exports.getAll = function (types) {
         from: function (indexName) {
             var defer = q.defer(),
                 esi = es.index(indexName),
-                defer = q.defer(),
                 est;
 
             if (!types) {
