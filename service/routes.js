@@ -1,4 +1,6 @@
-var handlers = require('./handlers'),
+var retrospectives = require('./models/retrospectives'),
+    tickets = require('./models/tickets'),
+
     allowCrossDomain = function(req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');
         res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
@@ -9,16 +11,16 @@ var handlers = require('./handlers'),
 exports.setup = function (api) {
     api.use(allowCrossDomain);
 
-    api.get('/retrospectives', handlers.getRetrospectives);
-    api.get('/retrospectives/:retroId', handlers.getRetrospective);
-    api.put('/retrospectives/:retroId', handlers.putRetrospective);
-    api.post('/retrospectives', handlers.postRetrospective);
+    api.get('/retrospectives', retrospectives.getRetrospectives);
+    api.get('/retrospectives/:retroId', retrospectives.getRetrospective);
+    api.put('/retrospectives/:retroId', retrospectives.putRetrospective);
+    api.post('/retrospectives', retrospectives.postRetrospective);
 
-    api.get('/retrospectives/:retroId/tickets', handlers.getTickets);
-    api.get('/retrospectives/:retroId/tickets/:ticketId', handlers.getTicket);
-    api.put('/retrospectives/:retroId/tickets/:ticketId', handlers.putTicket);
-    api.post('/retrospectives/:retroId/tickets', handlers.postTicketToRetrospective);
-    api.delete('/retrospectives/:retroId/tickets/:ticketId', handlers.deleteTicket);
+    api.get('/retrospectives/:retroId/tickets', tickets.getTickets);
+    api.get('/retrospectives/:retroId/tickets/:ticketId', tickets.getTicket);
+    api.put('/retrospectives/:retroId/tickets/:ticketId', tickets.putTicket);
+    api.post('/retrospectives/:retroId/tickets', tickets.postTicketToRetrospective);
+    api.delete('/retrospectives/:retroId/tickets/:ticketId', tickets.deleteTicket);
 
-    api.get('/wordcloud', handlers.getTicketWords);
+    api.get('/wordcloud', tickets.getTicketWords);
 };
