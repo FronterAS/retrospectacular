@@ -52,7 +52,7 @@ exports.getTicket = function (req, res) {
 exports.deleteTicket = function (req, res) {
     db.delete('ticket').withId(req.params.ticketId).from('retrospectives')
         .then(function (result) {
-            res.json(result);
+            res.send(204);
         })
         .fail(function (err) {
             console.log(err);
