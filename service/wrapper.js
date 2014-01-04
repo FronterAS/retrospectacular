@@ -71,16 +71,12 @@ exports.post = function (data) {
         },
 
         into: function (indexName) {
-            var esi = es.index(indexName),
-                promises = [],
-                est;
+            var promises = [];
 
             if (!typeName) {
                 defer.reject(new Error('You must specify a type'));
                 return;
             }
-
-            est = esi.type(typeName);
 
             data.forEach(function (item) {
                 var defer = q.defer();
@@ -91,28 +87,29 @@ exports.post = function (data) {
                         JSON.stringify(new Date())
                     );
                 }
-                debugger;
 
-                est.post(item, function (err, result) {
-                    if (err) {
-                        defer.reject(err);
+                client.create({
+                    index: indexName,
+                    type: typeName,
+                    body: item
+                }, function (error, response) {
+                    if (error) {
+                        defer.reject(error);
                         return;
                     }
-
-                    debugger;
-
-                    est.get(result.id, function (err, result) {
-                        debugger;
-                        if (err) {
-                            defer.reject(err);
+                    client.get({
+                        index: indexName,
+                        type: typeName,
+                        id: response._id
+                    }, function (error, result) {
+                        if (error) {
+                            defer.reject(error);
                             return;
                         }
-
                         result = adaptResult(result);
                         defer.resolve(result);
                     });
                 });
-
             });
 
             if (data.length === 1) {
@@ -282,7 +279,6 @@ exports.get = function (types) {
         from: function (indexName) {
             var defer = q.defer(),
                 esi = es.index(indexName),
-                defer = q.defer(),
                 est;
 
             if (!types) {
@@ -387,4 +383,4 @@ exports.query = function (queryString) {
             return defer.promise;
         }
     };
-}
+};
