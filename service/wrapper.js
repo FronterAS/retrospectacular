@@ -134,10 +134,8 @@ exports.put = function (data) {
             return this;
         },
         into: function (indexName) {
-            var esi = es.index(indexName),
-                promises = [],
-                defer = q.defer(),
-                est;
+            var promises = [],
+                defer = q.defer();
 
             promises.push(defer.promise);
 
@@ -146,12 +144,14 @@ exports.put = function (data) {
                 return;
             }
 
-            est = esi.type(typeName);
-
-            est.get(data.id, function(err, result) {
-                if (err) {
+            client.get({
+                index: indexName,
+                type: typeName,
+                id: data.id
+            }, function (error, response) {
+                if (error) {
                     // if it didn't find it, do a est.post?
-                    defer.reject(err);
+                    defer.reject(error);
                     return;
                 }
 
@@ -159,29 +159,39 @@ exports.put = function (data) {
                     JSON.stringify(new Date())
                 );
 
-                _.forEach(result._source, function(value, name) {
+                _.forEach(response._source, function(value, name) {
                     if (!data[name] ) {
                         data[name] = value;
                     }
                 });
 
-                est.put(data, function(err, result) {
-                    if (err) {
-                        defer.reject(err);
+                client.update({
+                    index: indexName,
+                    type: typeName,
+                    id: data.id,
+                    body: {
+                        doc: data
+                    }
+                }, function(error, response) {
+                    if (error) {
+                        defer.reject(error);
                         return;
                     }
-
-                    est.get(result.id, function (err, result) {
-                        if (err) {
-                            defer.reject(err);
+                    client.get({
+                        index: indexName,
+                        type: typeName,
+                        id: response._id
+                    }, function (error, response) {
+                        if (error) {
+                            defer.reject(error);
                             return;
                         }
-
-                        result = adaptResult(result);
+                        result = adaptResult(response);
                         defer.resolve(result);
                     });
                 });
             });
+
             if (data.length === 1) {
                 return promises[0];
             }
