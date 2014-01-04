@@ -24,7 +24,11 @@ exports.getTicketWords = function (req, res) {
 };
 
 exports.getTickets = function (req, res) {
-    db.query('retroId:' + req.params.retroId).of('ticket').from('retrospectives')
+    var start = 0;
+    if (!_.isUndefined(req.params.start)) {
+        start = req.params.start;
+    }
+    db.query('retroId:' + req.params.retroId).start(start).of('ticket').from('retrospectives')
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })

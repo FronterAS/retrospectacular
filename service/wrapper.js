@@ -90,7 +90,7 @@ exports.post = function (data) {
                 promises.push(defer.promise);
 
                 if (!item.createdAt) {
-                    item.createdAt = JSON.parse(
+                    item.createdat = json.parse(
                         JSON.stringify(new Date())
                     );
                 }
@@ -236,7 +236,7 @@ exports.getIndexStatus = function (indexName) {
  * @return {promise}
  */
 exports.getAll = function (type) {
-    var from = 0;
+    var start = 0;
     return {
         start: function (_start) {
             start = _start;
@@ -344,6 +344,7 @@ exports.createIndex = function (indexName) {
 
 exports.query = function (queryString) {
     var typeName,
+        start = 0,
         // results to return
         size = 1000000;
 
@@ -353,39 +354,37 @@ exports.query = function (queryString) {
             return this;
         },
 
+        start: function (_start) {
+            start = _start;
+            return this;
+        },
+
         withSize: function (_size) {
             size = _size;
+            return this;
         },
 
         from: function (indexName) {
-            var defer = q.defer(),
-                esi = es.index(indexName),
-                defer = q.defer(),
-                qStr,
-                est;
+            var defer = q.defer();
 
             if (!typeName) {
                 defer.reject(new Error('Type name must be supplied'));
             }
 
-            est = esi.type(typeName);
-
-            qStr = {'size': size, 'query': { 'query_string': { 'query': queryString }}};
-
-            est.find(qStr, function (err, results, code, headers, message) {
-                if (err) {
-                    defer.reject(err);
+            client.search({
+                index: indexName,
+                q: queryString,
+                from: start,
+                size: size
+            }, function (error, results) {
+                var response;
+                if (error) {
+                    defer.reject(error);
                     return;
                 }
-
-                results = adaptResults(results);
-
-                // Add a total count for the query
-                results.total = message.body.hits.total;
-
-
-
-                defer.resolve(results);
+                response = adaptResults(results.hits.hits);
+                response.total = results.hits.total;
+                defer.resolve(response);
             });
 
             return defer.promise;
