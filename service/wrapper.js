@@ -1,7 +1,5 @@
-var sage = require('sage'),
-    q = require('q'),
+var q = require('q'),
     _ = require('lodash'),
-    es = sage('http://localhost:9200'),
     elasticsearch = require('elasticsearch'),
     client = new elasticsearch.Client({
         host: 'localhost:9200'
@@ -22,40 +20,6 @@ var sage = require('sage'),
         return results;
     };
 
-/**
- * Delete type from index.
- * @example
- * db.delete('myType').withId(5).from('myIndex');
- * // 'withId' param is the id to delete.
- * // 'from' param is the string name of the index to delete from.
- *
- * @param  {string} typeName The name of the type to delete.
- * @return {object}
- */
-exports.delete = function (typeName) {
-    var id;
-    return {
-        withId: function (_id) {
-            id = _id;
-            return this;
-        },
-        from: function (indexName) {
-            var defer = q.defer();
-            client.delete({
-                index: indexName,
-                type: typeName,
-                id: id
-            }, function (error, response) {
-                if (error) {
-                    defer.reject(error);
-                    return;
-                }
-                defer.resolve(response);
-            });
-            return defer.promise;
-        }
-    };
-};
 
 exports.post = function (data) {
     var typeName;
@@ -120,6 +84,102 @@ exports.post = function (data) {
         }
     };
 };
+
+
+exports.query = function (queryString) {
+    var typeName,
+        start = 0,
+        // results to return
+        size = 1000000;
+
+    return {
+        of: function (_typeName) {
+            typeName = _typeName;
+            return this;
+        },
+
+        start: function (_start) {
+            start = _start;
+            return this;
+        },
+
+        withSize: function (_size) {
+            size = _size;
+            return this;
+        },
+
+        from: function (indexName) {
+            var defer = q.defer();
+
+            if (!typeName) {
+                defer.reject(new Error('Type name must be supplied'));
+            }
+
+            client.search({
+                index: indexName,
+                q: queryString,
+                from: start,
+                size: size
+            }, function (error, results) {
+                var response;
+                if (error) {
+                    defer.reject(error);
+                    return;
+                }
+                response = adaptResults(results.hits.hits);
+                response.total = results.hits.total;
+                defer.resolve(response);
+            });
+
+            return defer.promise;
+        }
+    };
+};
+
+
+/**
+ * Use to retrieve all results of [type] from [index].
+ *
+ * @param  {string} type
+ * @return {promise}
+ */
+exports.getAll = function (type) {
+    var start = 0;
+    return {
+        start: function (_start) {
+            start = _start;
+            return this;
+        },
+
+        from: function (indexName) {
+            var defer = q.defer();
+
+            if (!type) {
+                // @TODO: if we ever actually need 'types' as a array, check
+                // back in git history.
+                defer.reject(new Error('Type must be supplied'));
+            }
+
+            client.search({
+                index: indexName,
+                q: '_type:' + type,
+                from: start
+            }, function (error, results) {
+                var response;
+                if (error) {
+                    defer.reject(error);
+                    return;
+                }
+                response = adaptResults(results.hits.hits);
+                response.total = results.hits.total;
+                defer.resolve(response);
+            });
+
+            return defer.promise;
+        }
+    };
+};
+
 
 exports.put = function (data) {
     var typeName;
@@ -200,197 +260,92 @@ exports.put = function (data) {
     };
 };
 
-exports.checkIndexExists = function (indexName) {
-    var esi = es.index(indexName),
-        defer = q.defer();
-
-    esi.exists(function (err, exists) {
-        if (err) {
-            defer.reject(err);
-            return;
-        }
-
-        defer.resolve(exists);
-    });
-
-    return defer.promise;
-};
-
-exports.getIndexStatus = function (indexName) {
-    var esi = es.index(indexName),
-        defer = q.defer();
-
-    esi.status(function(err, result) {
-        if (err) {
-            defer.reject(err);
-            return;
-        }
-
-        defer.resolve(result);
-    });
-
-    return defer.promise;
-};
-
 
 /**
- * Use to retrieve all results of [type] from [index].
+ * Delete type from index.
+ * @example
+ * db.delete('myType').withId(5).from('myIndex');
+ * // 'withId' param is the id to delete.
+ * // 'from' param is the string name of the index to delete from.
  *
- * @param  {string} type
- * @return {promise}
+ * @param  {string} typeName The name of the type to delete.
+ * @return {object}
  */
-exports.getAll = function (type) {
-    var start = 0;
-    return {
-        start: function (_start) {
-            start = _start;
-            return this;
-        },
-
-        from: function (indexName) {
-            var defer = q.defer();
-
-            if (!type) {
-                // @TODO: if we ever actually need 'types' as a array, check
-                // back in git history.
-                defer.reject(new Error('Type must be supplied'));
-            }
-
-            client.search({
-                index: indexName,
-                q: '_type:' + type,
-                from: start
-            }, function (error, results) {
-                var response;
-                if (error) {
-                    defer.reject(error);
-                    return;
-                }
-                response = adaptResults(results.hits.hits);
-                response.total = results.hits.total;
-                defer.resolve(response);
-            });
-
-            return defer.promise;
-        }
-    };
-};
-
-
-exports.get = function (types) {
-    var getId;
-
+exports.delete = function (typeName) {
+    var id;
     return {
         withId: function (_id) {
-            getId = _id;
+            id = _id;
             return this;
         },
-
-        from: function (indexName) {
-            var defer = q.defer(),
-                esi = es.index(indexName),
-                est;
-
-            if (!types) {
-                defer.reject(new Error('Type(s) must be supplied'));
-            }
-
-            est = esi.type(types);
-
-            est.get(getId, function (err, results) {
-                if (err) {
-                    defer.reject(err);
-                    return;
-                }
-
-                results = adaptResult(results);
-
-                defer.resolve(results);
-            });
-
-            return defer.promise;
-        }
-    };
-};
-
-exports.destroyIndex = function (indexName) {
-    var esi = es.index(indexName),
-        defer = q.defer();
-
-    esi.destroy(function (err, result) {
-        if (err) {
-            defer.reject(err);
-            return;
-        }
-
-        defer.resolve(result);
-    });
-
-    return defer.promise;
-};
-
-exports.createIndex = function (indexName) {
-    var esi = es.index(indexName),
-        defer = q.defer();
-
-    esi.create(function (err, result) {
-        if (err) {
-            defer.reject(err);
-            return;
-        }
-
-        defer.resolve(result);
-    });
-
-    return defer.promise;
-};
-
-exports.query = function (queryString) {
-    var typeName,
-        start = 0,
-        // results to return
-        size = 1000000;
-
-    return {
-        of: function (_typeName) {
-            typeName = _typeName;
-            return this;
-        },
-
-        start: function (_start) {
-            start = _start;
-            return this;
-        },
-
-        withSize: function (_size) {
-            size = _size;
-            return this;
-        },
-
         from: function (indexName) {
             var defer = q.defer();
-
-            if (!typeName) {
-                defer.reject(new Error('Type name must be supplied'));
-            }
-
-            client.search({
+            client.delete({
                 index: indexName,
-                q: queryString,
-                from: start,
-                size: size
-            }, function (error, results) {
-                var response;
+                type: typeName,
+                id: id
+            }, function (error, response) {
                 if (error) {
                     defer.reject(error);
                     return;
                 }
-                response = adaptResults(results.hits.hits);
-                response.total = results.hits.total;
                 defer.resolve(response);
             });
-
             return defer.promise;
         }
     };
+};
+
+
+exports.checkIndexExists = function (indexName) {
+    var defer = q.defer();
+
+    client.indices.exists({
+        index: indexName
+    }, function (error, response) {
+        if (error) {
+            defer.reject(error);
+            return;
+        }
+
+        defer.resolve(response);
+    });
+
+    return defer.promise;
+};
+
+
+exports.destroyIndex = function (indexName) {
+    var defer = q.defer();
+
+    client.indices.delete({
+        index: indexName
+    }, function (error, response) {
+        if (error) {
+            defer.reject(error);
+            return;
+        }
+
+        defer.resolve(response);
+    });
+
+    return defer.promise;
+};
+
+
+exports.createIndex = function (indexName) {
+    var defer = q.defer();
+
+    client.indices.create({
+        index: indexName
+    }, function (error, response) {
+        if (error) {
+            defer.reject(error);
+            return;
+        }
+
+        defer.resolve(response);
+    });
+
+    return defer.promise;
 };
