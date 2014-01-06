@@ -1,16 +1,13 @@
 var should = require('should'),
     assert = require('assert'),
-    request = require('supertest'),
+    request = require('supertest');
 //    winston = require('winston'),
-    sage = require('sage');
     //config = require('./config-debug');
 
 describe('Routing', function () {
-    var url = 'http://localhost:3000',
-        es = null;
+    var url = 'http://localhost:3000';
 
     before(function(done) {
-        es = sage('http://localhost:9200');
         done();
     });
 
