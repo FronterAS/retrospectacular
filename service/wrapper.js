@@ -1,8 +1,9 @@
 var q = require('q'),
     _ = require('lodash'),
     elasticsearch = require('elasticsearch'),
+    config = require('./config').Config,
     client = new elasticsearch.Client({
-        host: 'localhost:9200'
+        host: config.db.url
     }),
 
     adaptResult = function (result) {

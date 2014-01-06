@@ -1,5 +1,0 @@
-{
-    "db": {
-        "url": "http://localhost:9200"
-    }
-}

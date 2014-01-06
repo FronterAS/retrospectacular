@@ -15,7 +15,7 @@ npm-debug.log
 node_modules
 
 # service
-service/config.json
+service/config.js
 service/test/config-debug.js
 
 # static
