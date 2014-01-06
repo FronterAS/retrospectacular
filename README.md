@@ -26,7 +26,7 @@ cd elasticsearch-0.90.7/bin
 
 ```Shell
 # create and update config file
-cp service/config.json.example service/config.json
+cp service/config.js.example service/config.js
 cd service
 npm install
 cd service/bin
