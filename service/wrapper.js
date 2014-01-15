@@ -56,6 +56,7 @@ exports.post = function (data) {
                 client.create({
                     index: indexName,
                     type: typeName,
+                    timestamp: JSON.parse(JSON.stringify(new Date())),
                     body: item
                 }, function (error, response) {
                     if (error) {
