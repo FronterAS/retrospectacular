@@ -48,7 +48,7 @@ exports.post = function (data) {
                 promises.push(defer.promise);
 
                 if (!item.createdAt) {
-                    item.createdat = JSON.parse(
+                    item.createdAt = JSON.parse(
                         JSON.stringify(new Date())
                     );
                 }
