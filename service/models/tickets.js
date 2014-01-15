@@ -10,7 +10,7 @@ var _ = require('lodash'),
     };
 
 exports.getTicketWords = function (req, res) {
-    db.getAll('ticket').from('retrospectives')
+    db.getAll('ticket').sortBy('createdAt:desc').from('retrospectives')
         .then(function (result) {
             var words = explodeMessages(result);
             res.json({'results': words});
@@ -26,7 +26,7 @@ exports.getTickets = function (req, res) {
     if (!_.isUndefined(req.params.start)) {
         start = req.params.start;
     }
-    db.query('retroId:' + req.params.retroId).start(start).of('ticket').from('retrospectives')
+    db.query('retroId:' + req.params.retroId).start(start).sortBy('createdAt:desc').of('ticket').from('retrospectives')
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })
