@@ -154,10 +154,17 @@ exports.query = function (queryString) {
  */
 exports.getAll = function (type) {
     var start = 0,
-        sort = '';
+        sort = '',
+        size = 1000;
+
     return {
         start: function (_start) {
             start = _start;
+            return this;
+        },
+
+        size: function (_size) {
+            size = _size;
             return this;
         },
 
@@ -183,7 +190,8 @@ exports.getAll = function (type) {
                 index: indexName,
                 q: '_type:' + type,
                 from: start,
-                sort: sort
+                sort: sort,
+                size: size
             }, function (error, results) {
                 var response;
                 if (error) {
