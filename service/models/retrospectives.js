@@ -17,7 +17,7 @@ exports.getRetrospectives = function (req, res) {
     if (!_.isUndefined(req.params.start)) {
         start = req.params.start;
     }
-    db.getAll('retrospective').start(start).from('retrospectives')
+    db.getAll('retrospective').sortBy('createdAt:desc').start(start).from('retrospectives')
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })

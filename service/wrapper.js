@@ -48,7 +48,7 @@ exports.post = function (data) {
                 promises.push(defer.promise);
 
                 if (!item.createdAt) {
-                    item.createdat = JSON.parse(
+                    item.createdAt = JSON.parse(
                         JSON.stringify(new Date())
                     );
                 }
@@ -56,6 +56,7 @@ exports.post = function (data) {
                 client.create({
                     index: indexName,
                     type: typeName,
+                    timestamp: JSON.parse(JSON.stringify(new Date())),
                     body: item
                 }, function (error, response) {
                     if (error) {
@@ -90,6 +91,7 @@ exports.post = function (data) {
 exports.query = function (queryString) {
     var typeName,
         start = 0,
+        sort = '',
         // results to return
         size = 1000000;
 
@@ -101,6 +103,11 @@ exports.query = function (queryString) {
 
         start: function (_start) {
             start = _start;
+            return this;
+        },
+
+        sortBy: function (_sort) {
+            sort = _sort;
             return this;
         },
 
@@ -120,7 +127,8 @@ exports.query = function (queryString) {
                 index: indexName,
                 q: queryString,
                 from: start,
-                size: size
+                size: size,
+                sort: sort
             }, function (error, results) {
                 var response;
                 if (error) {
@@ -145,13 +153,23 @@ exports.query = function (queryString) {
  * @return {promise}
  */
 exports.getAll = function (type) {
-    var start = 0;
+    var start = 0,
+        sort = '';
     return {
         start: function (_start) {
             start = _start;
             return this;
         },
 
+        /**
+         * @param String _sort A comma-separated list of <field>:<direction>
+         *                      pairs
+         * @TODO: validate _sort
+         */
+        sortBy: function(_sort) {
+            sort = _sort;
+            return this;
+        },
         from: function (indexName) {
             var defer = q.defer();
 
@@ -164,7 +182,8 @@ exports.getAll = function (type) {
             client.search({
                 index: indexName,
                 q: '_type:' + type,
-                from: start
+                from: start,
+                sort: sort
             }, function (error, results) {
                 var response;
                 if (error) {
