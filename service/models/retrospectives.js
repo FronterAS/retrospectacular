@@ -14,11 +14,19 @@ exports.getRetrospective = function (req, res) {
 };
 
 exports.getRetrospectives = function (req, res) {
-    var start = 0;
-    if (!_.isUndefined(req.params.start)) {
-        start = req.params.start;
+    var start = 0,
+        rpp = 10,
+        page = 1;
+
+    if (!_.isUndefined(req.query.page)) {
+        page = req.query.page;
     }
-    db.getAll('retrospective').sortBy('createdAt:desc').start(start).from(config.db.index)
+    if (!_.isUndefined(req.query.rpp)) {
+        rpp = req.query.rpp;
+    }
+    start = (page - 1) * rpp;
+
+    db.getAll('retrospective').sortBy('createdAt:desc').start(start).size(rpp).from(config.db.index)
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })
