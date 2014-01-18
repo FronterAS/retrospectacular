@@ -19,7 +19,7 @@ var _ = require('lodash'),
         var promises = [];
         _.each(results, function(retrospective) {
             var defer = q.defer(),
-                doc = fixDox(retrospective);
+                doc = fixDoc(retrospective);
 
             console.log('retrospective', retrospective, 'doc', doc);
             promises.push(defer.promise);
@@ -56,7 +56,7 @@ var _ = require('lodash'),
         var promises = [];
         _.each(tickets, function(ticket) {
             var defer = q.defer(),
-                doc = fixDox(ticket);
+                doc = fixDoc(ticket);
 
             promises.push(defer.promise);
             console.log('ticket', ticket, 'doc', doc);
@@ -77,7 +77,7 @@ var _ = require('lodash'),
         return q.all(promises);
     },
 
-    fixDox = function(doc) {
+    fixDoc = function(doc) {
         var result = {
             createdAt: (doc.createdat ? doc.createdat : doc.createdAt)
         };
