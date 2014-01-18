@@ -10,7 +10,7 @@ angular.module('retrospectApp')
     function ($scope, $location, retrospectives, LocaleDateTime) {
         $scope.retrospectives = [];
         $scope.newRetrospective = {};
-        $scope.resultsPerPage = 10;
+        $scope.resultsPerPage = 10000;
         $scope.page = 1;
 
         $scope.deleteRetrospective = function(retrospective) {
