@@ -1,4 +1,5 @@
 var _ = require('lodash'),
+    config = require('../config').Config,
     db = require('../wrapper'),
 
     explodeMessages = function (results) {
@@ -10,7 +11,7 @@ var _ = require('lodash'),
     };
 
 exports.getTicketWords = function (req, res) {
-    db.getAll('ticket').sortBy('createdAt:desc').from('retrospectives')
+    db.getAll('ticket').sortBy('createdAt:desc').from(config.db.index)
         .then(function (result) {
             var words = explodeMessages(result);
             res.json({'results': words});
@@ -26,7 +27,7 @@ exports.getTickets = function (req, res) {
     if (!_.isUndefined(req.params.start)) {
         start = req.params.start;
     }
-    db.query('retroId:' + req.params.retroId).start(start).sortBy('createdAt:desc').of('ticket').from('retrospectives')
+    db.query('retroId:' + req.params.retroId).start(start).sortBy('createdAt:desc').of('ticket').from(config.db.index)
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })
@@ -37,7 +38,7 @@ exports.getTickets = function (req, res) {
 };
 
 exports.getTicket = function (req, res) {
-    db.query('_id:' + req.params.ticketId).of('ticket').from('retrospectives')
+    db.query('_id:' + req.params.ticketId).of('ticket').from(config.db.index)
         .then(function (result) {
             res.json(result);
         })
@@ -48,7 +49,7 @@ exports.getTicket = function (req, res) {
 };
 
 exports.deleteTicket = function (req, res) {
-    db.delete('ticket').withId(req.params.ticketId).from('retrospectives')
+    db.delete('ticket').withId(req.params.ticketId).from(config.db.index)
         .then(function (result) {
             res.send(204);
         })
@@ -60,7 +61,7 @@ exports.deleteTicket = function (req, res) {
 
 exports.putTicket = function (req, res) {
     req.body.retroId = req.params.retroId;
-    db.put(req.body).ofType('ticket').withId(req.params.ticketId).into('retrospectives')
+    db.put(req.body).ofType('ticket').withId(req.params.ticketId).into(config.db.index)
         .then(function (result) {
             res.json(result);
         })
@@ -74,7 +75,7 @@ exports.postTicketToRetrospective = function (req, res) {
     // @TODO: perhaps move retroId into req.body
     //  from the frontend?
     req.body.retroId = req.params.retroId;
-    db.post(req.body).ofType('ticket').into('retrospectives')
+    db.post(req.body).ofType('ticket').into(config.db.index)
         .then(function (result) {
             res.json(result);
         })
