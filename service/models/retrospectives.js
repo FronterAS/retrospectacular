@@ -1,8 +1,9 @@
 var _ = require('lodash'),
+    config = require('../config').Config,
     db = require('../wrapper');
 
 exports.getRetrospective = function (req, res) {
-    db.query('_id:' + req.params.retroId).of('retrospective').from('retrospectives')
+    db.query('_id:' + req.params.retroId).of('retrospective').from(config.db.index)
         .then(function (result) {
             res.json(result[0]);
         })
@@ -17,7 +18,7 @@ exports.getRetrospectives = function (req, res) {
     if (!_.isUndefined(req.params.start)) {
         start = req.params.start;
     }
-    db.getAll('retrospective').sortBy('createdAt:desc').start(start).from('retrospectives')
+    db.getAll('retrospective').sortBy('createdAt:desc').start(start).from(config.db.index)
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })
@@ -28,7 +29,7 @@ exports.getRetrospectives = function (req, res) {
 };
 
 exports.postRetrospective = function (req, res) {
-    db.post(req.body).ofType('retrospective').into('retrospectives')
+    db.post(req.body).ofType('retrospective').into(config.db.index)
         .then(function (result) {
             res.json(result);
         })
@@ -39,7 +40,7 @@ exports.postRetrospective = function (req, res) {
 };
 
 exports.putRetrospective = function (req, res) {
-    db.put(req.body).ofType('retrospective').withId(req.params.retroId).into('retrospectives')
+    db.put(req.body).ofType('retrospective').withId(req.params.retroId).into(config.db.index)
         .then(function (result) {
             res.json(result);
         })

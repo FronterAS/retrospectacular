@@ -1,4 +1,5 @@
 var db = require('../wrapper'),
+    config = require('../config').Config,
     q = require('q'),
 
     tickets = [{
@@ -22,13 +23,13 @@ var db = require('../wrapper'),
     handleDbExists = function (exists) {
         if (exists) {
             console.log('db exists, deleting it');
-            return db.destroyIndex('retrospectives');
+            return db.destroyIndex(config.db.index);
         }
     },
 
     createDb = function () {
         console.log('creating new db');
-        return db.createIndex('retrospectives');
+        return db.createIndex(config.db.index);
     },
 
     postRetrospective = function () {
@@ -36,7 +37,7 @@ var db = require('../wrapper'),
 
         console.log('posting retrospective');
 
-        db.post({'name': 'Sprint 1'}).ofType('retrospective').into('retrospectives')
+        db.post({'name': 'Sprint 1'}).ofType('retrospective').into(config.db.index)
             .then(function (result) {
                 console.log(result);
                 defer.resolve(result);
@@ -58,7 +59,7 @@ var db = require('../wrapper'),
 
             ticket.retroId = retrospective.id;
 
-            db.post(ticket).ofType('ticket').into('retrospectives')
+            db.post(ticket).ofType('ticket').into(config.db.index)
                 .then(function (result) {
                     defer.resolve(result);
                 })
@@ -70,7 +71,7 @@ var db = require('../wrapper'),
         return q.all(promises);
     };
 
-db.checkIndexExists('retrospectives')
+db.checkIndexExists(config.db.index)
     .then(handleDbExists)
     .then(createDb)
     .then(postRetrospective)

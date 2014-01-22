@@ -1,6 +1,7 @@
 var development = {
     "db": {
-        "url": "http://localhost:9200"
+        "url": "http://localhost:9200",
+        "index": "retrospectives_22012014"
     },
     "app": {
         "host":"localhost",
@@ -10,7 +11,8 @@ var development = {
 
 production = {
     "db": {
-        "url": "http://localhost:9200"
+        "url": "http://localhost:9200",
+        "index": "retrospectives_22012014"
     },
     "app": {
         "host":"localhost",

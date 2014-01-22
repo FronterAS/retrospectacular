@@ -1,10 +1,11 @@
 var _ = require('lodash'),
     q = require('q'),
+    config = require('../config').Config,
     db = require('../wrapper'),
 
     getRetrospectives = function () {
         var defer = q.defer();
-        db.getAll('retrospective').from('retrospectives')
+        db.getAll('retrospective').from(config.db.index)
             .then(function (results) {
                 console.log('getRetrospectives:', results);
                 defer.resolve(results);
@@ -24,7 +25,7 @@ var _ = require('lodash'),
             console.log('retrospective', retrospective, 'doc', doc);
             promises.push(defer.promise);
 
-            db.put(doc).ofType('retrospective').withId(retrospective.id).into('retrospectives')
+            db.put(doc).ofType('retrospective').withId(retrospective.id).into(config.db.index)
                 .then(function(retrospective) {
                     console.log(retrospective);
                     defer.resolve(retrospective);
@@ -41,7 +42,7 @@ var _ = require('lodash'),
     },
     getTickets = function () {
         var defer = q.defer();
-        db.getAll('ticket').from('retrospectives')
+        db.getAll('ticket').from(config.db.index)
             .then(function (tickets) {
                 console.log('tickets', tickets);
                 defer.resolve(tickets);
@@ -61,7 +62,7 @@ var _ = require('lodash'),
             promises.push(defer.promise);
             console.log('ticket', ticket, 'doc', doc);
 
-            db.put(doc).ofType('ticket').withId(ticket.id).into('retrospectives')
+            db.put(doc).ofType('ticket').withId(ticket.id).into(config.db.index)
                 .then(function(result) {
                     console.log(result);
                     defer.resolve(result);
@@ -89,7 +90,7 @@ var _ = require('lodash'),
         }
     };
 
-db.checkIndexExists('retrospectives')
+db.checkIndexExists(config.db.index)
     .then(getRetrospectives)
     .then(putRetrospectives)
     .then(getTickets)
