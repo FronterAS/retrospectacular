@@ -1,0 +1,50 @@
+{
+ "template": "retro*",
+ "settings": {
+  "number_of_shards": 1
+  },
+  "mappings": {
+   "retrospective": {
+    "_source": {
+     "enabled": true
+    },
+    "properties": {
+     "createdAt":{
+      "type":"date",
+      "format":"dateOptionalTime"
+     },
+     "updatedAt":{
+      "type":"date",
+      "format":"dateOptionalTime"
+     },
+     "name":{
+      "type":"string"
+     }
+    }
+   },
+   "ticket":{
+    "_source": {
+     "enabled": true
+    },
+    "properties": {
+     "createdAt":{
+      "type":"date",
+      "format":"dateOptionalTime"
+     },
+     "updatedAt":{
+      "type":"date",
+      "format":"dateOptionalTime"
+     },
+     "message":{
+      "type":"string"
+     },
+     "retroId":{
+      "type":"string"
+     },
+     "role":{
+      "type":"string"
+     }
+    }
+   }
+  }
+}
