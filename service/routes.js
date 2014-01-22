@@ -15,6 +15,7 @@ exports.setup = function (api) {
     api.get('/retrospectives/:retroId', retrospectives.getRetrospective);
     api.put('/retrospectives/:retroId', retrospectives.putRetrospective);
     api.post('/retrospectives', retrospectives.postRetrospective);
+    api.delete('/retrospectives/:retroId', retrospectives.deleteRetrospective);
 
     api.get('/retrospectives/:retroId/tickets', tickets.getTickets);
     api.get('/retrospectives/:retroId/tickets/:ticketId', tickets.getTicket);

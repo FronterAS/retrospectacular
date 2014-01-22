@@ -50,3 +50,13 @@ exports.putRetrospective = function (req, res) {
         });
 };
 
+exports.deleteRetrospective = function (req, res) {
+    db.delete('retrospective').withId(req.params.retroId).from(config.db.index)
+        .then(function (result) {
+            res.json(result);
+        })
+        .fail(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+};
