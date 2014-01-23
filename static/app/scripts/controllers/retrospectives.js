@@ -9,6 +9,15 @@ angular.module('retrospectApp')
         $scope.retrospectives = [];
         $scope.newRetrospective = {};
 
+        $scope.deleteRetrospective = function(retrospective) {
+            var index = $scope.retrospectives.indexOf(retrospective);
+
+            retrospectives.delete({'retroId': retrospective.id}, function () {
+                console.log('deleted retrospective');
+                $scope.retrospectives.splice(index, 1);
+            });
+        };
+
         $scope.saveRetrospective = function () {
             var retrospective;
 
