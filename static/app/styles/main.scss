@@ -40,7 +40,7 @@ h2 {
 #sprint-names,
 .nav-list {
     list-style: none;
-    padding: 0;
+    padding: 5px 0 0 0;
     margin: 0;
 }
 
@@ -120,6 +120,23 @@ header h1 {
     }
 }
 
+.retrospectives {
+    list-style: none;
+    padding: 0;
+}
+
+.retrospective {
+    padding:5px;
+    margin-bottom: 5px;
+    outline: 1px solid #E2E2E2;
+
+    font-family: 'comic sans ms',fantasy;
+    .retrospective-controls {
+        text-align: right;
+    }
+}
+
 .edit-active-ticket {
     width: 100%;
 }
+
