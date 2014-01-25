@@ -12,7 +12,13 @@
     </form>
 
     <ul id="sprint-names">
-        <li ng-repeat="retrospective in retrospectives">
+        <li class="retrospective" ng-repeat="retrospective in retrospectives">
+            <div class="retrospective-controls">
+                <button class="delete-retrospective btn btn-danger" ng-click="deleteRetrospective(retrospective)">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                    <span class="sr-only">Delete</span>
+                </button>
+            </div>
             <a href="#/retrospectives/{{retrospective.id}}">{{retrospective.name}}</a>
         </li>
     </ul>
