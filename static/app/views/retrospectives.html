@@ -20,6 +20,9 @@
                 </button>
             </div>
             <a href="#/retrospectives/{{retrospective.id}}">{{retrospective.name}}</a>
+            <div class="retrospective-meta">
+                <time class="created-date" itemProp="dateCreated" datetime="{{retrospective.createdAt}}">{{retrospective.createdAt}}</time>
+            </div>
         </li>
     </ul>
     <h3>Enjoy retrospecting!</h3>

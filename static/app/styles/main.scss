@@ -106,8 +106,15 @@ header h1 {
         background-color: $puzzle_bg;
     }
 
-    .ticket-controls {
+    .ticket-controls,
+    .ticket-meta {
         text-align: right;
+    }
+
+    .ticket-meta {
+      bottom: 0;
+      right: 2px;
+      font-size: 80%;
     }
 
     .delete-ticket {
@@ -131,8 +138,15 @@ header h1 {
     outline: 1px solid #E2E2E2;
 
     font-family: 'comic sans ms',fantasy;
-    .retrospective-controls {
+
+    .retrospective-controls,
+    .retrospective-meta {
         text-align: right;
+    }
+    .retrospective-meta {
+      bottom: 0;
+      right: 2px;
+      font-size: 80%;
     }
 }
 

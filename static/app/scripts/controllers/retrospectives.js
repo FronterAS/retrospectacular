@@ -5,7 +5,9 @@ angular.module('retrospectApp')
         '$scope',
         '$location',
         'retrospectives',
-    function ($scope, $location, retrospectives) {
+        'LocaleDateTime',
+
+    function ($scope, $location, retrospectives, LocaleDateTime) {
         $scope.retrospectives = [];
         $scope.newRetrospective = {};
 
@@ -40,7 +42,7 @@ angular.module('retrospectApp')
 
         // this throws an error with cross domain
         retrospectives.get(function (response) {
-            $scope.retrospectives = response.results;
+            $scope.retrospectives = LocaleDateTime.localizeResults(response.results);
         });
     }
 ]);
