@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+    - 0.10
+
+before_script:
+    - cd service
+    - npm install
+    - cd ../static
+    - npm install -g bower grunt-cli
+    - npm install
+    - bower install
+    - grunt
+
+script:
+    - cd ../service
+    - npm start
+    - mocha
+    - cd ../static
+    - npm test
