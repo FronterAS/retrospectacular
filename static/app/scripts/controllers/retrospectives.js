@@ -5,7 +5,9 @@ angular.module('retrospectApp')
         '$scope',
         '$location',
         'retrospectives',
-    function ($scope, $location, retrospectives) {
+        'LocaleDateTime',
+
+    function ($scope, $location, retrospectives, LocaleDateTime) {
         $scope.retrospectives = [];
         $scope.newRetrospective = {};
 
@@ -38,29 +40,9 @@ angular.module('retrospectApp')
             }
         };
 
-        var toLocaleStringSupportsLocales = function() {
-            try {
-                new Date().toLocaleString("i");
-            } catch (e) {
-                return e.name === "RangeError";
-            }
-            return false;
-        };
-
-        $scope.adaptResults = function(results) {
-            results.forEach(function(result, index) {
-                var tmpObj = new Date(result.createdAt);
-                if (toLocaleStringSupportsLocales()) {
-                    result.createdAt = tmpObj.toLocaleString("en-gb");
-                    results[index] = result;
-                }
-            });
-            return results;
-        };
-
         // this throws an error with cross domain
         retrospectives.get(function (response) {
-            $scope.retrospectives = $scope.adaptResults(response.results);
+            $scope.retrospectives = LocaleDateTime.localizeResults(response.results);
         });
     }
 ]);

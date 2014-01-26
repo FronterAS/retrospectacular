@@ -6,8 +6,9 @@ angular.module('retrospectApp')
         '$routeParams',
         'retrospectives',
         'tickets',
+        'LocaleDateTime',
 
-        function ($scope, $routeParams, retrospectives, tickets, BoardService) {
+        function ($scope, $routeParams, retrospectives, tickets, LocaleDateTime) {
             var updateTickets;
 
             $scope.retroId = $routeParams.retroId;
@@ -24,31 +25,11 @@ angular.module('retrospectApp')
                 $scope.tickets.splice(index, 1);
             };
 
-            var toLocaleStringSupportsLocales = function() {
-                try {
-                    new Date().toLocaleString("i");
-                } catch (e) {
-                    return e.name === "RangeError";
-                }
-                return false;
-            };
-
-            $scope.adaptResults = function(results) {
-                results.forEach(function(result, index) {
-                    var tmpObj = new Date(result.createdAt);
-                    if (toLocaleStringSupportsLocales()) {
-                        result.createdAt = tmpObj.toLocaleString("en-gb");
-                        results[index] = result;
-                    }
-                });
-                return results;
-            };
-
             $scope.updateTickets = function () {
                 console.log('Updating tickets.');
                 tickets.get({'retroId': $scope.retroId}, function (tickets) {
                     console.log('Got tickets');
-                    $scope.tickets = $scope.adaptResults(tickets.results);
+                    $scope.tickets = LocaleDateTime.localizeResults(tickets.results);
                 });
             };
 
