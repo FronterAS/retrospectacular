@@ -6,6 +6,7 @@ before_script:
     - cd service
     - npm install
     - cd ../static
+    - gem install compass
     - npm install -g bower grunt-cli
     - npm install
     - bower install
