@@ -37,6 +37,19 @@ angular.module('retrospectApp')
                 $scope.retroName = retrospective.name;
             });
 
+            $scope.toggleEditmode = function () {
+                $scope.showEdit = !$scope.showEdit;
+            }
+
+            $scope.updateRetro = function () {
+                retrospectives.update({'retroId': $scope.retroId}, {"name":$scope.retroName}, function () {
+                    console.log("Updating...");
+                }, function (error) {
+                    console.error('Error updating retrospective name', error);
+                });
+                $scope.toggleEditmode();
+            }
+
             $scope.updateTickets();
         }
     ]

@@ -12,7 +12,16 @@
     </nav>
 
     <header>
-        <h1>Board: {{retroName}}</h1>
+        <h1>Board: 
+            <span ng-hide="showEdit">{{retroName}}</span>
+            <span ng-show="showEdit"><input class="edit-active-retro" type="text" ng-model="retroName"</span>
+        </h1>
+        <button ng-click="toggleEditmode()" ng-hide="showEdit">
+            <span class="glyphicon glyphicon-edit"></span>
+        </button>
+        <button ng-click="updateRetro()" ng-show="showEdit">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </button> 
         <button class="btn btn-default" ng-click="updateTickets()">
             <span class="glyphicon glyphicon-refresh"></span> Refresh
         </button>
