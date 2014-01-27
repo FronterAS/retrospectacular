@@ -14,11 +14,23 @@ exports.getRetrospective = function (req, res) {
 };
 
 exports.getRetrospectives = function (req, res) {
-    var start = 0;
-    if (!_.isUndefined(req.params.start)) {
-        start = req.params.start;
+    var start = 0,
+        limit = 10,
+        page = 1;
+
+    if (req.query.page) {
+        page = req.query.page;
     }
-    db.getAll('retrospective').sortBy('createdAt:desc').start(start).from(config.db.index)
+
+    if (req.query.limit) {
+        limit = req.query.limit;
+    }
+
+    // page is a human readable iterator
+    // start is for the machines
+    start = (page - 1) * limit;
+
+    db.getAll('retrospective').sortBy('createdAt:desc').start(start).size(limit).from(config.db.index)
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })

@@ -111,7 +111,7 @@ exports.query = function (queryString) {
             return this;
         },
 
-        withSize: function (_size) {
+        size: function (_size) {
             size = _size;
             return this;
         },
