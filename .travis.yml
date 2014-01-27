@@ -15,7 +15,7 @@ install:
     - bower install
 
 before_script:
-    - cd static/app/scripts/
+    - cd app/scripts/
     - cp config.js.example config.js
     - cd ../../
     - grunt
