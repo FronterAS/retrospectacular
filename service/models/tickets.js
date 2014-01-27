@@ -24,20 +24,20 @@ exports.getTicketWords = function (req, res) {
 
 exports.getTickets = function (req, res) {
     var start = 0,
-        resultsPerPage = 100,
+        limit = 100,
         page = 1;
 
     if (req.query.page) {
         page = req.query.page;
     }
 
-    if (req.query.rpp) {
-        resultsPerPage = req.query.rpp;
+    if (req.query.limit) {
+        limit = req.query.limit;
     }
 
-    start = (page - 1) * resultsPerPage;
+    start = (page - 1) * limit;
 
-    db.query('retroId:' + req.params.retroId).start(start).sortBy('createdAt:desc').size(resultsPerPage).of('ticket').from(config.db.index)
+    db.query('retroId:' + req.params.retroId).start(start).sortBy('createdAt:desc').size(limit).of('ticket').from(config.db.index)
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })

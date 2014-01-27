@@ -15,7 +15,7 @@ angular.module('retrospectApp')
             $scope.retroName = '';
             $scope.tickets = [];
             $scope.page = 1;
-            $scope.resultsPerPage = 10000;
+            $scope.limit = 10000;
 
             $scope.deleteTicket = function (ticket) {
                 var index = $scope.tickets.indexOf(ticket);
@@ -29,7 +29,7 @@ angular.module('retrospectApp')
 
             $scope.updateTickets = function () {
                 console.log('Updating tickets.');
-                tickets.get({'page': $scope.page, 'rpp': $scope.resultsPerPage, 'retroId': $scope.retroId}, function (tickets) {
+                tickets.get({'page': $scope.page, 'limit': $scope.limit, 'retroId': $scope.retroId}, function (tickets) {
                     console.log('Got tickets');
                     $scope.tickets = LocaleDateTime.localizeResults(tickets.results);
                 });

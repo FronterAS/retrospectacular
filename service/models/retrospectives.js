@@ -15,22 +15,22 @@ exports.getRetrospective = function (req, res) {
 
 exports.getRetrospectives = function (req, res) {
     var start = 0,
-        resultsPerPage = 10,
+        limit = 10,
         page = 1;
 
     if (req.query.page) {
         page = req.query.page;
     }
 
-    if (req.query.rpp) {
-        resultsPerPage = req.query.rpp;
+    if (req.query.limit) {
+        limit = req.query.limit;
     }
 
     // page is a human readable iterator
     // start is for the machines
-    start = (page - 1) * resultsPerPage;
+    start = (page - 1) * limit;
 
-    db.getAll('retrospective').sortBy('createdAt:desc').start(start).size(resultsPerPage).from(config.db.index)
+    db.getAll('retrospective').sortBy('createdAt:desc').start(start).size(limit).from(config.db.index)
         .then(function (result) {
             res.json({'results': result, 'total': result.total});
         })

@@ -7,7 +7,7 @@ angular.module('retrospectApp')
         function ($resource, SERVICE_URL) {
             return $resource(SERVICE_URL + '/retrospectives/:retroId', {
                 'page': '@page',
-                'rpp': '@rpp'
+                'limit': '@limit'
             });
         }
     ]);

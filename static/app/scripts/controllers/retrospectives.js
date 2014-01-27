@@ -10,7 +10,7 @@ angular.module('retrospectApp')
     function ($scope, $location, retrospectives, LocaleDateTime) {
         $scope.retrospectives = [];
         $scope.newRetrospective = {};
-        $scope.resultsPerPage = 10000;
+        $scope.limit = 10000;
         $scope.page = 1;
 
         $scope.deleteRetrospective = function(retrospective) {
@@ -43,7 +43,7 @@ angular.module('retrospectApp')
         };
 
         // this throws an error with cross domain
-        retrospectives.get({'rpp': $scope.resultsPerPage, 'page': $scope.page},function (response) {
+        retrospectives.get({'limit': $scope.limit, 'page': $scope.page},function (response) {
             $scope.retrospectives = LocaleDateTime.localizeResults(response.results);
         });
     }
