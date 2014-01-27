@@ -18,7 +18,6 @@ before_script:
     - cd app/scripts/
     - cp config.js.example config.js
     - cd ../../
-    - grunt
 
 script:
     - cd ../static
