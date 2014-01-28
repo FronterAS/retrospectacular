@@ -6,13 +6,13 @@ describe('Service: lStore', function () {
   beforeEach(module('retrospectApp'));
 
   // instantiate service
-  var lStore;
-  beforeEach(inject(function (_lStore_) {
-    lStore = _lStore_;
+  var service;
+  beforeEach(inject(function (Lstore) {
+    service = Lstore;
   }));
 
   it('should do something', function () {
-    expect(!!lStore).toBe(true);
+    expect(!!service).toBe(true);
   });
 
 });
