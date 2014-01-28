@@ -36,6 +36,13 @@ describe('Directive: fuiEditable', function () {
     element = angular.element('<fui-editable></fui-editable>');
     element = $compile(element)($rootScope);
     $rootScope.$digest();
-    expect(element.html()).toContain('<button class="delete-ticket btn btn-danger" ng-click="onDelete()">');
+
+    /**
+     * Activate this after PR #21 in merged.
+     * expect(element.html()).toContain('hasDelete()');
+     */
+    expect(element.html()).toContain('onDelete()');
+    expect(element.html()).toContain('delete-ticket');
+    expect(element.html()).toContain('btn-danger');
   }));
 });
