@@ -11,7 +11,7 @@ describe('Service: lStore', function () {
     service = Lstore;
   }));
 
-  it('should do something', function () {
+  it('Should be a instance', function () {
     expect(!!service).toBe(true);
   });
 
