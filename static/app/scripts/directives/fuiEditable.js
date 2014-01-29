@@ -60,12 +60,7 @@ angular.module('retrospectApp')
                 };
 
                 scope.updateRetro = function () {
-                    retrospectives.update({'retroId': scope.item.id}, {'name':scope.item.name}, function () {
-                        console.log('Updating...');
-                    }, function (error) {
-                        console.error('Error updating retrospective name', error);
-                    });
-                    console.log('Updating.......');
+                    scope.onUpdate();
                     scope.toggleEditmode();
                 };
             }

@@ -38,6 +38,15 @@ angular.module('retrospectApp')
                 $scope.retrospective = retrospective;
             });
 
+            $scope.updateRetro = function () {
+                retrospectives.update({'retroId': $scope.retroId}, {'name':$scope.retrospective.name}, function () {
+                    console.log('Updating...');
+                }, function (error) {
+                    console.error('Error updating retrospective name', error);
+                });
+                console.log('Updating.......');
+            };
+
             $scope.updateTickets();
         }
     ]
