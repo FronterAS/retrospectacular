@@ -4,7 +4,7 @@
             <span class="glyphicon glyphicon-edit"></span>
             <span class="sr-only" ng-transclude>Edit</span>
         </button>
-        <button ng-show="hasUpdate()" class="delete-ticket btn btn-success" ng-click="saveChange()" ng-show="showEdit">
+        <button ng-show="hasUpdate() && showEdit" class="delete-ticket btn btn-success" ng-click="saveChange()">
             <span class="glyphicon glyphicon-pencil"></span>
             <span class="sr-only" ng-transclude>Edit</span>
         </button>
