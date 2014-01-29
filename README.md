@@ -3,8 +3,8 @@
 A retrospective tool
 
 ##Build
-![travis-ci.org build](https://api.travis-ci.org/FronterAS/retrospectacular.png)
-
+[![Build Status](https://travis-ci.org/FronterAS/retrospectacular.png?branch=master)](https://travis-ci.org/FronterAS/retrospectacular)
+
 ##Database
 ###Setup
 http://www.elasticsearch.org/download/
