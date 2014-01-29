@@ -23,6 +23,8 @@ static/.sass-cache
 static/.tmp
 static/app/bower_components
 static/dist
+static/coverage
 static/app/styles/*.css
+static/Firefox*
 
 static/app/scripts/config.js
