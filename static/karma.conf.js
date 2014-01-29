@@ -16,9 +16,16 @@ module.exports = function(config) {
       'app/bower_components/angular-resource/angular-resource.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
+      'app/views/*.html',
+      'app/views/directives/*.html',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
+
+    preprocessors: {
+      'app/views/*.html': 'html2js',
+      'app/views/**/*.html': 'html2js'
+    },
 
     // list of files / patterns to exclude
     exclude: [],
