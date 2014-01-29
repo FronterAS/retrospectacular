@@ -37,10 +37,7 @@ describe('Directive: fuiEditable', function () {
     element = $compile(element)($rootScope);
     $rootScope.$digest();
 
-    /**
-     * Activate this after PR #21 in merged.
-     * expect(element.html()).toContain('hasDelete()');
-     */
+    expect(element.html()).toContain('hasDelete()');
     expect(element.html()).toContain('onDelete()');
     expect(element.html()).toContain('delete-ticket');
     expect(element.html()).toContain('btn-danger');

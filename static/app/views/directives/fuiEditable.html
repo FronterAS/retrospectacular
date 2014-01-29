@@ -1,14 +1,14 @@
 <span>
     <div class="ticket-controls">
-        <button class="delete-ticket btn btn-warning" ng-click="toggleEditmode()" ng-hide="showEdit">
+        <button class="delete-ticket btn btn-warning" ng-click="toggleEditmode()" ng-hide="!hasUpdate() || showEdit">
             <span class="glyphicon glyphicon-edit"></span>
             <span class="sr-only" ng-transclude>Edit</span>
         </button>
-        <button class="delete-ticket btn btn-success" ng-click="saveChange()" ng-show="showEdit">
+        <button ng-show="hasUpdate() && showEdit" class="delete-ticket btn btn-success" ng-click="saveChange()">
             <span class="glyphicon glyphicon-pencil"></span>
             <span class="sr-only" ng-transclude>Edit</span>
         </button>
-        <button class="delete-ticket btn btn-danger" ng-click="onDelete()">
+        <button ng-show="hasDelete()" class="delete-ticket btn btn-danger" ng-click="onDelete()">
             <span class="glyphicon glyphicon-remove-circle"></span>
             <span class="sr-only">Delete</span>
         </button>
