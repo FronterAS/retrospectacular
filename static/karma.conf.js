@@ -24,7 +24,8 @@ module.exports = function(config) {
 
     preprocessors: {
       'app/views/*.html': 'html2js',
-      'app/views/**/*.html': 'html2js'
+      'app/views/**/*.html': 'html2js',
+      'app/scripts/**/*.js': 'coverage'
     },
 
     // list of files / patterns to exclude
@@ -55,6 +56,13 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: false,
+
+    reporters: ['progress','coverage'],
+
+    //coverage reporter type
+    coverageReporter: {
+        type : 'html'
+    }
   });
 };
