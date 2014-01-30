@@ -5,15 +5,15 @@ var db = require('../wrapper'),
     tickets = [{
         'role': 'pro',
         'message': 'We learned loads',
-        'createdAt' : JSON.parse(JSON.stringify(new Date()))
+        'createdAt' : (new Date()).toISOString()
     },{
         'role': 'con',
         'message': 'Then we forgot most of it',
-        'createdAt': JSON.parse(JSON.stringify(new Date()))
+        'createdAt': (new Date()).toISOString()
     },{
         'role': 'puzzle',
         'message': "We still can't quite understand what happened",
-        'createdAt': JSON.parse(JSON.stringify(new Date()))
+        'createdAt': (new Date()).toISOString()
     }],
 
     handleError = function (err) {
