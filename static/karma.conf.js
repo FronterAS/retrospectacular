@@ -18,7 +18,7 @@ module.exports = function(config) {
       'app/scripts/**/*.js',
       'app/views/*.html',
       'app/views/directives/*.html',
-      'test/mock/**/*.js',
+      //'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
