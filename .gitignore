@@ -26,5 +26,6 @@ static/dist
 static/coverage
 static/app/styles/*.css
 static/Firefox*
+static/PhantomJS*
 
 static/app/scripts/config.js
