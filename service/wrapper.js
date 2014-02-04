@@ -48,15 +48,13 @@ exports.post = function (data) {
                 promises.push(defer.promise);
 
                 if (!item.createdAt) {
-                    item.createdAt = JSON.parse(
-                        JSON.stringify(new Date())
-                    );
+                    item.createdAt = (new Date()).toISOString();
                 }
 
                 client.create({
                     index: indexName,
                     type: typeName,
-                    timestamp: JSON.parse(JSON.stringify(new Date())),
+                    timestamp: (new Date()).toISOString(),
                     body: item
                 }, function (error, response) {
                     if (error) {
@@ -243,9 +241,7 @@ exports.put = function (data) {
                     return;
                 }
 
-                data.updatedAt = JSON.parse(
-                    JSON.stringify(new Date())
-                );
+                data.updatedAt = (new Date()).toISOString();
 
                 _.forEach(response._source, function(value, name) {
                     if (!data[name] ) {

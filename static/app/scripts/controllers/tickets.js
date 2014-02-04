@@ -46,14 +46,14 @@ angular.module('retrospectApp')
 
             $scope.setRole('pro');
 
-            $scope.createdAt = JSON.stringify(new Date());
+            $scope.createdAt = (new Date()).toISOString();
 
             $scope.addTicket = function () {
                 var params = {
                     'role'   : $scope.role,
                     'message': $scope.retroMessage,
                     'retroId': $scope.retroId,
-                    'createdAt': JSON.parse($scope.createdAt)
+                    'createdAt': (new Date()).toISOString()
                 };
 
                 $scope.tickets.push(params);
