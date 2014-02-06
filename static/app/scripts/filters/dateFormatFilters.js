@@ -1,5 +1,5 @@
 angular.module('retrospectApp')
-    .filter('fromNow', function () {
+    .filter('someTimeAgo', function () {
         'use strict';
         return function (dateString) {
             return moment(dateString).fromNow();
