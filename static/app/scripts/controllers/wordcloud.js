@@ -12,17 +12,6 @@ angular.module('retrospectApp')
 
                 var fill = d3.scale.category20();
 
-                d3.layout.cloud().size([300, 300])
-                        .words(cloudwords.map(function (d) {
-                            return {text: d, size: 10 + Math.random() * 90};
-                        }))
-                        .padding(5)
-                        .rotate(function () { return ~~(Math.random() * 2) * 90; })
-                        .font('Impact')
-                        .fontSize(function (d) { return d.size; })
-                        .on('end', draw)
-                        .start();
-
                 function draw(words) {
                     d3.select('#cloud-container').append('svg')
                             .attr('width', window.innerWidth)
@@ -41,11 +30,23 @@ angular.module('retrospectApp')
                             })
                             .text(function (d) { return d.text; });
                 }
+
+                d3.layout.cloud().size([300, 300])
+                        .words(cloudwords.map(function (d) {
+                            return {text: d, size: 10 + Math.random() * 90};
+                        }))
+                        .padding(5)
+                        .rotate(function () { return ~~(Math.random() * 2) * 90; })
+                        .font('Impact')
+                        .fontSize(function (d) { return d.size; })
+                        .on('end', draw)
+                        .start();
+
             };
 
             wordcloud.get(function (cloudwords) {
                 buildCloud(cloudwords.results);
-            })
+            });
         }
     ]
 );
