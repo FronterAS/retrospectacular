@@ -26,15 +26,15 @@ angular.module('retrospectApp').controller('TicketCtrl', [
 
             $scope.setRole = function (role) {
                 switch (role) {
-                    case 'pro':
-                        $scope.placeholder = 'What went well?';
-                        break;
-                    case 'con':
-                        $scope.placeholder = 'What did not go well?';
-                        break;
-                    case 'puzzle':
-                        $scope.placeholder = 'What was confusing?';
-                        break;
+                case 'pro':
+                    $scope.placeholder = 'What went well?';
+                    break;
+                case 'con':
+                    $scope.placeholder = 'What did not go well?';
+                    break;
+                case 'puzzle':
+                    $scope.placeholder = 'What was confusing?';
+                    break;
                 }
 
                 $scope.role = role;
