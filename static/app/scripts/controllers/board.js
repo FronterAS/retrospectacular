@@ -6,9 +6,8 @@ angular.module('retrospectApp')
         '$routeParams',
         'retrospectives',
         'tickets',
-        'LocaleDateTime',
 
-        function ($scope, $routeParams, retrospectives, tickets, LocaleDateTime) {
+        function ($scope, $routeParams, retrospectives, tickets) {
             var updateTickets;
 
             $scope.retroId = $routeParams.retroId;
@@ -31,7 +30,7 @@ angular.module('retrospectApp')
                 console.log('Updating tickets.');
                 tickets.get({'page': $scope.page, 'limit': $scope.limit, 'retroId': $scope.retroId}, function (tickets) {
                     console.log('Got tickets');
-                    $scope.tickets = LocaleDateTime.localizeResults(tickets.results);
+                    $scope.tickets = tickets.results;
                 });
             };
 
