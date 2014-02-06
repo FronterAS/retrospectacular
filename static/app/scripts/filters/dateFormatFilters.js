@@ -1,4 +1,3 @@
-/*global moment*/
 angular.module('retrospectApp')
     .filter('fromNow', function () {
         'use strict';
