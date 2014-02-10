@@ -36,7 +36,7 @@ angular.module('retrospectApp')
                             return {text: d, size: 10 + Math.random() * 90};
                         }))
                         .padding(5)
-                        .rotate(function () { return ~~(Math.random() * 2) * 90; })
+                        .rotate(function () { return (Math.random() * 2) * 90; })
                         .font('Impact')
                         .fontSize(function (d) { return d.size; })
                         .on('end', draw)
