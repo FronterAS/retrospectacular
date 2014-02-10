@@ -14,6 +14,7 @@ module.exports = function(config) {
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-resource/angular-resource.js',
+      'app/bower_components/momentjs/moment.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'app/views/*.html',

@@ -21,7 +21,7 @@
             </div>
             <a href="#/retrospectives/{{retrospective.id}}">{{retrospective.name}}</a>
             <div class="retrospective-meta">
-                <time class="created-date" itemProp="dateCreated" datetime="{{retrospective.createdAt}}">{{retrospective.createdAt}}</time>
+                <time class="created-date" itemProp="dateCreated" datetime="{{retrospective.createdAt | someTimeAgo}}">{{retrospective.createdAt | someTimeAgo}}</time>
             </div>
         </li>
     </ul>
