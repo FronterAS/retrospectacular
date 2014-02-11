@@ -6,45 +6,45 @@ angular.module('retrospectApp')
     var hasLocalStorage = false,
       hasCheckedForLocalStorage = false,
       checkForLocalStorage = function () {
-        var tst = "retrospectacular";
+        var tst = 'retrospectacular';
 
         if (hasCheckedForLocalStorage) {
-          return hasLocalStorage;
+            return hasLocalStorage;
         }
 
         try {
-          localStorage.setItem(tst, tst);
-          localStorage.removeItem(tst);
-          hasLocalStorage =  true;
+            localStorage.setItem(tst, tst);
+            localStorage.removeItem(tst);
+            hasLocalStorage =  true;
         } catch(e) {
-          hasLocalStorage =  false;
+            hasLocalStorage =  false;
         }
         hasCheckedForLocalStorage = true;
         return hasLocalStorage;
-      }
+    };
 
     this.get = function (key) {
-      var retval;
+        var retval;
 
-      if(!checkForLocalStorage()) {
-        return false;
-      }
-      retval = localStorage.getItem(key);
+        if (!checkForLocalStorage()) {
+            return false;
+        }
+        retval = localStorage.getItem(key);
 
-      return retval && JSON.parse(retval);
-    }
+        return retval && JSON.parse(retval);
+    };
 
     this.set = function (key, value) {
-      if(!checkForLocalStorage()) {
-        return false;
-      }
-      localStorage.setItem(key, JSON.stringify(value));
-    }
+        if(!checkForLocalStorage()) {
+            return false;
+        }
+        localStorage.setItem(key, JSON.stringify(value));
+    };
 
     this.remove = function (key) {
-      if(!checkForLocalStorage()) {
-        return false;
-      }
-      localStorage.removeItem(key);
-    }
-  });
+        if(!checkForLocalStorage()) {
+            return false;
+        }
+        localStorage.removeItem(key);
+    };
+});

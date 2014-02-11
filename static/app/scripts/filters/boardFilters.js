@@ -1,5 +1,6 @@
 angular.module('retrospectApp')
     .filter('role', function () {
+        'use strict';
         return function (items, role) {
             var filtered = [];
 

@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('retrospectApp')
-    .controller('RetroCtrl', [
-        '$scope',
-        '$location',
-        'retrospectives',
+angular.module('retrospectApp').controller('RetroCtrl', [
+    '$scope',
+    '$location',
+    'retrospectives',
 
     function ($scope, $location, retrospectives) {
         $scope.retrospectives = [];

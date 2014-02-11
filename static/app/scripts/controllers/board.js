@@ -8,7 +8,6 @@ angular.module('retrospectApp')
         'tickets',
 
         function ($scope, $routeParams, retrospectives, tickets) {
-            var updateTickets;
 
             $scope.retroId = $routeParams.retroId;
             $scope.retroName = '';
