@@ -22,6 +22,8 @@ service/test/config-debug.js
 static/.sass-cache
 static/.tmp
 static/app/bower_components
+static/.bower-cache
+static/.bower-registry
 static/dist
 static/coverage
 static/app/styles/*.css
