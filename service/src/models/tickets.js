@@ -3,6 +3,7 @@ var _ = require('lodash'),
     db = require('../wrapper'),
 
     explodeMessages = function (results) {
+        'use strict';
         var words = [];
         _.each(results, function (result) {
             words = words.concat(result.message.split(' '));
@@ -11,6 +12,7 @@ var _ = require('lodash'),
     };
 
 exports.getTicketWords = function (req, res) {
+    'use strict';
     db.getAll('ticket').sortBy('createdAt:desc').from(config.db.index)
         .then(function (result) {
             var words = explodeMessages(result);
@@ -23,6 +25,7 @@ exports.getTicketWords = function (req, res) {
 };
 
 exports.getTickets = function (req, res) {
+    'use strict';
     var start = 0,
         limit = 100,
         page = 1;
@@ -48,6 +51,7 @@ exports.getTickets = function (req, res) {
 };
 
 exports.getTicket = function (req, res) {
+    'use strict';
     db.query('_id:' + req.params.ticketId).of('ticket').from(config.db.index)
         .then(function (result) {
             res.json(result);
@@ -59,8 +63,10 @@ exports.getTicket = function (req, res) {
 };
 
 exports.deleteTicket = function (req, res) {
+    'use strict';
     db.delete('ticket').withId(req.params.ticketId).from(config.db.index)
         .then(function (result) {
+            console.log(result);
             res.send(204);
         })
         .fail(function (err) {
@@ -70,6 +76,7 @@ exports.deleteTicket = function (req, res) {
 };
 
 exports.putTicket = function (req, res) {
+    'use strict';
     req.body.retroId = req.params.retroId;
     db.put(req.body).ofType('ticket').withId(req.params.ticketId).into(config.db.index)
         .then(function (result) {
@@ -82,6 +89,7 @@ exports.putTicket = function (req, res) {
 };
 
 exports.postTicketToRetrospective = function (req, res) {
+    'use strict';
     // @TODO: perhaps move retroId into req.body
     //  from the frontend?
     req.body.retroId = req.params.retroId;

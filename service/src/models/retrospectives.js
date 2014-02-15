@@ -1,8 +1,8 @@
-var _ = require('lodash'),
-    config = require('../../config').Config,
+var config = require('../../config').Config,
     db = require('../wrapper');
 
 exports.getRetrospective = function (req, res) {
+    'use strict';
     db.query('_id:' + req.params.retroId).of('retrospective').from(config.db.index)
         .then(function (result) {
             res.json(result[0]);
@@ -14,6 +14,7 @@ exports.getRetrospective = function (req, res) {
 };
 
 exports.getRetrospectives = function (req, res) {
+    'use strict';
     var start = 0,
         limit = 10,
         page = 1;
@@ -41,6 +42,7 @@ exports.getRetrospectives = function (req, res) {
 };
 
 exports.postRetrospective = function (req, res) {
+    'use strict';
     db.post(req.body).ofType('retrospective').into(config.db.index)
         .then(function (result) {
             res.json(result);
@@ -52,6 +54,7 @@ exports.postRetrospective = function (req, res) {
 };
 
 exports.putRetrospective = function (req, res) {
+    'use strict';
     db.put(req.body).ofType('retrospective').withId(req.params.retroId).into(config.db.index)
         .then(function (result) {
             res.json(result);
@@ -63,6 +66,7 @@ exports.putRetrospective = function (req, res) {
 };
 
 exports.deleteRetrospective = function (req, res) {
+    'use strict';
     db.delete('retrospective').withId(req.params.retroId).from(config.db.index)
         .then(function (result) {
             res.json(result);

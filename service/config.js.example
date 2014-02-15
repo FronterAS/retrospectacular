@@ -1,22 +1,22 @@
 var development = {
-    "db": {
-        "url": "http://localhost:9200",
-        "index": "retrospectives_22012014"
+    'db': {
+        'url': 'http://localhost:9200',
+        'index': 'retrospectives_22012014'
     },
-    "app": {
-        "host":"localhost",
-        "port": 3000
+    'app': {
+        'host':'localhost',
+        'port': 3000
     }
 },
 
 production = {
-    "db": {
-        "url": "http://localhost:9200",
-        "index": "retrospectives_22012014"
+    'db': {
+        'url': 'http://localhost:9200',
+        'index': 'retrospectives_22012014'
     },
-    "app": {
-        "host":"localhost",
-        "port": 3000
+    'app': {
+        'host':'localhost',
+        'port': 3000
     }
 };
 

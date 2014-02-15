@@ -21,6 +21,9 @@
   "globals": {
     "angular": false,
     "moment": false,
-    "d3": false
+    "d3": false,
+    "describe": false,
+    "it": false,
+    "before": false
   }
 }

@@ -2,6 +2,7 @@ var retrospectives = require('./models/retrospectives'),
     tickets = require('./models/tickets'),
 
     allowCrossDomain = function(req, res, next) {
+        'use strict';
         res.header('Access-Control-Allow-Origin', '*');
         res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
         res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -9,6 +10,7 @@ var retrospectives = require('./models/retrospectives'),
     };
 
 exports.setup = function (api) {
+    'use strict';
     api.use(allowCrossDomain);
 
     api.get('/retrospectives', retrospectives.getRetrospectives);
