@@ -1,7 +1,7 @@
 var q = require('q'),
     _ = require('lodash'),
     elasticsearch = require('elasticsearch'),
-    config = require('./config').Config,
+    config = require('../config').Config,
     client = new elasticsearch.Client({
         host: config.db.url
     }),

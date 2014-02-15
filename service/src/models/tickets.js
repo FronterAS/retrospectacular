@@ -1,5 +1,5 @@
 var _ = require('lodash'),
-    config = require('../config').Config,
+    config = require('../../config').Config,
     db = require('../wrapper'),
 
     explodeMessages = function (results) {
