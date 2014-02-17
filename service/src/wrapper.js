@@ -39,11 +39,13 @@ exports.post = function (data) {
         },
 
         into: function (indexName) {
-            var promises = [];
+            var promises = [],
+                errorDefer;
 
             if (!typeName) {
-                defer.reject(new Error('You must specify a type'));
-                return;
+                errorDefer = q.defer();
+                errorDefer.reject(new Error('You must specify a type'));
+                return errorDefer.promise;
             }
 
             data.forEach(function (item) {
