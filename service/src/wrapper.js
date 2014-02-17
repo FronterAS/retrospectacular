@@ -1,3 +1,5 @@
+'use strict';
+
 var q = require('q'),
     _ = require('lodash'),
     elasticsearch = require('elasticsearch'),
@@ -7,7 +9,6 @@ var q = require('q'),
     }),
 
     adaptResult = function (result) {
-        'use strict';
         var _result = result._source;
         _result.id = result._id;
 
@@ -15,7 +16,6 @@ var q = require('q'),
     },
 
     adaptResults = function (results) {
-        'use strict';
         results = _.map(results, function(result) {
             return adaptResult(result);
         });
@@ -25,7 +25,6 @@ var q = require('q'),
 
 
 exports.post = function (data) {
-    'use strict';
     var typeName;
 
     if (!Array.isArray(data)) {
@@ -92,7 +91,6 @@ exports.post = function (data) {
 
 
 exports.query = function (queryString) {
-    'use strict';
     var typeName,
         start = 0,
         sort = '',
@@ -157,7 +155,6 @@ exports.query = function (queryString) {
  * @return {promise}
  */
 exports.getAll = function (type) {
-    'use strict';
     var start = 0,
         sort = '',
         size = 1000;
@@ -215,7 +212,6 @@ exports.getAll = function (type) {
 
 
 exports.put = function (data) {
-    'use strict';
     var typeName;
 
     return {
@@ -303,7 +299,6 @@ exports.put = function (data) {
  * @return {object}
  */
 exports.delete = function (typeName) {
-    'use strict';
     var id;
     return {
         withId: function (_id) {
@@ -330,7 +325,6 @@ exports.delete = function (typeName) {
 
 
 exports.checkIndexExists = function (indexName) {
-    'use strict';
     var defer = q.defer();
 
     client.indices.exists({
@@ -349,7 +343,6 @@ exports.checkIndexExists = function (indexName) {
 
 
 exports.destroyIndex = function (indexName) {
-    'use strict';
     var defer = q.defer();
 
     client.indices.delete({
@@ -368,7 +361,6 @@ exports.destroyIndex = function (indexName) {
 
 
 exports.createIndex = function (indexName) {
-    'use strict';
     var defer = q.defer();
 
     client.indices.create({

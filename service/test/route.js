@@ -1,9 +1,10 @@
+'use strict';
+
 var should = require('should'),
     request = require('supertest');
 
 
 var checkHeaders = function(err, res, done) {
-    'use strict';
     should.not.exist(err);
     if (err) {
         throw err;
@@ -33,7 +34,6 @@ var checkHeaders = function(err, res, done) {
 };
 
 describe('Routing', function () {
-    'use strict';
     var url = 'http://localhost:3000';
 
     before(function(done) {

@@ -1,3 +1,5 @@
+'use strict';
+
 var db = require('../wrapper'),
     config = require('../config').Config,
     q = require('q'),
@@ -17,12 +19,10 @@ var db = require('../wrapper'),
     }],
 
     handleError = function (err) {
-        'use strict';
         console.log(err);
     },
 
     handleDbExists = function (exists) {
-        'use strict';
         if (exists) {
             console.log('db exists, deleting it');
             return db.destroyIndex(config.db.index);
@@ -30,13 +30,11 @@ var db = require('../wrapper'),
     },
 
     createDb = function () {
-        'use strict';
         console.log('creating new db');
         return db.createIndex(config.db.index);
     },
 
     postRetrospective = function () {
-        'use strict';
         var defer = q.defer();
 
         console.log('posting retrospective');
@@ -54,7 +52,6 @@ var db = require('../wrapper'),
     },
 
     postTickets = function (retrospective) {
-        'use strict';
         var promises = [];
 
         console.log('posting tickets');
