@@ -1,3 +1,5 @@
+'use strict';
+
 var db = require('../wrapper'),
     config = require('../config').Config,
     q = require('q'),
@@ -12,7 +14,7 @@ var db = require('../wrapper'),
         'createdAt': (new Date()).toISOString()
     },{
         'role': 'puzzle',
-        'message': "We still can't quite understand what happened",
+        'message': 'We still can not quite understand what happened',
         'createdAt': (new Date()).toISOString()
     }],
 

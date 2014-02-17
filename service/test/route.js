@@ -1,8 +1,37 @@
+'use strict';
+
 var should = require('should'),
-    assert = require('assert'),
     request = require('supertest');
-//    winston = require('winston'),
-    //config = require('./config-debug');
+
+
+var checkHeaders = function(err, res, done) {
+    should.not.exist(err);
+    if (err) {
+        throw err;
+    }
+    res.should.have.status(200);
+    res.should.have.header(
+            'Content-Type',
+            'application/json; charset=utf-8'
+            );
+
+    res.should.have.header(
+            'Access-Control-Allow-Methods',
+            'GET,PUT,POST,DELETE,OPTIONS'
+            );
+
+    res.should.have.header(
+            'Access-Control-Allow-Headers',
+            'X-Requested-With, Content-Type'
+            );
+
+    res.should.have.header(
+            'Access-Control-Allow-Origin',
+            '*'
+            );
+
+    done();
+};
 
 describe('Routing', function () {
     var url = 'http://localhost:3000';
@@ -64,30 +93,3 @@ describe('Routing', function () {
 });
 
 
-var checkHeaders = function(err, res, done) {
-    if (err) {
-        throw err;
-    }
-    res.should.have.status(200);
-    res.should.have.header(
-            'Content-Type',
-            'application/json; charset=utf-8'
-            );
-
-    res.should.have.header(
-            'Access-Control-Allow-Methods',
-            'GET,PUT,POST,DELETE,OPTIONS'
-            );
-
-    res.should.have.header(
-            'Access-Control-Allow-Headers',
-            'X-Requested-With, Content-Type'
-            );
-
-    res.should.have.header(
-            'Access-Control-Allow-Origin',
-            '*'
-            );
-
-    done();
-};

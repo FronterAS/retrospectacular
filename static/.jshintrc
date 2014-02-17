@@ -18,9 +18,13 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
+  "globalstrict": true,
   "globals": {
     "angular": false,
     "moment": false,
-    "d3": false
+    "d3": false,
+    "describe": false,
+    "it": false,
+    "before": false
   }
 }

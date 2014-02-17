@@ -1,5 +1,6 @@
-var _ = require('lodash'),
-    config = require('../config').Config,
+'use strict';
+
+var config = require('../../config').Config,
     db = require('../wrapper');
 
 exports.getRetrospective = function (req, res) {

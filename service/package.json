@@ -4,7 +4,7 @@
   "description": "A tool to aid remote retrospective and facilitate continuous improvement.",
   "main": "app.js",
   "scripts": {
-    "start": "git log -1 --format=format:%H > logs/version.log; node app.js",
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

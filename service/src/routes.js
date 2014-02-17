@@ -1,3 +1,5 @@
+'use strict';
+
 var retrospectives = require('./models/retrospectives'),
     tickets = require('./models/tickets'),
 

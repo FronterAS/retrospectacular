@@ -1,5 +1,7 @@
+'use strict';
+
 var _ = require('lodash'),
-    config = require('../config').Config,
+    config = require('../../config').Config,
     db = require('../wrapper'),
 
     explodeMessages = function (results) {
@@ -61,6 +63,7 @@ exports.getTicket = function (req, res) {
 exports.deleteTicket = function (req, res) {
     db.delete('ticket').withId(req.params.ticketId).from(config.db.index)
         .then(function (result) {
+            console.log(result);
             res.send(204);
         })
         .fail(function (err) {
