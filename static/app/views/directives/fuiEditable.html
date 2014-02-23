@@ -13,6 +13,6 @@
             <span class="sr-only">Delete</span>
         </button>
     </div>
-    <div class="ticket-message" ng-hide="showEdit">{{item.message | urlToLink}}</div>
+    <div class="ticket-message" ng-hide="showEdit" ng-bind-html="item.message | urlToLink | toTrusted"></div>
     <div class="ticket-message" ng-show="showEdit"><input class="edit-active-ticket" type="text" ng-model="item.message"</div>
 </span>

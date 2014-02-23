@@ -29,7 +29,7 @@
                             <span class="sr-only">Delete</span>
                         </button>
                     </div>
-                    <div class="ticket-message">{{ticket.message | urlToLink}}</div>
+                    <div class="ticket-message" ng-bind-html="ticket.message | urlToLink | toTrusted"></div>
                     <div class="ticket-meta">
                         <time class="created-date" itemProp="dateCreated" datetime="{{ticket.createdAt | someTimeAgo}}">{{ticket.createdAt | someTimeAgo}}</time>
                     </div>
@@ -47,7 +47,7 @@
                             <span class="sr-only">Delete</span>
                         </button>
                     </div>
-                    <div class="ticket-message">{{ticket.message | urlToLink}}</div>
+                    <div class="ticket-message" ng-bind-html="ticket.message | urlToLink | toTrusted"></div>
                     <div class="ticket-meta">
                         <time class="created-date" itemProp="dateCreated" datetime="{{ticket.createdAt | someTimeAgo}}">{{ticket.createdAt | someTimeAgo}}</time>
                     </div>
@@ -64,7 +64,7 @@
                             <span class="sr-only">Delete</span>
                         </button>
                     </div>
-                    <div class="ticket-message">{{ticket.message | urlToLink}}</div>
+                    <div class="ticket-message" ng-bind-html="ticket.message | urlToLink | toTrusted"></div>
                     <div class="ticket-meta">
                         <time class="created-date" itemProp="dateCreated" datetime="{{ticket.createdAt | someTimeAgo}}">{{ticket.createdAt | someTimeAgo}}</time>
                     </div>
