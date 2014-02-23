@@ -1,3 +1,4 @@
+/* Based on https://gist.github.com/jakemmarsh/6008983 */
 angular.module('retrospectApp')
     .filter('urlToLink', function() {
         var  //URLs starting with http://, https://, or ftp://
@@ -11,13 +12,13 @@ angular.module('retrospectApp')
 
         return function(text, target, otherProp) {
             angular.forEach(text.match(protocolReplacePattern), function(url) {
-                text = text.replace(protocolReplacePattern, "<a href=\"$1\" target=\"_blank\">$1</a>");
+                text = text.replace(protocolReplacePattern, "<a href='$1' target='_blank'>$1</a>");
             });
             angular.forEach(text.match(w3ReplacePattern), function(url) {
-                text = text.replace(w3ReplacePattern, "$1<a href=\"http://$2\" target=\"_blank\">$2</a>");
+                text = text.replace(w3ReplacePattern, "$1<a href='http://$2' target='_blank'>$2</a>");
             });
             angular.forEach(text.match(eMailReplacePattern), function(url) {
-                text = text.replace(eMailReplacePattern, "<a href=\"mailto:$1\">$1</a>");
+                text = text.replace(eMailReplacePattern, "<a href='mailto:$1'>$1</a>");
             });
 
             return text;
