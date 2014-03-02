@@ -8,6 +8,11 @@ angular.module('retrospectApp')
             return $resource(SERVICE_URL + '/retrospectives/:retroId', {
                 'page': '@page',
                 'limit': '@limit'
+            }, {
+                'update': {
+                    method: 'PUT',
+                    isArray: false
+                }
             });
         }
     ]);
