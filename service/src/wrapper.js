@@ -224,10 +224,7 @@ exports.put = function (data) {
             return this;
         },
         into: function (indexName) {
-            var promises = [],
-                defer = q.defer();
-
-            promises.push(defer.promise);
+            var defer = q.defer();
 
             if (!typeName) {
                 defer.reject(new Error('You must specify a type'));
@@ -279,10 +276,7 @@ exports.put = function (data) {
                 });
             });
 
-            if (data.length === 1) {
-                return promises[0];
-            }
-            return q.all(promises);
+            return defer.promise;
         }
     };
 };
