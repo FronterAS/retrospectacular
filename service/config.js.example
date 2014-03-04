@@ -8,9 +8,7 @@ var development = {
         'port': 3000
     },
     'log': {
-        'transport': 'Console',
-        'dir': '/var/log/retrospectacular/',
-        'file': 'retro_express_dev.log'
+        'transport': 'Console'
     }
 },
 
@@ -26,7 +24,7 @@ production = {
     'log': {
         'transport': 'DailyRotateFile',
         'dir': '/var/log/retrospectacular/',
-        'file': 'retro_express_prod.log'
+        'file': 'retro_express_prod.json'
     }
 };
 
