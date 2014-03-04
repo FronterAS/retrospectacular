@@ -1,6 +1,6 @@
 {
   "name": "Retrospectacular",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A tool to aid remote retrospective and facilitate continuous improvement.",
   "main": "app.js",
   "scripts": {
