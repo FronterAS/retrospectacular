@@ -12,10 +12,7 @@
     </nav>
 
     <header>
-        <h1>Board: {{retroName}}</h1>
-        <button class="btn btn-default" ng-click="updateTickets()">
-            <span class="glyphicon glyphicon-refresh"></span> Refresh
-        </button>
+        <fui-retroname item=retrospective on-update="updateRetro()"></fui-retroname>
     </header>
 
     <div>

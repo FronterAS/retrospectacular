@@ -35,7 +35,16 @@ angular.module('retrospectApp')
 
             retrospectives.get({'retroId': $scope.retroId}, function (retrospective) {
                 $scope.retroName = retrospective.name;
+                $scope.retrospective = retrospective;
             });
+
+            $scope.updateRetro = function () {
+                retrospectives.update({'retroId': $scope.retroId}, {'name':$scope.retrospective.name}, function () {
+                    console.log('Updating...');
+                }, function (error) {
+                    console.error('Error updating retrospective name', error);
+                });
+            };
 
             $scope.updateTickets();
         }
