@@ -9,7 +9,8 @@ var development = {
     },
     'log': {
         'transport': 'Console',
-        'dir': '/var/log/retrospectacular/'
+        'dir': '/var/log/retrospectacular/',
+        'file': 'retro_express_dev.log'
     }
 },
 
@@ -24,7 +25,8 @@ production = {
     },
     'log': {
         'transport': 'DailyRotateFile',
-        'dir': '/var/log/retrospectacular/'
+        'dir': '/var/log/retrospectacular/',
+        'file': 'retro_express_prod.log'
     }
 };
 

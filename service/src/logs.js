@@ -13,7 +13,7 @@ var winston = require('winston'),
 if (config.log.transport==='DailyRotateFile') {
     logTransport = new winston.transports.DailyRotateFile({
         colorize: true,
-        filename: config.log.dir + 'dailyRotateFile.log',
+        filename: config.log.dir + config.log.file,
         datePattern: '.yyyy-MM-dd',
         maxsize: 20000
     });
