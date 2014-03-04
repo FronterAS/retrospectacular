@@ -44,7 +44,7 @@ angular.module('retrospectApp')
             }
         };
     })
-    .directive('fuiRetroname', function (retrospectives) {
+    .directive('fuiRetroname', function () {
         return {
             templateUrl: 'views/directives/fuiRetroname.html',
             restrict: 'EA',
@@ -54,7 +54,7 @@ angular.module('retrospectApp')
                 onUpdate: '&'
             },
             transclude: true,
-            link: function postLink(scope, element, attrs) {
+            link: function postLink(scope) {
                 scope.toggleEditmode = function() {
                     scope.showEdit = !scope.showEdit;
                 };
