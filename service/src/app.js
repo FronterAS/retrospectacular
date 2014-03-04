@@ -1,4 +1,5 @@
 var routes = require('./routes'),
+    logs = require('./logs'),
     express = require('express'),
     api = express(),
     config = require('../config').Config;
@@ -6,8 +7,10 @@ var routes = require('./routes'),
 api.use(express.methodOverride());
 api.use(express.json());
 
+logs.setupLogger(api);
+
 routes.setup(api);
 
-api.use(express.logger('dev'));
+logs.setupErrorLogger(api);
 
 api.listen(config.app.port, config.app.host);

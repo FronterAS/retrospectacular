@@ -6,6 +6,10 @@ var development = {
     'app': {
         'host':'localhost',
         'port': 3000
+    },
+    'log': {
+        'transport': 'Console',
+        'dir': '/var/log/retrospectacular/'
     }
 },
 
@@ -17,6 +21,10 @@ production = {
     'app': {
         'host':'localhost',
         'port': 3000
+    },
+    'log': {
+        'transport': 'DailyRotateFile',
+        'dir': '/var/log/retrospectacular/'
     }
 };
 
