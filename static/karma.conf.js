@@ -17,6 +17,7 @@ module.exports = function(config) {
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/momentjs/moment.js',
+      'app/bower_components/angularjs-modal-service/src/createDialog.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'app/views/*.html',
