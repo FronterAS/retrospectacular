@@ -25,7 +25,9 @@
     "express": "~3.4.6",
     "q": "~0.9.7",
     "lodash": "~2.4.1",
-    "elasticsearch": "~1.0.3"
+    "elasticsearch": "~1.0.3",
+    "express-winston": "~0.2.5",
+    "winston": "~0.7.2"
   },
   "devDependencies": {
     "should": "~2.1.1",
