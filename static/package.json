@@ -40,12 +40,15 @@
     "karma-coffee-preprocessor": "~0.1.1",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.10.8",
-    "karma-ng-html2js-preprocessor": "~0.1.0"
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "bower": "~1.2.8",
+    "grunt-cli": "~0.1.13"
   },
   "engines": {
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "cp app/scripts/config.js.example app/scripts/config.js; node_modules/.bin/bower install; node_modules/.bin/grunt"
   }
 }

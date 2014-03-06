@@ -11,14 +11,7 @@ install:
     - npm install
     - cd ../static
     - npm install
-    - npm install -g bower grunt-cli
-    - bower install
-
-before_script:
-    - cd app/scripts/
-    - cp config.js.example config.js
-    - cd ../../
 
 script:
     - npm test
-    - grunt jshint
+    - node_modules/.bin/grunt jshint
