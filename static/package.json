@@ -47,6 +47,6 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "bower install; grunt"
+    "postinstall": "cp app/scripts/config.js.example app/scripts/config.js; bower install; grunt"
   }
 }
