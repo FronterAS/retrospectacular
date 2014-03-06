@@ -6,8 +6,9 @@ angular.module('retrospectApp')
         '$routeParams',
         'retrospectives',
         'tickets',
+        'createDialog',
 
-        function ($scope, $routeParams, retrospectives, tickets) {
+        function ($scope, $routeParams, retrospectives, tickets, createDialog) {
 
             $scope.retroId = $routeParams.retroId;
             $scope.retroName = '';
@@ -16,13 +17,24 @@ angular.module('retrospectApp')
             $scope.limit = 10000;
 
             $scope.deleteTicket = function (ticket) {
-                var index = $scope.tickets.indexOf(ticket);
+                createDialog({
+                    template: '<p>Are you sure you want to delete this ticket?</p>',
+                    id: 'deleteTicketDialog',
+                    title: 'Delete ticket',
+                    backdrop: true,
+                    success: {
+                        label: 'Make my day!',
+                        fn: function () {
+                            var index = $scope.tickets.indexOf(ticket);
 
-                tickets.delete({'ticketId': ticket.id, 'retroId': $scope.retroId}, function () {
-                    console.log('got a response');
+                            tickets.delete({'ticketId': ticket.id, 'retroId': $scope.retroId}, function () {
+                                console.log('got a response');
+                            });
+
+                            $scope.tickets.splice(index, 1);
+                        }
+                    }
                 });
-
-                $scope.tickets.splice(index, 1);
             };
 
             $scope.updateTickets = function () {

@@ -12,7 +12,8 @@
     "angular-sanitize": "~1.2.12",
     "sass-bootstrap": "~3.0.2",
     "d3-cloud": "~1.0.4",
-    "momentjs": "~2.5.1"
+    "momentjs": "~2.5.1",
+    "angularjs-modal-service": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.12",
