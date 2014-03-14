@@ -12,6 +12,10 @@ install:
     - cd ../static
     - npm install
 
+before_script:
+    - cd app/scripts/
+    - cp config.js.example config.js
+    - cd ../../
 script:
     - npm test
     - node_modules/.bin/grunt jshint
