@@ -29,9 +29,8 @@ angular.module('retrospectApp')
 
                             tickets.delete({'ticketId': ticket.id, 'retroId': $scope.retroId}, function () {
                                 console.log('got a response');
+                                $scope.tickets.splice(index, 1);
                             });
-
-                            $scope.tickets.splice(index, 1);
                         }
                     }
                 });
