@@ -17,6 +17,8 @@ node_modules
 # service
 service/config.js
 service/test/config-debug.js
+service/newrelic.js
+service/newrelic_agent.log
 
 # static
 static/.sass-cache
