@@ -4,19 +4,31 @@ angular.module('retrospectApp').controller('RetroCtrl', [
     '$scope',
     '$location',
     'retrospectives',
+    'createDialog',
 
-    function ($scope, $location, retrospectives) {
+    function ($scope, $location, retrospectives, createDialog) {
         $scope.retrospectives = [];
         $scope.newRetrospective = {};
         $scope.limit = 10000;
         $scope.page = 1;
 
         $scope.deleteRetrospective = function(retrospective) {
-            var index = $scope.retrospectives.indexOf(retrospective);
+            createDialog({
+                template: '<p>Are you sure you want to delete this ticket?</p>',
+                id: 'deleteRetrospectiveDialog',
+                title: 'Delete retrospective',
+                backdrop: true,
+                success: {
+                    label: 'Make my day!',
+                    fn: function () {
+                        var index = $scope.retrospectives.indexOf(retrospective);
 
-            retrospectives.delete({'retroId': retrospective.id}, function () {
-                console.log('deleted retrospective');
-                $scope.retrospectives.splice(index, 1);
+                        retrospectives.delete({'retroId': retrospective.id}, function () {
+                            console.log('deleted retrospective');
+                            $scope.retrospectives.splice(index, 1);
+                        });
+                    }
+                }
             });
         };
 
