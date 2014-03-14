@@ -1,4 +1,7 @@
-require('newrelic');
+var fs = require('fs');
+fs.existsSync(__dirname, '/newrelic.js', function() {
+    require('newrelic');
+});
 
 var routes = require('./routes'),
     logs = require('./logs'),
