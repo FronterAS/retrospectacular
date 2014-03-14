@@ -49,6 +49,6 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "cp app/scripts/config.js.example app/scripts/config.js; node_modules/.bin/bower install; node_modules/.bin/grunt"
+    "postinstall": "node_modules/.bin/bower install; node_modules/.bin/grunt"
   }
 }
