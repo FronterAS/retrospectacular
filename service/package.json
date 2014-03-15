@@ -27,13 +27,15 @@
     "lodash": "~2.4.1",
     "elasticsearch": "~1.0.3",
     "express-winston": "~0.2.5",
-    "winston": "~0.7.2",
-    "newrelic": "~1.3.2"
+    "winston": "~0.7.2"
   },
   "devDependencies": {
     "should": "~2.1.1",
     "coffee-script": "~1.6.3",
     "mocha": "~1.15.1",
     "supertest": "~0.8.2"
+  },
+  "optionalDependencies": {
+    "newrelic": "~1.4.0"
   }
 }

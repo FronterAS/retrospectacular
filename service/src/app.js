@@ -1,7 +1,8 @@
-var fs = require('fs');
-fs.existsSync(__dirname, '/newrelic.js', function() {
+try {
     require('newrelic');
-});
+} catch (e) {
+    console.log('Optional module "newrelic" was not installed');
+}
 
 var routes = require('./routes'),
     logs = require('./logs'),
