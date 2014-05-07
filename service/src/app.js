@@ -1,3 +1,4 @@
+'use strict';
 try {
     require('newrelic');
 } catch (e) {
