@@ -23,4 +23,6 @@ routes.setup(api);
 
 logs.setupErrorLogger(api);
 
-api.listen(config.app.port, config.app.host);
+api.listen(config.app.port, config.app.host, function () {
+    console.log('listening on : ', config.app.host, ':', config.app.port);
+});
