@@ -7,6 +7,7 @@ before_install:
 install:
     - gem install compass
     - npm install -g bower grunt-cli
+    - cd static/
     - npm install
     - bower cache clean
     - bower install
