@@ -4,10 +4,28 @@ $pro_bg: #D4FFD7;
 $con_bg: #FFDADA;
 $puzzle_bg: #FFFDD4;
 
+$screen-lg-min: 1200px;
+$screen-md-min: 992px;
+$screen-sm-min: 440px;
+
 @mixin border-box() {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+@media (max-width: $screen-sm-min) {
+    .btn-text {
+        display: none;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 15px;
+    }
 }
 
 /* Put your CSS here */
@@ -50,10 +68,6 @@ h2 {
 
 header h1 {
     display: inline-block;
-}
-
-#tickets-publish {
-    float: right;
 }
 
 .role-switcher,
