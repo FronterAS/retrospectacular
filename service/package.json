@@ -34,8 +34,5 @@
     "coffee-script": "~1.6.3",
     "mocha": "~1.15.1",
     "supertest": "~0.8.2"
-  },
-  "optionalDependencies": {
-    "newrelic": "~1.4.0"
   }
 }
